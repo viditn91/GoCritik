@@ -1,5 +1,5 @@
 class FieldsValue < ActiveRecord::Base
-  belongs_to :resource
+  belongs_to :resource, inverse_of: :fields_values
   belongs_to :field
 
   validates :value, presence: true, if: "field.required"
