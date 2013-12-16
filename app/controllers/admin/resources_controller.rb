@@ -25,8 +25,8 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def index
-    @resources = Resource.all
-    @fields = Field.all
+    @resources = Resource.includes(:fields_values)
+    @fields = Field
   end
 
   def update
