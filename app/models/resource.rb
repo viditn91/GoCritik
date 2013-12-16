@@ -5,7 +5,7 @@ class Resource < ActiveRecord::Base
 
   validate :validate_associated_fields
  
-  before_save :destroy_empty_associated_field_values
+  after_save :destroy_empty_associated_field_values
 
   private
   
