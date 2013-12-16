@@ -1,7 +1,7 @@
 class Admin::FieldsController < Admin::BaseController
   before_action :set_field, only: [:edit, :update, :destroy]
   #as PATCH request is sent, if the field_type is changed, the options hash is to be emptied explicitly
-  # before_action :remove_options_if_params_empty, only: [:update]
+  before_action :remove_options_if_params_empty, only: [:update]
 
   def new
     @field = Field.new
@@ -51,17 +51,15 @@ class Admin::FieldsController < Admin::BaseController
 private
 
   def set_field
-    @field = Field.find_by(id: params[:id]) if Field.exists?(params[:id])
+    field = Field.find_by(id: params[:id])
+    field ? @field = field : redirect_to(admin_fields_path, notice: "Record not found")
   end
 
   def field_params
-    #[FIXME] using permit! will allow user to update any attribute.
-    #[DOUBT] But the user can update any attribute, provided that all records are empty under that attribute
-    params.require(:field).permit!
+    params.require(:field).permit(:name, :input_type, :field_type, :options, :default_value, :required, :unique)
   end
 
   def remove_options_if_params_empty
     @field.options = nil if field_params["options"].blank?
   end
-
 end
