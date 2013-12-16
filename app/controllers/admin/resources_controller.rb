@@ -3,7 +3,6 @@ class Admin::ResourcesController < Admin::BaseController
 
   def new
     @resource = Resource.new
-    @resource.fields_values.build
   end
 
   def create
