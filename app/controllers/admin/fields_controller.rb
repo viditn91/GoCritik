@@ -59,7 +59,9 @@ private
   end
 
   def field_params
-    params.require(:field).permit(:name, :input_type, :field_type, :options, :default_value, :required, :unique)
+    params.require(:field).permit(:name, :input_type, :field_type, :default_value, :required, :unique).tap do |whitelisted|
+      whitelisted[:options] = params[:field][:options]
+    end
   end
 
   def remove_options_if_params_empty
