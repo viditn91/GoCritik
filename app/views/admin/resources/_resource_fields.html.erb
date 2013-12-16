@@ -1,0 +1,23 @@
+<div class="control-group">
+  <% label_name = field.name %>
+  <% label_name += '*' if field.required %>
+  <% type = field.field_type %>
+  <%= f.label label_name, :class => 'control-label' %>
+  <div class="controls">
+    <% if type == 'select' %>
+      <% options_array = options_array_from_hash(field.options) %>
+      <%= f.select :value, options_array %>
+    <% elsif type == 'radio_button_tag' %>
+      <% options_array = options_array_from_hash(field.options) %>
+      <% options_array.each do |text, value| %>
+        <div class="radio inline">
+          <%= f.radio_button(:value, value) %>
+          <%= f.label(:value, text ) %>
+        </div>
+      <% end %>
+    <% else %>
+      <%= eval "f.#{type} :value" %>
+    <% end %>
+  </div>
+  <%= f.hidden_field :field_id, :value => field.id %>
+</div>

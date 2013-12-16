@@ -1,0 +1,39 @@
+<% if @resources.blank? %>
+  <% params[:notice] = "No #{ ResourceName } created. Click on 'new #{ ResourceName }'" %>
+<% end %>
+
+<% if params[:notice] %>
+<p id="notice"><%= params[:notice] %></p>
+<% end %>
+
+<div class="page-header">
+  <h1>Listing <%= ResourceName.pluralize %></h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <% @fields.each do |field| %>
+        <th><%= field.name %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @resources.each do |resource| %>
+      <tr>
+        <% @fields.each do |field| %>
+          <td><%= get_field_value(resource, field) %></td>
+        <% end %>
+        <td>
+          <%= link_to 'Show', admin_resource_path(resource), :class => 'btn btn-mini' %>
+          <%= link_to 'Edit', edit_admin_resource_path(resource), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', admin_resource_path(resource), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div>
+  <%= link_to "Add new #{ ResourceName }", new_admin_resource_path, :class => 'btn btn-primary' %>
+</div>

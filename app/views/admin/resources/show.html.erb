@@ -1,0 +1,17 @@
+<div class="page-header">
+  <h1>Showing <%= ResourceName %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <% @resource.fields_values.each do |field_value| %>
+    <dt><strong><%= field_value.field.name %>:</strong></dt>
+    <dd><%= field_value.value %></dd>
+    <% end %>
+</dl>
+
+<div class="form-actions">
+  <%= link_to 'Back', admin_resources_path, :class => 'btn' %>
+  <%= link_to 'Edit', edit_admin_resource_path(@resource), :class => 'btn' %>
+  <%= link_to 'Remove', admin_resource_path(@resource), :method => 'delete',
+              :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger' %>
+</div>

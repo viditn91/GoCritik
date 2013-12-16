@@ -1,0 +1,19 @@
+<tr>
+  <% attributes.each do |attr| %>
+    <td>
+      <% if attr == 'options' && field.try(attr.to_sym) %>
+        <pre><%= make_hash_readable(field.send(attr.to_sym))%></pre>
+      <% elsif attr == 'required' || attr == 'unique' %>
+        <% value = field.send(attr.to_sym) %>
+        <%= value %>
+      <% else %>
+        <% value = field.send(attr.to_sym) %>
+        <%= value.present? ? value : '- NA -' %>
+      <% end %>
+    </td>
+  <% end %>
+  <td>
+    <%= link_to 'Edit', edit_admin_field_path(field), :class => 'btn btn-mini' %>
+    <%= link_to 'Remove', admin_field_path(field), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
+  </td>
+</tr>

@@ -1,0 +1,79 @@
+<%= form_for [:admin, @field], :html => { :class => "form form-horizontal" } do |f| %>
+  
+  <% if @field.errors.any? %>
+    <div class="alert alert-error">
+      <a class="close" data-dismiss="alert">&#215;</a>
+      <h4><%= pluralize(@field.errors.count, "error") %> prohibited this cart from being saved:</h4>
+      <ul>
+        <% @field.errors.full_messages.each do |msg| %>
+          <%= content_tag :li, msg, :id => "error_#{msg}" if msg.is_a?(String) %>
+        <% end %>
+      </ul>
+    </div>
+ <% end %>
+
+  <div class="control-group">
+    <%= f.label 'Name', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label 'Input Type', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :input_type, InputTypeArray %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label 'Field Type', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :field_type, FieldTypeArray %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label 'Default Value', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :default_value %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label 'Is the field Required?', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :required, [['Yes', true], ['No', false]] %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label 'Should the field be unique?', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :unique, [['Yes', true], ['No', false]] %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label 'Options', :class => 'control-label' %>
+    <div class="controls">
+      <div id="options_container" >
+        <% if @field.options.present? %>
+          <% @field.options.each do |hash| %>
+            <div>
+              <input name="field[options][][text]" type="text" value="<%= hash[:text] %>" />
+              <input name="field[options][][value]" type="text" value="<%= hash[:value] %>" />
+              <a class="link_to_remove_option">[-] Remove</a>
+            </div>     
+          <% end %>
+          <a class="link_to_add_option">[+] Add Another Option</a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit action_name == 'new' ? 'Create' : 'Update', :class => 'btn btn-primary'%>
+    <%= link_to 'Cancel', admin_fields_path, :class => "btn" %>
+  </div>
+<% end %>
