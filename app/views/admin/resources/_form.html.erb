@@ -3,7 +3,7 @@
   <% if @resource.errors.any? %>
       <div class="alert alert-error">
         <a class="close" data-dismiss="alert">&#215;</a>
-        <h4><%= pluralize(@resource.errors.count, "error") %> prohibited this cart from being saved:</h4>
+        <h4><%= pluralize(@resource.errors.count, "error") %> prohibited this <%= ResourceName %> from being saved:</h4>
         <ul>
           <% @resource.errors.full_messages.each do |msg| %>
             <%= content_tag :li, msg, :id => "error_#{msg}" if msg.is_a?(String) %>
