@@ -16,6 +16,7 @@
         </div>
       <% end %>
     <% else %>
+      <% f.object.value ||= field.default_value %>
       <%= eval "f.#{type} :value" %>
     <% end %>
   </div>
