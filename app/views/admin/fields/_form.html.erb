@@ -33,7 +33,7 @@
     </div>
   </div>
 
-  <div class="control-group">
+  <div class="control-group defaults-field">
     <%= f.label 'Default Value', :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :default_value %>
@@ -54,15 +54,15 @@
     </div>
   </div>
 
-  <div class="control-group">
+  <div class="control-group options-field">
     <%= f.label 'Options', :class => 'control-label' %>
     <div class="controls">
       <div id="options_container" >
         <% if @field.options.present? %>
           <% @field.options.each do |hash| %>
             <div>
-              <input name="field[options][][text]" type="text" value="<%= hash[:text] %>" />
-              <input name="field[options][][value]" type="text" value="<%= hash[:value] %>" />
+              <input class="input-small" placeholder="Text" name="field[options][][text]" type="text" value="<%= hash[:text] %>" />
+              <input class="input-small" placeholder="Value" name="field[options][][value]" type="text" value="<%= hash[:value] %>" />
               <a class="link_to_remove_option">[-] Remove</a>
             </div>     
           <% end %>
