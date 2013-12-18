@@ -1,3 +1,12 @@
+<% content_for :sidebar do%>
+  <ul class="nav nav-list">
+    <li class="nav-header">Sidebar</li>
+    <li><%= link_to "Home", admin_path %></li>
+    <li><%= link_to "Manage Fields", admin_fields_path %></li>
+    <li><%= link_to "Manage #{ ResourceName.pluralize }", admin_resources_path %></li>
+  </ul>
+<% end %>
+
 <div class="page-header">
   <h1>New Field</h1>
 </div>
