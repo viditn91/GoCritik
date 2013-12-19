@@ -13,42 +13,42 @@
  <% end %>
 
   <div class="control-group">
-    <%= f.label 'Name', :class => 'control-label' %>
+    <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :name %>
     </div>
   </div>
 
   <div class="control-group">
-    <%= f.label 'Input Type', :class => 'control-label' %>
+    <%= f.label :input_type, :class => 'control-label' %>
     <div class="controls">
       <%= f.select :input_type, InputTypeArray %>
     </div>
   </div>
 
   <div class="control-group">
-    <%= f.label 'Field Type', :class => 'control-label' %>
+    <%= f.label :field_type, :class => 'control-label' %>
     <div class="controls">
       <%= f.select :field_type, FieldTypeArray %>
     </div>
   </div>
 
   <div class="control-group defaults-field">
-    <%= f.label 'Default Value', :class => 'control-label' %>
+    <%= f.label :default_value, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :default_value %>
     </div>
   </div>
 
   <div class="control-group">
-    <%= f.label 'Is the field Required?', :class => 'control-label' %>
+    <%= f.label :required, 'Is the field Required?', :class => 'control-label' %>
     <div class="controls">
       <%= f.select :required, [['Yes', true], ['No', false]] %>
     </div>
   </div>
 
   <div class="control-group">
-    <%= f.label 'Should the field be unique?', :class => 'control-label' %>
+    <%= f.label :unique, 'Should the field be unique?', :class => 'control-label' %>
     <div class="controls">
       <%= f.select :unique, [['Yes', true], ['No', false]] %>
     </div>
@@ -61,7 +61,7 @@
         <% if @field.options.present? %>
           <% @field.options.each do |hash| %>
             <div>
-              <input class="input-small" placeholder="Text" name="field[options][][text]" type="text" value="<%= hash[:text] %>" />
+              <input class="input-small" placeholder="Display Text" name="field[options][][text]" type="text" value="<%= hash[:text] %>" />
               <input class="input-small" placeholder="Value" name="field[options][][value]" type="text" value="<%= hash[:value] %>" />
               <a class="link_to_remove_option">[-] Remove</a>
             </div>     

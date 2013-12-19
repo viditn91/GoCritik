@@ -2,7 +2,7 @@
   <% label_name = field.name %>
   <% label_name += '*' if field.required %>
   <% type = field.field_type %>
-  <%= f.label label_name, :class => 'control-label' %>
+  <%= f.label :value, label_name, :class => 'control-label' %>
   <div class="controls">
     <% if type == 'select' %>
       <% options_array = options_array_from_hash(field.options) %>

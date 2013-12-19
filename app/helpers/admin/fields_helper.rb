@@ -8,4 +8,10 @@ module Admin::FieldsHelper
     str
   end
 
+  def get_field_type_display_value(field_type)
+    FieldTypeArray.each do |text, value|
+      return text if value == field_type
+    end
+  end
+
 end

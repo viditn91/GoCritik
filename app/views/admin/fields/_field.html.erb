@@ -5,7 +5,10 @@
         <pre><%= make_hash_readable(field.send(attr.to_sym))%></pre>
       <% elsif attr == 'required' || attr == 'unique' %>
         <% value = field.send(attr.to_sym) %>
-        <%= value %>
+        <%= value == true ? 'Yes' : 'No' %>
+      <% elsif attr == 'field_type' %>
+        <% value = field.send(attr.to_sym) %>
+        <%= get_field_type_display_value(value) %>
       <% else %>
         <% value = field.send(attr.to_sym) %>
         <%= value.present? ? value : '- NA -' %>
@@ -13,7 +16,7 @@
     </td>
   <% end %>
   <td>
-    <%= link_to 'Edit', edit_admin_field_path(field), :class => 'btn btn-mini' %>
+    <%= link_to 'Edit', edit_admin_field_path(field), :class => 'btn btn-mini btn-info' %>
     <%= link_to 'Remove', admin_field_path(field), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
   </td>
 </tr>

@@ -1,2 +1,8 @@
+<% content_for :navbar do %>
+  <li><%= link_to "Home", admin_path%></li>
+  <li><%= link_to ResourceName.pluralize, admin_resources_path %></li>
+  <li><%= link_to "Fields", admin_fields_path %></li>
+<% end %>
+
 <h1>Editing Field</h1>
 <%= render 'form' %>

@@ -35,7 +35,7 @@ ready = function() {
 add_options = function(scope) {
   var $options_container = scope.closest('.form').find('#options_container');
   $options_container.find('.link_to_add_option').remove();
-  var appended_elements_string = '<div><input class="input-small" placeholder="Text" name="field[options][][text]" type="text" />'
+  var appended_elements_string = '<div><input class="input-small" placeholder="Display Text" name="field[options][][text]" type="text" />'
    + '<input class="input-small" placeholder="Value" name="field[options][][value]" type="text" />' 
    + '<a class="link_to_remove_option">[-] Remove</a></div>'
    + '<a class="link_to_add_option">[+] Add Another Option</a>';

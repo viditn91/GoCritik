@@ -1,9 +1,7 @@
-<% content_for :sidebar do%>
-  <ul class="nav nav-list">
-    <li class="nav-header">Sidebar</li>
-    <li><%= link_to "Home", admin_path %></li>
-    <li><%= link_to "Manage Fields", admin_fields_path %></li>
-  </ul>
+<% content_for :navbar do %>
+  <li><%= link_to "Home", admin_path%></li>
+  <li><%= link_to ResourceName.pluralize, admin_resources_path %></li>
+  <li><%= link_to "Fields", admin_fields_path %></li>
 <% end %>
 
 <% if @resources.blank? %>
@@ -30,7 +28,7 @@
         <% end %>
         <td>
           <%= link_to 'Show', admin_resource_path(resource), :class => 'btn btn-mini' %>
-          <%= link_to 'Edit', edit_admin_resource_path(resource), :class => 'btn btn-mini' %>
+          <%= link_to 'Edit', edit_admin_resource_path(resource), :class => 'btn btn-mini btn-info' %>
           <%= link_to 'Destroy', admin_resource_path(resource), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
         </td>
       </tr>
@@ -39,5 +37,5 @@
 </table>
 
 <div>
-  <%= link_to "Add new #{ ResourceName }", new_admin_resource_path, :class => 'btn btn-primary' %>
+  <%= link_to "Add new #{ ResourceName }", new_admin_resource_path, :class => 'btn btn-success' %>
 </div>
