@@ -26,9 +26,7 @@ ActiveRecord::Schema.define(version: 20131219022539) do
   end
 
   create_table "fields_values", force: true do |t|
-    t.integer  "int_val"
-    t.string   "string_val"
-    t.text     "text_val"
+    t.text     "value"
     t.integer  "field_id"
     t.integer  "resource_id"
     t.datetime "created_at"
@@ -36,8 +34,6 @@ ActiveRecord::Schema.define(version: 20131219022539) do
   end
 
   create_table "resources", force: true do |t|
-    t.string   "name"
-    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
