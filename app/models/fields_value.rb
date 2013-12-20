@@ -14,7 +14,7 @@ class FieldsValue < ActiveRecord::Base
       reset_callbacks(:validate)
       validates attribute, presence: true, if: "#{ object.field.required }"
       validates attribute, uniqueness: true, if: "#{ object.field.unique }"
-      validates attribute, format: { with: regexp, message: "must be a #{input_type}" }, if: "#{ object.value.present? }"
+      validates attribute, format: { with: regexp, message: "must be a #{ input_type }" }, if: "#{ object.value.present? }"
     end
   end
  
