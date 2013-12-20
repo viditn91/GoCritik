@@ -6,13 +6,15 @@ class FieldsValue < ActiveRecord::Base
   before_validation :prepare_validations
   
   def prepare_validations
-    attribute = "#{field.input_type.downcase}_val".to_sym
-    required = field.required
+    attribute = "#{ field.input_type.downcase }_val".to_sym
+    object = self
     input_type = field.input_type
+    regexp = get_regexp(input_type)
     self.class.class_eval do
-      validates attribute, presence: true
-      validates attribute, uniqueness: true
-      validates attribute, format: { with: /[\w]+/, message: "must be a #{input_type}" }
+      reset_callbacks(:validate)
+      validates attribute, presence: true, if: "#{ object.field.required }"
+      validates attribute, uniqueness: true, if: "#{ object.field.unique }"
+      validates attribute, format: { with: regexp, message: "must be a #{input_type}" }, if: "#{ object.value.present? }"
     end
   end
  
@@ -21,25 +23,12 @@ class FieldsValue < ActiveRecord::Base
       return hash[:regexp] if hash[:name] == input_type
     end
   end
-  
-  # validates :string_val, presence: true, if: "field.required && field.input_type == 'String'"
-  # validates :string_val, uniqueness: true, if: "field.unique && field.input_type == 'String'"
-  # validates :string_val, format: { with: /[\w]+/, message: "must be a String" }
 
-  # validates :text_val, presence: true, if: "field.required && field.input_type == 'Text'"
-  # validates :text_val, uniqueness: true, if: "field.unique && field.input_type == 'Text'"
-  # validates :text_val, format: { with: /[\w]+/, message: "must be a Text" }
-
-  # validates :integer_val, presence: true, if: "field.required && field.input_type == 'Integer'"
-  # validates :integer_val, uniqueness: true, if: "field.unique && field.input_type == 'Integer'"
-  # validates :integer_val, format: { with: /[\d]+/, message: "must be a Integer" }, if: "value"
-
-  
   def value
     if new_record?
       @value
     else
-      attribute = "#{field.input_type.downcase}_val".to_sym
+      attribute = "#{ field.input_type.downcase }_val".to_sym
       @value = try(attribute)
     end
   end

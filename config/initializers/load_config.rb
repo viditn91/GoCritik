@@ -3,7 +3,7 @@ ResourceName = APP_CONFIG[:resource][:name]
 
 InputTypeHash = [ {name: 'String' , regexp: /[\w]+/ },
 {name: 'Text' , regexp: /[\w]+/ },
-{name: 'Integer' , regexp: /[\d]+/ },
+{name: 'Integer' , regexp: /\A[\d]+\Z/ },
 {name: 'Float' , regexp: /(^(\d+)(\.)?(\d+)?)|(^(\d+)?(\.)(\d+))/ },
 {name: 'Boolean' , regexp: /[true|false]/ }]
 
