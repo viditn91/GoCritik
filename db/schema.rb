@@ -26,7 +26,13 @@ ActiveRecord::Schema.define(version: 20131219022539) do
   end
 
   create_table "fields_values", force: true do |t|
-    t.text     "value"
+    t.integer  "integer_val"
+    t.string   "string_val"
+    t.text     "text_val"
+    t.float    "float_val"
+    t.boolean  "boolean_val"
+    t.date     "date_val"
+    t.time     "time_val"
     t.integer  "field_id"
     t.integer  "resource_id"
     t.datetime "created_at"

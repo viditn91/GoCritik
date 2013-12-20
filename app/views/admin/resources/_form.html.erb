@@ -15,7 +15,7 @@
   <!-- For every field, field value of the resource is checked. If it exists, then it is passed to the 
         fields_for helper, and if not, then a new instance of field_values is built and passed -->
   <% Field.all.each do |field| %>
-    <% field_value = @resource.fields_values.find_by(field_id: field.id) || @resource.fields_values.build%>
+    <% field_value = @resource.fields_values.find_by(field_id: field.id) || @resource.fields_values.build %>
     <%= f.fields_for :fields_values, field_value do |builder| %>
       <%= render partial: "resource_fields", locals: { f: builder, field: field } %>
     <% end %>

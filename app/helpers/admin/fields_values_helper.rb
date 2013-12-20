@@ -1,4 +1,3 @@
 module Admin::FieldsValuesHelper
-  
 
 end

@@ -1,5 +1,11 @@
 module Admin::FieldsHelper
 
+  def get_input_types
+    InputTypeHash.map do |hash|
+      hash[:name]
+    end
+  end
+
   def make_hash_readable(options_hash)
     str = ''
     options_hash.each do |hash|
