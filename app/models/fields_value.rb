@@ -6,6 +6,7 @@ class FieldsValue < ActiveRecord::Base
   belongs_to :field
 
   validates_with FieldValueValidator
+  after_validation :populate_value_to_table
 
   def get_regexp
     InputTypeHash.each do |hash|
@@ -29,8 +30,9 @@ class FieldsValue < ActiveRecord::Base
     end
   end
 
-  def value=(val)
-    @value = val
+  def populate_value_to_table
+    attribute = "#{ field.input_type.downcase }_val"
+    eval "self.#{ attribute } = value"
   end
 
 end
