@@ -1,5 +1,3 @@
-require 'exceptions'
-
 class Admin::FieldsController < Admin::BaseController
   before_action :set_field, only: [:edit, :update, :destroy]
   #as PATCH request is sent, if the field_type is changed, the options hash is to be emptied explicitly
