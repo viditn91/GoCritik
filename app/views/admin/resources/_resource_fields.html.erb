@@ -7,7 +7,7 @@
     <% if type == 'select' %>
       <% options_array = options_array_from_hash(field.options) %>
       <%= f.select :value, options_array %>
-    <% elsif type == 'radio_button_tag' %>
+    <% elsif type == 'radio_button' %>
       <% options_array = options_array_from_hash(field.options) %>
       <% options_array.each do |text, value| %>
         <div class="radio inline">
@@ -16,7 +16,9 @@
         </div>
       <% end %>
     <% else %>
-      <% f.object.value ||= field.default_value %>
+      <!-- Handling 'false' boolean value exception -->
+      <% field_value = f.object.value %>
+      <% f.object.value ||= (field_value == false ? "false" : field.default_value) %>
       <%= eval "f.#{type} :value" %>
     <% end %>
   </div>

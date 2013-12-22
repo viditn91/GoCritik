@@ -26,9 +26,11 @@ class FieldsValue < ActiveRecord::Base
       @value
     else
       attribute = "#{ field.input_type.downcase }_val".to_sym
-      @value = try(attribute)
+      @value ||= try(attribute)
     end
   end
+
+private
 
   def populate_value_to_table
     attribute = "#{ field.input_type.downcase }_val"
