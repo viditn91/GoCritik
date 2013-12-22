@@ -5,7 +5,7 @@ class Resource < ActiveRecord::Base
 
   validate :validate_associated_fields
 
-  # after_save :destroy_empty_associated_field_values
+  after_validation :destroy_empty_associated_field_values
 
 private
 
@@ -19,10 +19,11 @@ private
     end
   end
 
-  # def destroy_empty_associated_field_values
-  #   empty_fields_collection = fields_values.map do |field_value|
-  #     field_value if field_value.value.empty?
-  #   end
-  #   fields_values.destroy empty_fields_collection
-  # end
+  def destroy_empty_associated_field_values
+    empty_fields_collection = fields_values.select do |field_value|
+      field_value.value.blank?
+    end
+    fields_values.destroy empty_fields_collection
+  end
+
 end
