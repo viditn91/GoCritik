@@ -57,11 +57,11 @@ private
   end
 
   def new_resource_params
-    params.require(:resource).permit(fields_values_attributes: [:value, :field_id])
+    params.require(:resource).permit(:name, :description, fields_values_attributes: [:value, :field_id])
   end
   
   def edit_resource_params
-    params.require(:resource).permit(fields_values_attributes: [:value, :field_id, :id])
+    params.require(:resource).permit(:name, :description, fields_values_attributes: [:value, :field_id, :id])
   end
 
 end

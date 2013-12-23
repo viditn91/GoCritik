@@ -19,5 +19,6 @@ module Admin::ResourcesHelper
     options_hash.each do |hash|
       return hash[:text] if hash[:value] == value.to_s
     end
+    nil
   end
 end

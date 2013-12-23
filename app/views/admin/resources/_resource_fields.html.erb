@@ -9,6 +9,7 @@
       <%= f.select :value, options_array %>
     <% elsif type == 'radio_button' %>
       <% options_array = options_array_from_hash(field.options) %>
+      <%= f.hidden_field :value, :value => "" %>
       <% options_array.each do |text, value| %>
         <div class="radio inline">
           <%= f.radio_button(:value, value) %>

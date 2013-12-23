@@ -9,10 +9,15 @@
 </div>
 
 <dl class="dl-horizontal">
+  <% attributes = Resource.column_names - ['id', 'created_at', 'updated_at'] %>
+  <% attributes.each do |attr| %>
+    <dt><strong><%= attr.humanize %>:</strong></dt>
+    <dd><%= @resource.try attr.to_sym %></dd>
+  <% end %>
   <% @resource.fields_values.each do |field_value| %>
     <dt><strong><%= field_value.field.name %>:</strong></dt>
     <dd><%= get_field_value(@resource, field_value.field) %></dd>
-    <% end %>
+  <% end %>
 </dl>
 
 <div class="form-actions">

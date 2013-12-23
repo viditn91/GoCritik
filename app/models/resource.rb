@@ -3,6 +3,8 @@ class Resource < ActiveRecord::Base
   has_many :fields_values, inverse_of: :resource, dependent: :destroy, validate: false
   accepts_nested_attributes_for :fields_values
 
+  validates :name, presence: true, uniqueness: true
+  validates :description, presence: true, uniqueness: true
   validate :validate_associated_fields
 
   after_validation :destroy_empty_associated_field_values
