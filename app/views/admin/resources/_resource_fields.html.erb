@@ -6,6 +6,7 @@
   <div class="controls">
     <% if type == 'select' %>
       <% options_array = options_array_from_hash(field.options) %>
+      <% options_array.unshift(['-- select an option --', '']) %>
       <%= f.select :value, options_array %>
     <% elsif type == 'radio_button' %>
       <% options_array = options_array_from_hash(field.options) %>

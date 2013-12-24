@@ -8,4 +8,4 @@ InputTypeHash = [ {name: 'String' , regexp: /\A([^\t\n]{,256})\Z/ },
 {name: 'Boolean' , regexp: /(true|false)/ }]
 
 FieldTypeArray = [['Text Field','text_field'], ['Text Area', 'text_area'], ['Select Box', 'select'],
-  ['Radio Buttons', 'radio_button']]
+  ['Radio Buttons', 'radio_button'], ['Check Box', 'check_box']]

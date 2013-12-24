@@ -8,12 +8,6 @@ class FieldsValue < ActiveRecord::Base
   validates_with FieldValueValidator
   after_validation :populate_value_to_table
 
-  def get_regexp
-    InputTypeHash.each do |hash|
-      return hash[:regexp] if hash[:name] == field.input_type
-    end
-  end
-
   def is_value_unique?
     attribute = "#{ field.input_type.downcase }_val".to_sym
     FieldsValue.where(field_id: field_id).each do |field_value|

@@ -2,12 +2,24 @@ class Field < ActiveRecord::Base
 
   serialize :options
   validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validate :field_name_with_resource_attributes
+  validates_with FieldValidator
 
   before_destroy :ensure_not_referenced_by_resource
   before_update :check_for_updated_fields
 
+  def get_regexp
+    InputTypeHash.each do |hash|
+      return hash[:regexp] if hash[:name] == input_type
+    end
+  end
+  
 protected
   
+  def field_name_with_resource_attributes
+    errors.add(:name, 'is already taken.') if name =~ /name|description/i 
+  end
+
   def ensure_not_referenced_by_resource
     raise Exceptions::RequiredFieldError.new "Field Cannot be deleted. Records depend on this field" if field_exists_in_resource?
   end
@@ -25,5 +37,6 @@ protected
     end
     false
   end
+
 
 end
