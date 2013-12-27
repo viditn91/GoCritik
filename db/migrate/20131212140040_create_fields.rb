@@ -8,7 +8,6 @@ class CreateFields < ActiveRecord::Migration
       t.string :default_value
       t.boolean :required
       t.boolean :unique
-
       t.timestamps
     end
   end
