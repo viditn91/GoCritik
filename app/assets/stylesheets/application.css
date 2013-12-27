@@ -11,3 +11,36 @@
  *= require_self
  *= require_tree .
  */
+
+.rating {
+  background-color: #9ACD32;
+  color: #FFFEEE;
+  font-weight: bold;
+  padding: 5px;
+ }
+
+.top-buffer {
+  margin-top: 20px;
+}
+
+.side-buffer {
+  margin-right: 10px;
+}
+
+.title-style {
+  border-top: solid #AAA 1px;  
+}
+.fill-grey {
+  background-color: #F9F9F7;
+}
+.heading {
+  color: #444444;
+  font-weight: normal;
+  font-family: cursive;
+}
+.magnify  {
+  font-size: 20px;
+}
+.minify  {
+  font-size: 12px;
+}
