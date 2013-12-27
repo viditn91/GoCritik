@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131219022539) do
+ActiveRecord::Schema.define(version: 20131224110231) do
+
+  create_table "comments", force: true do |t|
+    t.text     "content"
+    t.integer  "review_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "fields", force: true do |t|
     t.string   "name"
@@ -39,9 +47,32 @@ ActiveRecord::Schema.define(version: 20131219022539) do
     t.datetime "updated_at"
   end
 
+  create_table "likes", force: true do |t|
+    t.integer  "likeable_id"
+    t.string   "likeable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ratings", force: true do |t|
+    t.integer  "value"
+    t.integer  "user_id"
+    t.integer  "resource_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "resources", force: true do |t|
     t.string   "name"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reviews", force: true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
