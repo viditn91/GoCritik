@@ -1,0 +1,2 @@
+$('#resource-header #votes').html("<%= @resource.ratings.count %>");
+$('#resource-header #score').html("<%= calc_avg_rating(@resource) %>");

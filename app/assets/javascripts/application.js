@@ -11,8 +11,18 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.rateit
+//= require jquery.ui.all
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
 //= require_tree ./admin
+
+$(document).ajaxError(function (e, xhr, settings) {
+  if (xhr.status == 401) {
+    var url = '/users/sign_in';
+    $(location).attr('href',url);
+  }
+});
+

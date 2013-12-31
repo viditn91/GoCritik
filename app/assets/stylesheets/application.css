@@ -8,15 +8,24 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require rateit
  *= require_self
  *= require_tree .
+ *= require jquery.ui.all
  */
 
-.rating {
+.rating-meter {
   background-color: #9ACD32;
   color: #FFFEEE;
-  font-weight: bold;
+  font-size: 20px;
   padding: 5px;
+  font-family: cursive;
+ }
+
+ .rating-meter-label {
+  background-color: #F9F9F7;
+  font-size: 12px;
+  font-family: cursive;
  }
 
 .top-buffer {
@@ -43,4 +52,16 @@
 }
 .minify  {
   font-size: 12px;
+}
+.comment-container {
+  font-size: 11px;
+  background-color: #F9F9F7;
+  margin: 2px;
+  margin-left: 0px !important;
+}
+.new-comment {
+  margin-left: 0px !important;
+}
+.new-comment textarea {
+  font-size: 11px;
 }
