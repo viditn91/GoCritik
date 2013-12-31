@@ -1,0 +1,5 @@
+<% if current_user && (rating = current_user.ratings.find_by_resource_id(@resource.id)) %>
+  <%= rateit_tag(max: 5, min: 0, step: 0.5, value: rating.value, resetable: false) %>
+<% else %>
+  <%= rateit_tag(max: 5, min: 0, step: 0.5, value: 0, resetable: false) %>
+<% end %>

@@ -1,0 +1,7 @@
+var review_container = $('#review_<%= @comment.review.id %>_container');
+
+review_container.html("<%= escape_javascript render(@comment.review) %>");
+
+review_container.find('#current_comment').css({'background-color':'#ffffff'})
+  .animate({'background-color':'#dddddd'},500)
+  .animate({'background-color':'#F9F9F7'}, 400);

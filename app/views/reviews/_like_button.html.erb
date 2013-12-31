@@ -1,0 +1,5 @@
+<% if current_user && (like = current_user.likes.where(likeable_type: object.class.name).find_by(likeable_id: object.id)) %>
+  <%= link_to "Unlike", like_path(like), { method: :delete, remote: true } %>
+<% else %>
+  <%= link_to "Like", likes_path(like: { likeable_id: object.id, likeable_type: object.class.name }), { method: :post, remote: true } %>
+<% end %>

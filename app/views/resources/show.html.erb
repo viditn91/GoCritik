@@ -1,7 +1,12 @@
-<div class="page-header title-style fill-grey">
+<div id="resource-header" class="page-header title-style fill-grey">
   <div class="row-fluid">
     <div class="span8 offset1 top-buffer">
-      <h1 class="heading"><%= @resource.name %></h1>
+      <div class="row-fluid">
+        <div class="span8"><h1 class="heading"><%= @resource.name %></h1></div>
+        <div class="span4 top-buffer">
+          <h4 class="heading">Your rating: <span id="star-rating"><%= render 'rating_button' %><span></h4>
+        </div>
+      </div>
       <h4><i class="icon-map-marker">
         <%= get_field_value(@resource, Field.find_by_name(:Location)) %>,
         <%= get_field_value(@resource, Field.find_by_name(:City)) %>
@@ -10,13 +15,12 @@
     </div>
     <div class="span2"> 
       <div class="pull-right top-buffer">
-        <div class="rating top-buffer">
-          <div>Rating</div>
-          <div>Score</div>
+        <div id="score" class="rating-meter top-buffer">
+          <%= calc_avg_rating(@resource) %>
         </div>
         <div class="top-buffer">
           <i class="heading icon-thumbs-up">
-            <span class="magnify"><%= @resource.ratings.count %></span> votes
+            <span id="votes" class="magnify"><%= @resource.ratings.count %></span> votes
           </i>
         </div>
         <div>

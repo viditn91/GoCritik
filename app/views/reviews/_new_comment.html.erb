@@ -1,0 +1,12 @@
+<%= form_for Comment.new, remote: true, :html => { :class => "form span12 new-comment" } do |f| %>
+  <div class="span1">
+    <img src="/images/user.jpg">
+  </div>
+  <div class="span10">
+    <%= f.text_area :content, class: "span12", rows: 1, placeholder: "Click to add in a comment.." %>
+  </div>
+  <div class="actions pull-right">
+    <%= f.submit :class => 'btn btn-success btn-small', remote: true%>
+  </div>
+  <%= f.hidden_field :review_id, :value => review.id %>
+<% end %>

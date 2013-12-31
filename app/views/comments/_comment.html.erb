@@ -1,0 +1,16 @@
+<% if comment == @comment %>
+<div id="current_comment" class="span12 comment-container">
+<% else %>
+<div class="span12 comment-container">
+<% end %>
+  <div class="span1 pull-left">
+    <img src="/images/user.jpg">
+  </div>
+  <div class="span10">
+    <%= comment.content %>
+    <div>
+      <%= render partial: 'reviews/like_button', locals: {object: comment} %>
+    	<i class="icon-thumbs-up"><%= comment.likes.count %></i>
+    </div>
+  </div>
+</div>
