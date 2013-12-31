@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20131224110231) do
   create_table "likes", force: true do |t|
     t.integer  "likeable_id"
     t.string   "likeable_type"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
