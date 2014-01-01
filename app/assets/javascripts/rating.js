@@ -11,6 +11,9 @@ ready = function() {
     if(!counter && !orig_value) {
       ajaxCall('/ratings.js', { rating: { value: value, resource_id: this_resource_id }}, 'POST', '', '' );
       counter++;
+    } else if(counter && !orig_value) {
+      ajaxCall('/ratings.js', { rating: { value: value, resource_id: this_resource_id }}, 'POST', '', '' );
+      counter = 0;
     } else {
       ajaxCall('/ratings/update.js', { rating: { value: value, resource_id: this_resource_id }}, 'PUT', '', '' );
     }

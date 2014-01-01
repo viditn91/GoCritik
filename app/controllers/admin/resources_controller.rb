@@ -52,8 +52,8 @@ class Admin::ResourcesController < Admin::BaseController
 
 private
   def set_resource
-    resource = Resource.find_by(id: params[:id])
-    resource ? @resource = resource : redirect_to(admin_resources_path, notice: "Record not found") 
+    resource_record = Resource.find_by(id: params[:id])
+    resource_ record ? @resource = resource_record : redirect_to(admin_resources_path, notice: "Record not found") 
   end
 
   def new_resource_params

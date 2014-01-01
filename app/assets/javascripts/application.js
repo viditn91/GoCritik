@@ -22,7 +22,7 @@
 $(document).ajaxError(function (e, xhr, settings) {
   if (xhr.status == 401) {
     var url = '/users/sign_in';
-    $(location).attr('href',url);
+    //$(location).attr('href',url);
+    $(document).find('#login-btn').click();
   }
 });
-

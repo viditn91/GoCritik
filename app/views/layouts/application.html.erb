@@ -37,6 +37,8 @@
     <%= javascript_include_tag "application" %>
   </head>
   <body>
+    <%= render "query/login_modal" %>
+    <%= render "query/sign_up_modal" %> 
     <div class="navbar navbar-inverse navbar-fluid-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -46,7 +48,7 @@
               <%= yield(:navbar) %>
             </ul>
             <ul class="pull-right nav">
-              <% if current_user %>
+              <% if user_signed_in? %>
                 <li class="dropdown pull-right">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <%= current_user.admin? ? "Admin" : current_user.email %>
@@ -60,7 +62,8 @@
                   </ul>
                 </li>
               <% else %>
-                <li><%= button_to "Log In", new_user_session_path, method: :get %><li>
+                <%= link_to "Sign up", "#sign_up", "data-toggle" => "modal", :class => 'btn btn-small btn-success', :id => "sign-up-btn" %>
+                <%= link_to "Login", "#login", "data-toggle" => "modal", :class => 'btn btn-small', :id => "login-btn"%>
               <% end %>
             </ul>
           </div>

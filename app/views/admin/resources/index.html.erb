@@ -24,7 +24,7 @@
       </tr>
     </thead>
     <tbody>
-      <%= render @resources %>
+    <%= render partial: 'resource', collection: @resources, as: :object %>
     </tbody>
   </table>
 <% end %>

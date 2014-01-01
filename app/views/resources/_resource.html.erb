@@ -5,16 +5,16 @@
   </div>
   <div class="media-body pull-left span8">
     <h4 class="media-heading heading">
-      <%= link_to(resource.name, resource_path(resource), 'data-no-turbolink' => true) %>
+      <%= link_to(object.name, resource_path(object), 'data-no-turbolink' => true) %>
       <h5>
         <i class="icon-map-marker">
-          <%= get_field_value(resource, Field.find_by_name(:Location)) %>,
-          <%= get_field_value(resource, Field.find_by_name(:City)) %>
+          <%= get_field_value(object, Field.find_by_name(:Location)) %>,
+          <%= get_field_value(object, Field.find_by_name(:City)) %>
         </i>
       </h5>
     </h4>
     <div class="media">
-      <%= truncate(resource.description, :length => 200)%>
+      <%= truncate(object.description, :length => 200)%>
     </div>
   </div>
   <div class="pull-right">

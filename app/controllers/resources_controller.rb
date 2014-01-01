@@ -19,8 +19,8 @@ class ResourcesController < ApplicationController
 
 private
   def set_resource
-    resource = Resource.find_by(id: params[:id])
-    resource ? @resource = resource : redirect_to(resources_path, notice: "Record not found") 
+    resource_record = Resource.find_by(id: params[:id])
+    resource_record ? @resource = resource_record : redirect_to(resources_path, notice: "Record not found") 
   end
 
 end

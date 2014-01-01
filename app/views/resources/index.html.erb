@@ -3,6 +3,6 @@
 </div>
 <div class="span9">
   <ul>
-    <%= render @resources %>
+    <%= render partial: 'resource', collection: @resources, as: :object %>
   </ul>
 </div>
