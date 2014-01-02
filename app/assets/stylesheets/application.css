@@ -19,13 +19,15 @@
   color: #FFFEEE;
   font-size: 20px;
   padding: 5px;
-  font-family: cursive;
+  text-align: center;
  }
 
  .rating-meter-label {
   background-color: #F9F9F7;
   font-size: 12px;
-  font-family: cursive;
+  text-align: center;
+  padding-right: 5px;
+  padding-left: 5px;
  }
 
 .top-buffer {
@@ -45,7 +47,7 @@
 .heading {
   color: #444444;
   font-weight: normal;
-  font-family: cursive;
+  margin-bottom: 0px;
 }
 .magnify  {
   font-size: 20px;
@@ -59,9 +61,53 @@
   margin: 2px;
   margin-left: 0px !important;
 }
+.comment-container .top-buffer {
+  margin-top: 5px;
+}
 .new-comment {
   margin-left: 0px !important;
 }
 .new-comment textarea {
   font-size: 11px;
+}
+body {
+  font-family: cursive !important;
+}
+.timestamp {
+  color: grey;
+}
+#resource-header .rating-meter-label {
+  background-color: white;
+  font-size: 14px;
+}
+#resource-header .rating-meter {
+  font-size: 22px;
+}
+.icon {
+  font-size: 16px !important;
+  margin-left: 10px;
+}
+.review-container {
+  margin-left: 0px !important;
+}
+.bottom-buffer {
+  margin-bottom: 20px;
+}
+.border-down {
+  padding-bottom: 20px;
+  border-bottom: solid 1px #ccc;
+}
+.listing {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: solid 1px #ccc;
+}
+.indent {
+  margin-left: 0px !important;
+}
+.resource-review-container .magnify {
+  font-size: 16px;
+}
+.resource-review-container .minify {
+  font-size: 12px;
 }
