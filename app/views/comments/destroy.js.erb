@@ -1,0 +1,3 @@
+var review_container = $('#review_<%= @comment.review.id %>_sub_container');
+
+review_container.html("<%= escape_javascript render(@comment.review) %>");

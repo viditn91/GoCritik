@@ -1,7 +1,7 @@
 <% if @like.likeable_type == "Review" %>
-  var review_container = $('#review_<%= @like.likeable_id %>_container');
+  var review_container = $('#review_<%= @like.likeable_id %>_sub_container');
   review_container.html("<%= escape_javascript render(@like.likeable) %>");
 <% elsif @like.likeable_type == "Comment" %>
-  var review_container = $('#review_<%= @like.likeable.review_id %>_container');
+  var review_container = $('#review_<%= @like.likeable.review_id %>_sub_container');
   review_container.html("<%= escape_javascript render(@like.likeable.review) %>");
 <% end %>

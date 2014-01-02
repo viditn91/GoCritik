@@ -1,0 +1,19 @@
+<div id="<%= 'review_' + review.id.to_s + '_container' %>" class="review-container span11">
+  <div class="row-fluid">
+    <div class="pull-left">
+      <%= image_tag "user1.jpg", size: "80" %>
+    </div>
+    <div class="span8">
+      <div><h4 class="heading"><%= link_to review.user.email, review.user %></h4></div>
+      <div><i class="icon-pencil"></i><%= review.user.reviews.count %><%= ' review'.pluralize(review.user.reviews.count) %></div>
+      <div><i class="icon-ok"></i><%= review.user.ratings.count %><%= ' rating'.pluralize(review.user.reviews.count) %></div>
+    </div>
+    <div class="pull-right">
+      <div class="rating-meter-label">RATED IT</div>
+      <div class="rating-meter"><%= get_rated_value(review) %></div>
+    </div>
+  </div>
+  <div id="<%= 'review_' + review.id.to_s + '_sub_container' %>">
+    <%= render review %>
+  </div>
+</div>

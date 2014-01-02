@@ -3,30 +3,39 @@
     <div class="span8 offset1 top-buffer">
       <div class="row-fluid">
         <div class="span8"><h1 class="heading"><%= @resource.name %></h1></div>
-        <div class="span4 top-buffer">
+        <div class="pull-right top-buffer">
           <h4 class="heading">Your rating: <span id="star-rating"><%= render 'rating_button' %><span></h4>
         </div>
       </div>
-      <h4><i class="icon-map-marker">
-        <%= get_field_value(@resource, Field.find_by_name(:Location)) %>,
-        <%= get_field_value(@resource, Field.find_by_name(:City)) %>
-      </i></h4>
-      <div><%= @resource.description %></div>
+      <div class="row-fluid">
+        <h4><i class="icon-map-marker">
+          <%= get_field_value(@resource, Field.find_by_name(:Location)) %>,
+          <%= get_field_value(@resource, Field.find_by_name(:City)) %>
+        </i></h4>
+      </div>
+      <div class="row-fluid top-buffer"><%= @resource.description %></div>
     </div>
     <div class="span2"> 
       <div class="pull-right top-buffer">
-        <div id="score" class="rating-meter top-buffer">
-          <%= calc_avg_rating(@resource) %>
+        <div class="row-field top-buffer">
+          <div class="rating-meter-label">
+            RATED AS
+          </div>
+          <div id="score" class="rating-meter">
+            <%= calc_avg_rating(@resource) %>
+          </div>
         </div>
-        <div class="top-buffer">
-          <i class="heading icon-thumbs-up">
-            <span id="votes" class="magnify"><%= @resource.ratings.count %></span> votes
-          </i>
+        <div class="row-field top-buffer">
+          <div class="pull-right">
+            <div id="votes" class="magnify pull-right"><%= @resource.ratings.count %><i class="icon icon-ok"></i></div> 
+            <div>RATINGS</div>
+          </div>
         </div>
-        <div>
-          <i class="heading icon-pencil"> 
-            <span class="magnify"><%= @resource.reviews.count %></span> reviews
-          </i>
+        <div class="row-field pull-right top-buffer">
+          <div class="pull-right">
+            <div class="magnify pull-right"><%= @resource.reviews.count %><i class="icon icon-pencil"></i></div>
+            <div>REVIEWS</div>
+          </div>
         </div>
       </div>
     </div>
@@ -37,10 +46,8 @@
       <% @resource.fields_values.each do |field_value| %>
         <% if !(field_value.field.name == 'Location' || field_value.field.name == 'City') %>
         <li class="side-buffer">
-            <i class="icon-tag">
-              <%= field_value.field.name %>:
-              <%= get_field_value(@resource, field_value.field) %>
-            </i>
+            <i class="icon-tag"></i>
+            <%= field_value.field.name %>: <%= get_field_value(@resource, field_value.field) %>
         </li>
         <% end %>
       <% end %>
@@ -66,7 +73,7 @@
       <h3 class="heading">User Reviews for <%= @resource.name %><h3>
     </div>
     <div>
-      <%= render @resource.reviews %>
+      <%= render partial: 'resources/resource_review', collection: @resource.reviews, as: :review %>
     </div>
   </div>
 </div>

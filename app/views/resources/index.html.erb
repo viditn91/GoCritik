@@ -1,8 +1,6 @@
-<div class="page-header">
-  <h1>All <%= ResourceName.pluralize %></h1>
+<div id="resource-header" class="page-header title-style fill-grey">
+  <h1 class="heading offset1">All <%= ResourceName.pluralize %></h1>
 </div>
-<div class="span9">
-  <ul>
-    <%= render partial: 'resource', collection: @resources, as: :object %>
-  </ul>
+<div class="span8 offset1">
+  <%= render partial: 'resource', collection: @resources, as: :object %>
 </div>

@@ -1,0 +1,22 @@
+<% resource_obj = review.resource %>
+<div id="<%= 'review_' + review.id.to_s + '_container' %>", class="listing">
+  <div class="row-fluid">
+    <div class="pull-left">
+      <%= image_tag "resource.jpg", size: "80" %>
+    </div>
+    <div class="span8">
+      <div><h4 class="heading"><%= link_to resource_obj.name, resource_obj, 'data-no-turbolink' => true %></h4></div>
+      <div><i class="icon-map-marker">
+        <%= get_field_value(resource_obj, Field.find_by_name(:Location)) %>,
+        <%= get_field_value(resource_obj, Field.find_by_name(:City)) %>
+      </i></div>
+    </div>
+    <div class="pull-right">
+      <div class="rating-meter-label">RATED IT</div>
+      <div class="rating-meter"><%= get_rated_value(review) %></div>
+    </div>
+  </div>
+  <div class="top-buffer row-fluid">
+    <%= review.content.truncate(300) %> <%= link_to "See full review", review %>
+  </div>
+</div>
