@@ -39,6 +39,8 @@ end
 
 gem 'rails-rateit'
 
+gem 'has_permalink'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
