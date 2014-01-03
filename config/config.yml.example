@@ -1,0 +1,2 @@
+resource:
+  name: [resource_name] //resource_name can be 'Doctors', 'Restaurants', 'Books' etc
