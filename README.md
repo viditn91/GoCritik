@@ -1,7 +1,7 @@
 GoCritik
 ========
 
-This application is a means to create a Review Website, where users can pour in there ratings and reviews. The USP of the app is that the resource being rated is not specific, it may be a business / product / service/ person which is generated dynamically by the admin of the website.
+This application is a means to create a Review Website, where users can pour in their ratings and reviews. The USP of the app is that the resource being rated is not specific, it may be a business / product / service/ person which is generated dynamically by the admin of the website.
 
 ## Pre-Requisites
 
@@ -35,4 +35,4 @@ This application is a means to create a Review Website, where users can pour in 
 - A comment can be liked by user
 
 ## Reporting issues
-- If you face any issue, report me at vidit@visnol.com
+- If you face any issue, report me at vidit@vinsol.com
