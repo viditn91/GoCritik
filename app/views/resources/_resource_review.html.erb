@@ -1,10 +1,10 @@
 <div id="<%= 'review_' + review.id.to_s + '_container' %>" class="review-container span11">
   <div class="row-fluid">
     <div class="pull-left">
-      <%= image_tag "user1.jpg", size: "80" %>
+      <%= render partial: 'pictures/picture', locals: { object: review.user, size: "80"} %>
     </div>
     <div class="span8">
-      <div><h4 class="heading"><%= link_to review.user.email, review.user %></h4></div>
+      <div><h4 class="heading"><%= link_to get_name(review.user), review.user %></h4></div>
       <div><i class="icon-pencil"></i><%= review.user.reviews.count %><%= ' review'.pluralize(review.user.reviews.count) %></div>
       <div><i class="icon-ok"></i><%= review.user.ratings.count %><%= ' rating'.pluralize(review.user.reviews.count) %></div>
     </div>

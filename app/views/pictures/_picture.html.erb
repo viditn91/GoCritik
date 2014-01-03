@@ -1,0 +1,5 @@
+<% if object.picture %>
+  <%= image_tag("/pictures/code_image/#{ object.picture.id }", :alt => "Image", size: size ) %>
+<% else %>
+  <%= image_tag("user1.jpg", size: size ) %>
+<% end %>

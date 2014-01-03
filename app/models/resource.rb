@@ -1,10 +1,12 @@
 class Resource < ActiveRecord::Base
 
   has_permalink :name
-
   has_many :fields_values, inverse_of: :resource, dependent: :destroy, validate: false
   has_many :reviews, dependent: :destroy
   has_many :ratings, dependent: :destroy
+  # has_one :picture, as: :imageable, dependent: :destroy
+  has_one :picture, dependent: :destroy
+
   accepts_nested_attributes_for :fields_values
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }

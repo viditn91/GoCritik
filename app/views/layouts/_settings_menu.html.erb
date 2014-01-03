@@ -1,0 +1,8 @@
+<li><%= link_to "My Page", current_user %></li>
+<li class="divider"></li>
+<li class="nav-header">Actions</li>
+<li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
+<% if current_user.admin? %>
+  <li><%= link_to "Admin Panel", admin_path %></li>
+<% end %>
+<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>

@@ -3,11 +3,11 @@
 <% else %>
 <div class="span12 comment-container">
 <% end %>
-  <div class="pull-left">
-    <%= image_tag "user1.jpg", size: "50" %>
+  <div class="pull-left span1">
+    <%= render partial: 'pictures/picture', locals: { object: comment.user, size: "50" } %>
   </div>
   <div class="span10 top-buffer">
-    <div><%= link_to comment.user.email, comment.user %>  <%= comment.content %></div>
+    <div><%= link_to get_name(comment.user), comment.user %>  <%= comment.content %></div>
     <div>
       <span class="side-buffer"><%= render partial: 'reviews/like_button', locals: {object: comment} %></span>
       <span class="side-buffer"><i class="icon-thumbs-up"><%= comment.likes.count %></i></span>

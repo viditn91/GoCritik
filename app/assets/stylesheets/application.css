@@ -111,3 +111,6 @@ body {
 .resource-review-container .minify {
   font-size: 12px;
 }
+.edit-profile .border-down {
+  padding-bottom: 5px;
+}

@@ -1,9 +1,3 @@
-<% content_for :navbar do %>
-  <li><%= link_to "Home", admin_path%></li>
-  <li><%= link_to ResourceName.pluralize, admin_resources_path %></li>
-  <li><%= link_to "Fields", admin_fields_path %></li>
-<% end %>
-
 <% if @fields.blank? %>
   <% flash[:notice] = "No Field created. Click on 'add a field'" %>
 <% end %>

@@ -1,0 +1,32 @@
+<%= form_for @user, :html => { :class => "form form-horizontal" } do |f| %>
+  
+  <% if @user.errors.any? %>
+    <div class="alert alert-error">
+      <a class="close" data-dismiss="alert">&#215;</a>
+      <h4><%= pluralize(@field.errors.count, "error") %> prohibited this field from being saved:</h4>
+      <ul>
+        <% @field.errors.full_messages.each do |msg| %>
+          <%= content_tag :li, msg, :id => "error_#{msg}" if msg.is_a?(String) %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :first_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :first_name %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :last_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :last_name %>
+    </div>
+  </div>
+  
+  <div class="actions offset4">
+    <%= f.submit 'Update', :class => 'btn btn-primary'%>
+  </div>
+<% end %>

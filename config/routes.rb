@@ -1,5 +1,5 @@
 GoCritik::Application.routes.draw do
-  
+
   devise_for :users
   namespace :admin do
     resources :fields
@@ -13,6 +13,9 @@ GoCritik::Application.routes.draw do
   resources :ratings, only: :create do
     put 'update', on: :collection 
   end
-  resources :users, only: [:show, :edit]
-  root 'query#home'
+  resources :users, only: [:show, :edit, :update]
+  resources :pictures, only: [:create, :show, :update, :destroy]
+  get 'pictures/code_image/:id', to: 'pictures#code_image'
+  root 'resources#index'
+
 end
