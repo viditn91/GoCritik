@@ -1,22 +1,12 @@
-== README
-- creating/ updating/ destroying fields
-- creating/ updating/ destroying resources
-- signing-in / signing-up
-- creating reviews/ ratings/ comments
-- liking/ unliking a review/ comment
-
 This application is a means to create a Review Website, where users can pour in there ratings and reviews. The USP of the app is that the resource being rated is not specific, it may be a business / product / service/ person which is generated dynamically by the admin of the website.
 
-## Pre-Requisites
+Pre-Requisites
 
 - You need to have mysql running on your machine and the mysql adapter for rails. Follow the given or any other command to install them
-
-  ```
   sudo apt-get install mysql-server mysql-client
   sudo apt-get install libmysql-ruby libmysqlclient-dev
-  ```
 
-## Installation
+Installation
 
 - Fork this repository
 - Run bundle install
@@ -25,12 +15,10 @@ This application is a means to create a Review Website, where users can pour in 
 - Run rake db:create ( MySql required to be installed on your system )
 - Run rake db:migrate
 
-## Optional Rake Tasks
-
+Optional Rake Tasks
 - Run db:setup:admin to create any normal user of this website an admin
 
-## Features
-
+Features
 - Admin of this website can create specific fields for a resource
 - Admin can create a resource by populating data into these fields
 - Admin can edit any field or any resource at any time 
@@ -38,5 +26,5 @@ This application is a means to create a Review Website, where users can pour in 
 - A review can be liked, commented upon by user
 - A comment can be liked by user
 
-## Reporting issues
+Reporting issues
 - If you face any issue, report me at vidit@visnol.com
