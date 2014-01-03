@@ -1,5 +1,0 @@
-resource:
-  name: 'Restaurant'
-  header: 'this is the header'
-  footer: 'this is the footer'
-  contact_details: 'these are contact details'
