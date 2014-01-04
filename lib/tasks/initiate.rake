@@ -10,8 +10,8 @@ namespace :db do
         puts "Confirm password:"
         password_confirmation = STDIN.gets.chomp
         admin = User.create(
-          :email => email,
-          :password => password,
+          :email => email, 
+          :password => password, 
           :password_confirmation => password_confirmation,
           :admin => true
           )
