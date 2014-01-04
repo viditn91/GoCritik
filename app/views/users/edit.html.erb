@@ -4,7 +4,7 @@
   </div>
   <div class="row-fluid">
     <div class="span2 offset1">
-      <%= render partial: 'pictures/picture', locals: { object: @user, size: "200x200"} %>
+      <%= image_tag @user.picture.photo.url(:full) %>
       <div class="pull-right">
         <% if @user.picture %>
           <%= link_to "Remove", picture_path(@user.picture), method: :delete %>

@@ -6,16 +6,13 @@ ready = function() {
   var counter = 0;
   scope.on('rated', function (e) {
     var ri = $(this);
-    var this_resource_id = window.location.pathname.substring(1).split('/')[1];
+    var this_permalink = window.location.pathname.substring(1).split('/')[1];
     var value = ri.rateit('value');
     if(!counter && !orig_value) {
-      ajaxCall('/ratings.js', { rating: { value: value, resource_id: this_resource_id }}, 'POST', '', '' );
+      ajaxCall('/ratings.js', { rating: { value: value, permalink: this_permalink }}, 'POST', '', '' );
       counter++;
-    } else if(counter && !orig_value) {
-      ajaxCall('/ratings.js', { rating: { value: value, resource_id: this_resource_id }}, 'POST', '', '' );
-      counter = 0;
     } else {
-      ajaxCall('/ratings/update.js', { rating: { value: value, resource_id: this_resource_id }}, 'PUT', '', '' );
+      ajaxCall('/ratings/update.js', { rating: { value: value, permalink: this_permalink }}, 'PUT', '', '' );
     }
   });
 }

@@ -2,7 +2,7 @@
   <div class="row-fluid">
     <div class="span8 offset1 top-buffer">
       <div class="row-fluid">
-        <div class="span8"><h1 class="heading"><%= @resource.name %></h1></div>
+        <div class  ="span8"><h1 class="heading"><%= @resource.name %></h1></div>
         <div class="pull-right top-buffer">
           <h4 class="heading">Your rating: <span id="star-rating"><%= render 'rating_button' %><span></h4>
         </div>
@@ -27,7 +27,7 @@
         </div>
         <div class="row-field top-buffer">
           <div class="pull-right">
-            <div id="votes" class="magnify pull-right"><%= @resource.ratings.count %><i class="icon icon-ok"></i></div> 
+            <div class="magnify pull-right"><span id="votes"><%= @resource.ratings.count %></span><i class="icon icon-ok"></i></div> 
             <div>RATINGS</div>
           </div>
         </div>

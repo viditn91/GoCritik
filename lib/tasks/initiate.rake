@@ -2,15 +2,30 @@ namespace :db do
   namespace :setup do
     desc "create default admin user"
     task :admin => :environment do
-      admin = User.create(
-        :email => "vidit@vinsol.com", 
-        :password => "vidit", 
-        :password_confirmation => "vidit",
-        :first_name => "vidit",
-        :last_name => "jain",
-        :admin => true
-        )
-      admin.save
+      begin
+        puts "Enter email:"
+        email = STDIN.gets.chomp
+        puts "Enter password:"
+        password = STDIN.gets.chomp
+        puts "Confirm password:"
+        password_confirmation = STDIN.gets.chomp
+        admin = User.create(
+          :email => email,
+          :password => password,
+          :password_confirmation => password_confirmation,
+          :admin => true
+          )
+        if admin.save
+          puts "Admin created successfully"
+          exit
+        else
+          if password != password_confirmation
+            puts "Password confirmation mismatch"
+          else
+            puts "Email format not correct"
+          end
+        end
+      end while 1
     end
   end
 end

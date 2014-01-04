@@ -1,15 +1,12 @@
-<% @picture = object.picture || Picture.new %>
-<%= form_for @picture, :html => { :class => "form form-horizontal" } do |f| %>
-  <%= f.label :image_file, 'Upload Picture', :class => 'control-label' %>
+<% @picture = object.picture || object.build_picture %>
+<%= form_for @picture, :html => { :class => "form form-horizontal", multipart: true } do |f| %>
+  <%= f.label :photo, 'Upload Picture', :class => 'control-label' %>
   <div class="controls">
-    <%= f.file_field :image_file %>
+    <%= f.file_field :photo %>
   </div>
   <div class="actions offset4 top-buffer">
     <%= f.submit 'Update', :class => 'btn btn-primary'%>
   </div>
-  <% if object.class.name == "User" %>
-    <%= f.hidden_field :user_id, value: object.id %>
-  <% elsif object.class.name == "Resource" %>
-    <%= f.hidden_field :resource_id, value: object.id %>
-  <% end %>
+  <%= f.hidden_field :imageable_id, value: object.id %>
+  <%= f.hidden_field :imageable_type, value: object.class.name %>
 <% end %>

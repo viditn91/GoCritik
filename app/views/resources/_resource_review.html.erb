@@ -1,7 +1,7 @@
 <div id="<%= 'review_' + review.id.to_s + '_container' %>" class="review-container span11">
   <div class="row-fluid">
     <div class="pull-left">
-      <%= render partial: 'pictures/picture', locals: { object: review.user, size: "80"} %>
+      <%= image_tag review.user.picture.photo.url(:small) %>
     </div>
     <div class="span8">
       <div><h4 class="heading"><%= link_to get_name(review.user), review.user %></h4></div>

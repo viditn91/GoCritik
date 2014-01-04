@@ -4,7 +4,7 @@
 <div class="span12 comment-container">
 <% end %>
   <div class="pull-left span1">
-    <%= render partial: 'pictures/picture', locals: { object: comment.user, size: "50" } %>
+    <%= image_tag comment.user.picture.photo.url(:thumb) %>
   </div>
   <div class="span10 top-buffer">
     <div><%= link_to get_name(comment.user), comment.user %>  <%= comment.content %></div>
