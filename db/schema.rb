@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140103120718) do
+ActiveRecord::Schema.define(version: 20140106063754) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20140103120718) do
   create_table "fields", force: true do |t|
     t.string   "name"
     t.string   "input_type"
-    t.string   "field_type"
+    t.string   "type"
     t.text     "options"
     t.string   "default_value"
     t.boolean  "required"

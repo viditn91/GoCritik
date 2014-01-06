@@ -15,7 +15,7 @@
     </tr>
   </thead>
   <tbody>
-    <%= render partial: @fields, locals: { attributes: attributes } %>
+    <%= render partial: 'field', collection: @fields, locals: { attributes: attributes } %>
   </tbody>
 </table>
 <%= link_to "Add a field", new_admin_field_path, :class => "btn btn-success" %>

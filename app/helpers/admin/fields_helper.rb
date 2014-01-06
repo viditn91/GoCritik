@@ -14,9 +14,9 @@ module Admin::FieldsHelper
     str
   end
 
-  def get_field_type_display_value(field_type)
+  def get_field_type_display_value(type)
     FieldTypeArray.each do |text, value|
-      return text if value == field_type
+      return text if value == type
     end
   end
 

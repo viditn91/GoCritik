@@ -9,7 +9,7 @@ class FieldsValue < ActiveRecord::Base
   after_validation :populate_value_to_table
 
   def is_value_unique?
-    attribute = "#{ field.input_type.downcase }_val".to_sym
+    attribute = get_column_name
     FieldsValue.where(field_id: field_id).each do |field_value|
       return false if value == field_value.try(attribute) && id != field_value.id
     end
@@ -19,7 +19,7 @@ class FieldsValue < ActiveRecord::Base
     if new_record?
       @value
     else
-      attribute = "#{ field.input_type.downcase }_val".to_sym
+      attribute = get_column_name
       @value ||= try(attribute)
     end
   end
@@ -27,8 +27,12 @@ class FieldsValue < ActiveRecord::Base
 private
 
   def populate_value_to_table
-    attribute = "#{ field.input_type.downcase }_val"
-    eval "self.#{ attribute } = value"
+    attribute = get_column_name.to_s + '='
+    send(attribute, value)
+  end
+
+  def get_column_name
+    "#{ field.input_type.downcase }_val".to_sym
   end
 
 end

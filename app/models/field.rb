@@ -3,7 +3,6 @@ class Field < ActiveRecord::Base
   serialize :options
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validate :field_name_with_resource_attributes
-  validates_with FieldValidator
 
   before_destroy :ensure_not_referenced_by_resource
   before_update :check_for_updated_fields
@@ -26,7 +25,7 @@ protected
 
   def check_for_updated_fields
     hash = self.changes
-    if hash.keys.include?('input_type') || hash.keys.include?('field_type')
+    if hash.keys.include?('input_type') || hash.keys.include?('type')
       raise Exceptions::RequiredFieldError.new "Field-Type/Input-Type Cannot be updated. Records depend on this field" if field_exists_in_resource?
     end
   end
