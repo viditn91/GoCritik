@@ -27,7 +27,7 @@
       <% f.object.value ||= (field_value == false ? "false" : field.default_value) %>
       <%= f.text_area :value %>
     <% when 'CheckBoxField' %>
-      <%= f.text_area :value %>
+      <%= f.check_box :value %>
     <% end %>
   </div>
   <%= f.hidden_field :field_id, :value => field.id %>

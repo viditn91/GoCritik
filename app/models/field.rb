@@ -16,7 +16,7 @@ class Field < ActiveRecord::Base
 protected
   
   def field_name_with_resource_attributes
-    errors.add(:name, 'is already taken.') if name =~ /name|description/i 
+    errors.add(:name, 'is already taken.') if name =~ /^(name|description)$/i 
   end
 
   def ensure_not_referenced_by_resource
@@ -36,6 +36,5 @@ protected
     end
     false
   end
-
 
 end
