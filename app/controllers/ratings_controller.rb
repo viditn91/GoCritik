@@ -9,6 +9,11 @@ class RatingsController < ApplicationController
     @rating.user_id = current_user.id
     @rating.value = rating_params[:value]
     respond_to do |format|
+      ## Also, note that conditions should be inside the format.js, format.html etc blocks.
+      ## Wouldn't this work here?
+      ## format.js do
+      ##  @resource if @rating.save
+      ## end
       if @rating.save
         format.js { @resource = @resource }
       end
@@ -18,14 +23,16 @@ class RatingsController < ApplicationController
   def update
     @rating.update(value: rating_params[:value])
     respond_to do |format|
+      ## Same as above
       if @rating.save
         format.js { @resource = @resource }
       end
     end
   end
- 
+
 private
   def set_rating
+    ## Please use find_by or where
     @resource = Resource.find_by_permalink(rating_params[:permalink])
     @rating = @resource.ratings.find_by(user_id: current_user.id)
   end

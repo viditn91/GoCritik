@@ -23,7 +23,10 @@ class CommentsController < ApplicationController
 private
   def set_comment
     comment = Comment.find_by(id: params[:id])
-    comment ? @comment = comment : redirect_to(resources_path, notice: "Record not found") 
+    ## unless @comment = comment
+    ##  redirect_to(resources_path, notice: "Record not found")
+    ## end
+    comment ? @comment = comment : redirect_to(resources_path, notice: "Record not found")
   end
 
   def comment_params

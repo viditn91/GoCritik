@@ -23,7 +23,8 @@ private
 
   def set_user
     user = User.find_by(id: params[:id])
-    user ? @user = user : redirect_to(resources_path, notice: "User not found") 
+    ## Same as described in comments_controller
+    user ? @user = user : redirect_to(resources_path, notice: "User not found")
   end
 
   def user_params

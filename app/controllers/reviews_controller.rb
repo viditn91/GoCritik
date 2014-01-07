@@ -8,6 +8,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to :back, notice: "Review created successfully"
     else
+      ## Please show an error message when review not saved successfully
       redirect_to :back
     end
   end
@@ -19,6 +20,7 @@ class ReviewsController < ApplicationController
     if @review.destroy
       redirect_to :back, notice: "Review deleted successfully"
     else
+      ## Please show an error message when review not destroyed successfully
       redirect_to :back
     end
   end
@@ -26,7 +28,8 @@ class ReviewsController < ApplicationController
 private
   def set_review
     review = Review.find_by(id: params[:id])
-    review ? @review = review : redirect_to(resources_path, notice: "Record not found") 
+    ## Same as described in comments_controller
+    review ? @review = review : redirect_to(resources_path, notice: "Record not found")
   end
 
   def review_params
