@@ -7,6 +7,9 @@
       <li class="inline">
         <%= render partial: 'reviews/like_button', locals: { object: review } %>
       </li>
+      <li class="inline">
+        <%= render partial: 'reviews/delete_button', locals: { object: review } %>
+      </li>
       <li class="inline timestamp minify">
         <%= distance_of_time_in_words(Time.now, review.created_at) + " ago" %>
       </li>

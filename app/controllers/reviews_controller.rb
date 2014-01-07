@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to :back, notice: "Review created successfully"
     else
-      redirect_to :back
+      redirect_to :back, notice: "Something went bad"
     end
   end
 
@@ -17,9 +17,9 @@ class ReviewsController < ApplicationController
 
   def destroy
     if @review.destroy
-      redirect_to :back, notice: "Review deleted successfully"
+      redirect_to :back, notice: "Review removed successfully"
     else
-      redirect_to :back
+      redirect_to :back, notice: "Something went bad"
     end
   end
 
