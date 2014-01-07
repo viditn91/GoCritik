@@ -7,5 +7,5 @@ InputTypeHash = [ {name: 'String' , regexp: /\A([^\t\n]{,256})\Z/ },
 {name: 'Float' , regexp: /(^(\d+)(\.)?(\d+)?)|(^(\d+)?(\.)(\d+))/ },
 {name: 'Boolean' , regexp: /(true|false)/ }]
 
-FieldTypeArray = [['Text Field','text_field'], ['Text Area', 'text_area'], ['Select Box', 'select'],
-  ['Radio Buttons', 'radio_button'], ['Check Box', 'check_box']]
+FieldTypeArray = [['Text Field','TextField'], ['Text Area', 'TextAreaField'], ['Select Box', 'SelectBoxField'],
+  ['Radio Buttons', 'RadioButtonField'], ['Check Box', 'CheckBoxField']]

@@ -6,12 +6,12 @@
       <% elsif attr == 'required' || attr == 'unique' %>
         <% value = field.send(attr.to_sym) %>
         <%= value == true ? 'Yes' : 'No' %>
-      <% elsif attr == 'field_type' %>
+      <% elsif attr == 'type' %>
         <% value = field.send(attr.to_sym) %>
         <%= get_field_type_display_value(value) %>
       <% else %>
         <% value = field.send(attr.to_sym) %>
-        <%= value.present? ? value : '- NA -' %>
+        <%= value.presence || '- NA -' %>
       <% end %>
     </td>
   <% end %>

@@ -1,8 +1,10 @@
 class Admin::ResourcesController < Admin::BaseController
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
+  before_action :set_column_names, only: [:show, :index]
 
   def new
     @resource = Resource.new
+    @fields = Field.all
   end
 
   def create
@@ -19,6 +21,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def edit
+    @fields = Field.all
   end
 
   def show
@@ -62,6 +65,10 @@ private
   
   def edit_resource_params
     params.require(:resource).permit(:name, :description, fields_values_attributes: [:value, :field_id, :id])
+  end
+
+  def set_column_names
+    @resource_columns = Resource.column_names
   end
 
 end

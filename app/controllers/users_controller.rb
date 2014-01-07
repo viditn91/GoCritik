@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_action :verify_user, only: :edit
 
   def show
+    @location_field = Field.find_by_name(:Location)
+    @city_field = Field.find_by_name(:City)
   end
 
   def edit

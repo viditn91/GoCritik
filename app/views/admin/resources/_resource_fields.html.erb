@@ -1,14 +1,15 @@
 <div class="control-group">
   <% label_name = field.name %>
   <% label_name += '*' if field.required %>
-  <% type = field.field_type %>
+  <% type = field.type %>
   <%= f.label :value, label_name, :class => 'control-label' %>
   <div class="controls">
-    <% if type == 'select' %>
+    <% case type%>
+    <% when 'SelectBoxField' %>
       <% options_array = options_array_from_hash(field.options) %>
       <% options_array.unshift(['-- select an option --', '']) %>
       <%= f.select :value, options_array %>
-    <% elsif type == 'radio_button' %>
+    <% when 'RadioButtonField' %>
       <% options_array = options_array_from_hash(field.options) %>
       <%= f.hidden_field :value, :value => "" %>
       <% options_array.each do |text, value| %>
@@ -17,11 +18,16 @@
           <%= f.label(:value, text ) %>
         </div>
       <% end %>
-    <% else %>
-      <!-- Handling 'false' boolean value exception -->
+    <% when 'TextField' %>
       <% field_value = f.object.value %>
       <% f.object.value ||= (field_value == false ? "false" : field.default_value) %>
-      <%= eval "f.#{type} :value" %>
+      <%= f.text_field :value %>
+    <% when 'TextAreaField' %>
+      <% field_value = f.object.value %>
+      <% f.object.value ||= (field_value == false ? "false" : field.default_value) %>
+      <%= f.text_area :value %>
+    <% when 'CheckBoxField' %>
+      <%= f.check_box :value %>
     <% end %>
   </div>
   <%= f.hidden_field :field_id, :value => field.id %>

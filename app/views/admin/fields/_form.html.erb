@@ -1,4 +1,4 @@
-<%= form_for [:admin, @field], :html => { :class => "form form-horizontal" } do |f| %>
+<%= form_for [:admin, @field.becomes(Field)], :html => { :class => "form form-horizontal" } do |f| %>
   
   <% if @field.errors.any? %>
     <div class="alert alert-error">
@@ -20,9 +20,9 @@
   </div>
 
   <div class="control-group">
-    <%= f.label :field_type, :class => 'control-label' %>
+    <%= f.label :type, :class => 'control-label' %>
     <div class="controls">
-      <%= f.select :field_type, FieldTypeArray %>
+      <%= f.select :type, FieldTypeArray %>
     </div>
   </div>
 

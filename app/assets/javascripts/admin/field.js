@@ -2,12 +2,11 @@ var ready;
 
 ready = function() {
   
-  var scope = $(document).find('#field_field_type');
+  var scope = $(document).find('#field_type');
   show_or_hide_elements(scope);
   // code to append options fields if selectbox/redio buttons are selected
-  $(document).on('change','#field_field_type',function() {
+  $(document).on('change','#field_type',function() {
     var scope = $(this);
-    scope.closest('.form').find('#options_container').html('');
     show_or_hide_elements(scope);
   });
   // code to append options if the add more options button is clicked
@@ -41,11 +40,11 @@ show_or_hide_elements = function(scope) {
   if(field_type == 'Select Box' || field_type == 'Radio Buttons') {
     adjust_options(form_scope);
     form_scope.find('.default-field, .is-unique-field').hide();
-    form_scope.find('#field_unique option').find('option[value="false"]').attr('selected', true);
+    // form_scope.find('#field_unique option').find('option[value="false"]').attr('selected', true);
   } else if(field_type == 'Check Box') {
     form_scope.find('.options-field, .default-field, .input-type-field, .is-unique-field').hide();
-    form_scope.find('#field_input_type').find('option[value="Integer"]').attr('selected', true);
-    form_scope.find('#field_unique').find('option[value="false"]').attr('selected', true);
+    // form_scope.find('#field_input_type').find('option[value="Integer"]').attr('selected', true);
+    // form_scope.find('#field_unique').find('option[value="false"]').attr('selected', true);
   } else {
     form_scope.find('.options-field').hide();
   }

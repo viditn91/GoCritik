@@ -27,7 +27,7 @@
   </div>
 
   <!-- For every field, field value of the resource is checked. If it exists as a persisted record then its a case of updation OR if it exists in the collection then its a case of validation error OR if it is a new record then a new indtance is passed to the fields_for helper-->
-  <% Field.all.each do |field| %>
+  <% @fields.each do |field| %>
     <% field_value = @resource.fields_values.find_by(field_id: field.id) || @resource.fields_values.find { |fv| fv.field_id == field.id } || @resource.fields_values.build %>
     <%= f.fields_for :fields_values, field_value do |builder| %>
       <%= render partial: "resource_fields", locals: { f: builder, field: field } %>
