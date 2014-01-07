@@ -24,6 +24,7 @@ class Admin::FieldsController < Admin::BaseController
 
   def index
     @fields = Field.all
+    @field_columns = Field.column_names
   end
 
   def update
