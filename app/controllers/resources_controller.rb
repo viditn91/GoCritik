@@ -1,10 +1,9 @@
 class ResourcesController < ApplicationController
   before_action :set_resource, only: :show
+  before_action :get_fields, only: [:show, :index]
 
   def index
     @resources = Resource.all
-    @location_field = Field.find_by_name(:Location)
-    @city_field = Field.find_by_name(:City)
   end
 
   def show
@@ -12,10 +11,20 @@ class ResourcesController < ApplicationController
 
 private
   def set_resource
+    ## fixed
     ## Please use find_by or where
-    resource_record = Resource.find_by_permalink(params[:id])
+    @resource = Resource.find_by(permalink: params[:id])
+    ## fixed
     ## Same as described in comments_controller
-    resource_record ? @resource = resource_record : redirect_to(resources_path, notice: "Record not found")
+    unless @resource
+      flash[:alert] = "#{ ResourceName.capitalize } not found"
+      redirect_to_back_or_default_path
+    end
+  end
+
+  def get_fields
+    @location_field = Field.find_by(name: 'Location')
+    @city_field = Field.find_by(name: 'City')
   end
 
 end

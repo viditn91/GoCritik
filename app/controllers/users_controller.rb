@@ -18,15 +18,19 @@ class UsersController < ApplicationController
 
 private
   def verify_user
-    if !current_user || current_user != @user
-      redirect_to user_path(@user)
+    unless current_user || current_user == @user
+      redirect_to @user
     end
   end
 
   def set_user
-    user = User.find_by(id: params[:id])
+    @user = User.find_by(id: params[:id])
+    ## fixed
     ## Same as described in comments_controller
-    user ? @user = user : redirect_to(resources_path, notice: "User not found")
+    unless @user
+      flash[:error] = "User Not Found"
+      redirect_to_back_or_default_path
+    end
   end
 
   def user_params

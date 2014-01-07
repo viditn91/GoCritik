@@ -6,10 +6,13 @@ class ReviewsController < ApplicationController
     @review = Review.new review_params
     @review.user_id = current_user.id
     if @review.save
-      redirect_to :back, notice: "Review created successfully"
+      flash[:notice] = "Review created successfully"
+      redirect_to_back_or_default_path
     else
+      ## fixed
       ## Please show an error message when review not saved successfully
-      redirect_to :back, notice: "Something went bad"
+      flash[:error] = "Some error occured, Review couldn't be saved"
+      redirect_to_back_or_default_path
     end
   end
 
@@ -18,18 +21,24 @@ class ReviewsController < ApplicationController
 
   def destroy
     if @review.destroy
-      redirect_to :back, notice: "Review removed successfully"
+      flash[:notice] = "Review removed successfully"
+      redirect_to_back_or_default_path
     else
+      ## fixed
       ## Please show an error message when review not destroyed successfully
-      redirect_to :back, notice: "Something went bad"
+      flash[:error] = "Some error occured, Review couldn't be saved"
+      redirect_to_back_or_default_path
     end
   end
 
 private
   def set_review
-    review = Review.find_by(id: params[:id])
+    @review = Review.find_by(id: params[:id])
+    ## fixed
     ## Same as described in comments_controller
-    review ? @review = review : redirect_to(resources_path, notice: "Record not found")
+    unless @review
+      redirect_to_back_or_default_path 
+    end
   end
 
   def review_params

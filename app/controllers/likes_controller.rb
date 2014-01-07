@@ -6,27 +6,36 @@ class LikesController < ApplicationController
     @like = Like.new like_params
     @like.user_id = current_user.id
     respond_to do |format|
+      ## fixed
       ## Should we write it this way?
       ## format.js { @like.save }
-      if @like.save
-        format.js
+      format.js do
+        unless @like.save
+          flash.now[:error] = "Like could not be saved"
+        end
       end
     end
   end
 
   def destroy
     respond_to do |format|
-      if @like.destroy
-        format.js
+      format.js do
+        unless @like.destroy
+          flash.now[:error] = "Some error occured"
+        end
       end
     end
   end
 
 private
   def set_like
-    like = Like.find_by(id: params[:id])
+    @like = Like.find_by(id: params[:id])
+    ## Fixed
     ## Same as described in comments_controller
-    like ? @like = like : redirect_to(resources_path, notice: "Record not found")
+    unless @like
+      flash.now[:error] = "Some error occured"
+      render action: params[:action]
+    end
   end
 
   def like_params
