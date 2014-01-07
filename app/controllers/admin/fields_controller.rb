@@ -1,7 +1,5 @@
 class Admin::FieldsController < Admin::BaseController
   before_action :set_field, only: [:edit, :update, :destroy]
-  #as PATCH request is sent, if the type is changed, the options hash is to be emptied explicitly
-  # before_action :remove_options_if_params_empty, only: [:update]
   rescue_from Exceptions::RequiredFieldError, with: :drop_action_on_required_field
 
   def new
@@ -29,9 +27,9 @@ class Admin::FieldsController < Admin::BaseController
   end
 
   def update
-    @field = @field.becomes(TextField)
+    @field = Field.find_by(id: params[:id]) if @field.update(field_params)
     respond_to do |format|
-      if @field.save(field_params)
+      if @field.update(field_params)
         format.html { redirect_to admin_fields_path, notice: 'Field was successfully updated.' }
         format.json { head :no_content }
       else
@@ -62,10 +60,6 @@ private
       whitelisted[:options] = params[:field][:options]
     end
   end
-
-  # def remove_options_if_params_empty
-  #   @field.options = nil if field_params["options"].blank?
-  # end
 
   def drop_action_on_required_field(exception)
     logger.error exception.message

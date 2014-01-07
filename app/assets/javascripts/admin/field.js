@@ -7,7 +7,6 @@ ready = function() {
   // code to append options fields if selectbox/redio buttons are selected
   $(document).on('change','#field_type',function() {
     var scope = $(this);
-    scope.closest('.form').find('#options_container').html('');
     show_or_hide_elements(scope);
   });
   // code to append options if the add more options button is clicked
