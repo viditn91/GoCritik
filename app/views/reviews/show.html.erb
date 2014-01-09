@@ -19,8 +19,7 @@
         </i></div>
       </div>
       <div class="pull-right">
-        <div class="rating-meter-label">RATED IT</div>
-        <div class="rating-meter"><%= get_rated_value(review) %></div>
+        <%= render partial: 'rating_meter', locals: { review: review } %>
       </div>
     </div>
     <div id="<%= 'review_' + review.id.to_s + '_sub_container' %>">

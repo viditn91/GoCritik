@@ -18,8 +18,19 @@ class Resource < ActiveRecord::Base
   scope :approved, -> { where(approved: true) }
   scope :listed,   -> { where(approved: false) }
 
-private
+  def calc_avg_rating
+    ## fixed
+    ## This method can be moved to Resource model.
+    if ratings.present?
+      rating_array = ratings.pluck(:value)
+      (rating_array.inject{ |sum, el| sum + el }.to_f / rating_array.size).round(2)
+    else
+      0.00
+    end
+  end
 
+private
+  
   def validate_associated_fields
     fields_values.each do |field_value|
       if field_value.invalid?
@@ -36,5 +47,6 @@ private
     end
     fields_values.destroy empty_fields_collection
   end
+
 
 end

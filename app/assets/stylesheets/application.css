@@ -39,7 +39,8 @@
 }
 
 .title-style {
-  border-top: solid #AAA 1px;  
+  border-top: solid #ddd 1px;  
+  border-left: solid green 2px;  
 }
 .fill-grey {
   background-color: #F9F9F7;
@@ -132,6 +133,15 @@ html, body {
   height: auto !important;
   height: 100%;
 }
-.footer, .push {
+.footer {
   height: 4em;
+}
+.footer .row-fluid {
+  border-top: solid 2px green;
+  background-color: #333;
+  color: #aaa;
+  padding-bottom: 20px;
+}
+.bleach {
+  color: white;
 }

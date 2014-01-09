@@ -5,11 +5,19 @@ module UsersHelper
   end
 
   def get_heading(title, user)
-    if current_user == user
+    if my_profile?(user)
       "My #{title.capitalize}"
     else
       "#{title.capitalize} by #{get_name(user)}"
     end
+  end
+
+  def show_error_message(msg)
+    content_tag :li, msg, :id => "error_#{msg}" if msg.is_a?(String)
+  end
+
+  def my_profile?(user)
+    current_user && current_user == user 
   end
 
 end

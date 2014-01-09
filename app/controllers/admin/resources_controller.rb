@@ -3,9 +3,9 @@ class Admin::ResourcesController < Admin::BaseController
   before_action :set_column_names, only: [:show, :index]
   before_action :load_all_fields, only: [:new, :create, :edit, :index, :update]
 
+  ##fixed
   ## Please don't use scaffolding when generating controllers. Please remove the json format blocks
   ## Also update the admin controllers like we did the user facing controllers.
-
   def new
     @resource = Resource.new
   end

@@ -2,11 +2,11 @@
   <div class="pull-left">
     <%= get_new_comment_thumbnail %>
   </div>
-  <div class="span10">
+  <div class="span9 pull-left">
     <%= f.text_area :content, class: "span12", rows: 1, placeholder: "Click to add in a comment.." %>
   </div>
-  <div class="actions pull-right">
-    <%= f.submit :class => 'btn btn-success btn-small', remote: true%>
+  <div class="actions span1">
+    <%= f.submit 'Comment', :class => 'btn btn-small', remote: true%>
   </div>
   <%= f.hidden_field :review_id, :value => review.id %>
 <% end %>

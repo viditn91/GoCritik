@@ -23,4 +23,11 @@ module Admin::ResourcesHelper
     end
     nil
   end
+
+  def get_field_value_instance(resource, field)
+    @resource.fields_values.find_by(field_id: field.id) || 
+      @resource.fields_values.find { |fv| fv.field_id == field.id } || 
+      @resource.fields_values.build
+  end
+
 end

@@ -1,9 +1,12 @@
 class User < ActiveRecord::Base
-  has_many :reviews, dependent: :destroy
-  has_many :ratings, dependent: :destroy
-  has_many :likes, dependent: :destroy
-  has_one :picture, as: :imageable, dependent: :destroy
-  
+  with_options dependent: :destroy do |assoc|
+    assoc.has_many :reviews
+    assoc.has_many :ratings
+    assoc.has_many :likes
+    assoc.has_one :picture, as: :imageable
+  end
+
+  validates :first_name, :last_name, presence: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable.
   devise :database_authenticatable, :registerable,

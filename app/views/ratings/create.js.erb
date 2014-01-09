@@ -2,5 +2,5 @@
   alert(<%= flash.now[:alert] %>);
 <% else %>
   $('#resource-header #votes').html("<%= @resource.ratings.count %>");
-  $('#resource-header #score').html("<%= calc_avg_rating(@resource) %>");
+  $('#resource-header #score').html("<%= @resource.calc_avg_rating %>");
 <% end %>

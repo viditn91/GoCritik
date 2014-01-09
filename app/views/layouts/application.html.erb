@@ -78,23 +78,23 @@
       </div>
     </div>
     <footer class="footer">
-      <div id="footer" class="page-header title-style fill-grey">
+      <div id="footer" class="page-header">
         <div class="row-fluid">
           <div class="span6 pull-left offset1 top-buffer">
-            <h4>About GoCritik.com</h4>
+            <h4 class="bleach">About GoCritik.com</h4>
             <div><%= ResourceTrivia %></div>
           </div>
           <div class="span2 top-buffer">
             <div class="border-down">
-              <div class="magnify"><%= Resource.approved.count %></div>
+              <div class="magnify bleach"><%= Resource.approved.count %></div>
               <div><%= "Listed #{ ResourceName.pluralize }" %></div>
             </div>
             <div class="top-buffer border-down">
-              <div class="magnify"><%= User.count %></div>
+              <div class="magnify bleach"><%= User.count %></div>
               <div><%= "Registered Users" %></div>
             </div>
             <div class="top-buffer border-down">
-              <div class="magnify"><%= Review.count %></div>
+              <div class="magnify bleach"><%= Review.count %></div>
               <div><%= "Trusted Reviews" %></div>
             </div>
           </div>

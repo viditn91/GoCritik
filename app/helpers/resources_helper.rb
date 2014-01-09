@@ -1,4 +1,5 @@
 module ResourcesHelper
+  
   def get_field_value(resource, field)
     value = resource.fields_values.find_by(field_id: field.id).try(:value) 
     value = get_disp_text(field.options, value) if field.options.present?
@@ -7,4 +8,9 @@ module ResourcesHelper
     # handling boolean value 'false' exception
     value.blank? ? (value == false ? 'false' : '- NA -') : value
   end
+  
+  def taggable_field?(field_value)
+    ['Location', 'City'].exclude? field_value.field.name
+  end
+
 end

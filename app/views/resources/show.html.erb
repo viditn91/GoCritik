@@ -18,23 +18,19 @@
     <div class="span2">
       <div class="pull-right top-buffer">
         <div class="row-field top-buffer">
-          <div class="rating-meter-label">
-            RATED AS
-          </div>
-          <div id="score" class="rating-meter">
-            <%= calc_avg_rating(@resource) %>
-          </div>
+          <div class="rating-meter-label">RATED AS</div>
+          <div id="score" class="rating-meter"><%= @resource.calc_avg_rating %></div>
         </div>
         <div class="row-field top-buffer">
           <div class="pull-right">
             <div class="magnify pull-right"><span id="votes"><%= @resource.ratings.count %></span><i class="icon icon-ok"></i></div>
-            <div>RATINGS</div>
+            <div><%= 'rating'.pluralize(@resource.ratings.count).upcase %></div>
           </div>
         </div>
         <div class="row-field pull-right top-buffer">
           <div class="pull-right">
             <div class="magnify pull-right"><%= @resource.reviews.count %><i class="icon icon-pencil"></i></div>
-            <div>REVIEWS</div>
+            <div><%= 'review'.pluralize(@resource.reviews.count).upcase %></div>
           </div>
         </div>
       </div>
@@ -44,12 +40,13 @@
     <div class="span10 offset1 top-buffer">
       <ul class="inline">
       <% @resource.fields_values.each do |field_value| %>
+        <!-- fixed -->
         <!-- Move the below to a helper method. -->
-        <% if !(field_value.field.name == 'Location' || field_value.field.name == 'City') %>
-        <li class="side-buffer">
-            <i class="icon-tag"></i>
-            <%= field_value.field.name %>: <%= get_field_value(@resource, field_value.field) %>
-        </li>
+        <% if taggable_field?(field_value) %>
+          <li class="side-buffer">
+              <i class="icon-tag"></i>
+              <%= field_value.field.name %>: <%= get_field_value(@resource, field_value.field) %>
+          </li>
         <% end %>
       <% end %>
       </ul>

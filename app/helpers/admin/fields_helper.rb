@@ -7,13 +7,9 @@ module Admin::FieldsHelper
   end
 
   def make_hash_readable(options_hash)
+    ## fixed
     ## This too would work:
-    ## options_hash.inject('') {|str,hash| str+= "Option: #{hash[:text]}, Value: #{hash[:value]} \n"}
-    str = ''
-    options_hash.each do |hash|
-      str += "Option: #{hash[:text]}, Value: #{hash[:value]} \n"
-    end
-    str
+    options_hash.inject('') { |str,hash| str += "Option: #{hash[:text]}, Value: #{hash[:value]} \n" }
   end
 
   def get_field_type_display_value(type)

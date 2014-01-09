@@ -3,11 +3,12 @@
   <% if @user.errors.any? %>
     <div class="alert alert-error">
       <a class="close" data-dismiss="alert">&#215;</a>
-      <h4><%= pluralize(@field.errors.count, "error") %> prohibited this field from being saved:</h4>
+      <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
       <ul>
-        <% @field.errors.full_messages.each do |msg| %>
+        <% @user.errors.full_messages.each do |msg| %>
+          <!-- fixed -->
           <!-- We can move the whole below line in a helper method with 'msg' as o parameter. -->
-          <%= content_tag :li, msg, :id => "error_#{msg}" if msg.is_a?(String) %>
+          <%= show_error_message(msg) %>
         <% end %>
       </ul>
     </div>

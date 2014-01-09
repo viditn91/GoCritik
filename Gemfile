@@ -15,7 +15,6 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
-gem 'twitter-bootstrap-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -30,19 +29,10 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-gem 'devise'
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
-
-gem 'rails-rateit'
-
-gem 'has_permalink'
-
-gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
-
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -55,3 +45,21 @@ gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+#Devise
+gem 'devise'
+
+#Bootstrap
+gem 'twitter-bootstrap-rails'
+
+#Rate-It
+gem 'rails-rateit'
+
+#Permalink
+gem 'has_permalink'
+
+#Paperclip
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+
+#Thinking Sphinx
+gem 'thinking-sphinx', '3.0.6'

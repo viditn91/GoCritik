@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140109030926) do
+ActiveRecord::Schema.define(version: 20140109160545) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20140109030926) do
   end
 
   create_table "ratings", force: true do |t|
-    t.integer  "value"
+    t.decimal  "value",       precision: 2, scale: 1
     t.integer  "user_id"
     t.integer  "resource_id"
     t.datetime "created_at"

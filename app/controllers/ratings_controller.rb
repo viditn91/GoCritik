@@ -6,7 +6,7 @@ class RatingsController < ApplicationController
   def create
     @rating = @resource.ratings.build
     @rating.user_id = current_user.id
-    @rating.value = rating_params[:value]
+    @rating.value = rating_params[:value].to_f
     respond_to do |format|
       ## fixed
       ## Also, note that conditions should be inside the format.js, format.html etc blocks.
@@ -27,7 +27,7 @@ class RatingsController < ApplicationController
       ## fixed
       ## Same as above
       format.js do
-        unless @rating.update(value: rating_params[:value])
+        unless @rating.update(value: rating_params[:value].to_f)
           flash.now[:error] = "Rating could not be updated, some error occured"
         end
       end
