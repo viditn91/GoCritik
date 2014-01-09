@@ -8,14 +8,11 @@ class Admin::FieldsController < Admin::BaseController
 
   def create
     @field = Field.new(field_params)
-    respond_to do |format|
-      if @field.save
-        format.html { redirect_to admin_fields_path, notice: 'Field was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @resource }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @resource.errors, status: :unprocessable_entity }
-      end
+    if @field.save
+      flash[:notice] = "Field was successfully created"
+      redirect_to admin_fields_path
+    else
+      render action: 'new'
     end
   end
 
@@ -29,31 +26,31 @@ class Admin::FieldsController < Admin::BaseController
 
   def update
     @field = Field.find_by(id: params[:id]) if @field.update(field_params)
-    respond_to do |format|
-      if @field.update(field_params)
-        format.html { redirect_to admin_fields_path, notice: 'Field was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @field.errors, status: :unprocessable_entity }
-      end
+    if @field.update(field_params)
+      flash[:notice] = "Field was successfully updated"
+      redirect_to admin_fields_path
+    else
+      render action: 'edit'
     end
   end
 
   def destroy
     if @field.destroy
-      respond_to do |format|
-        format.html { redirect_to admin_fields_path, :notice => 'Field successfully removed' }
-        format.json { head :no_content }
-      end
+      flash[:notice] = "Field successfully removed"
+    else
+      flash[:error] = "Field couldn't removed, an error occured"
     end
+    redirect_to admin_fields_path
   end
 
 private
 
   def set_field
-    field = Field.find_by(id: params[:id])
-    field ? @field = field : redirect_to(admin_fields_path, notice: "Record not found")
+    @field = Field.find_by(id: params[:id])
+    unless @field
+      flash[:error] = "Field Not found"
+      redirect_to admin_fields_path
+    end
   end
 
   def field_params
@@ -65,7 +62,7 @@ private
   def drop_action_on_required_field(exception)
     logger.error exception.message
     flash[:notice] = exception.message
-    redirect_to :back
+    redirect_to_back_or_default_path
   end
 
 end

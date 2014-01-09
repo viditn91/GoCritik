@@ -1,6 +1,5 @@
 <tr>
-  <% attributes = @resource_columns - ['id', 'created_at', 'updated_at'] %>
-  <% attributes.each do |attr| %>
+  <% @resource_columns.each do |attr| %>
     <td><%= attr == 'description' ? truncate(object.try(attr.to_sym), length: 50) : object.try(attr.to_sym) %></td>
   <% end %>
   <% @fields.each do |field| %>
@@ -9,6 +8,7 @@
   <td>
     <%= link_to 'Show', admin_resource_path(object), :class => 'btn btn-mini' %>
     <%= link_to 'Edit', edit_admin_resource_path(object), :class => 'btn btn-mini btn-info' %>
+    <%= link_to 'Approve', approve_admin_resource_path(object), method: :put, :class => 'btn btn-mini btn-success' if status == :listed %>
     <%= link_to 'Destroy', admin_resource_path(object), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
   </td>
 </tr>

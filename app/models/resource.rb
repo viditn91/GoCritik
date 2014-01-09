@@ -1,10 +1,11 @@
 class Resource < ActiveRecord::Base
-
   has_permalink :name
-  has_many :fields_values, inverse_of: :resource, dependent: :destroy, validate: false
-  has_many :reviews, dependent: :destroy
-  has_many :ratings, dependent: :destroy
-  has_one :picture, as: :imageable, dependent: :destroy
+  with_options dependent: :destroy do |assoc|
+    assoc.has_many :fields_values, inverse_of: :resource, validate: false
+    assoc.has_many :reviews, inverse_of: :resource
+    assoc.has_many :ratings
+    assoc.has_one :picture, as: :imageable
+  end
 
   accepts_nested_attributes_for :fields_values
 
@@ -13,6 +14,9 @@ class Resource < ActiveRecord::Base
   validate :validate_associated_fields
 
   after_validation :destroy_empty_associated_field_values
+
+  scope :approved, -> { where(approved: true) }
+  scope :listed,   -> { where(approved: false) }
 
 private
 

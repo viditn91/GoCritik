@@ -11,8 +11,8 @@ module DeviseHelper
     html = <<-HTML
     <div class="alert alert-error">
       <a class="close" data-dismiss="alert">&#215;</a>
-      <h4>#{sentence}</h4>
-      <ul>#{messages}</ul>
+      <h4>#{ sentence }</h4>
+      <ul>#{ messages }</ul>
     </div>
     HTML
 
