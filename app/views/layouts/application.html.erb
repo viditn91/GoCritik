@@ -67,17 +67,45 @@
         </div>
       </div>
     </div>
-
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span12">
-          <%= bootstrap_flash %>
-          <%= yield %>
+    <div class="wrapper">
+      <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="span12">
+            <%= bootstrap_flash %>
+            <%= yield %>
+          </div>
         </div>
       </div>
-      <footer>
-      </footer>
     </div>
+    <footer class="footer">
+      <div id="footer" class="page-header title-style fill-grey">
+        <div class="row-fluid">
+          <div class="span6 pull-left offset1 top-buffer">
+            <h4>About GoCritik.com</h4>
+            <div><%= ResourceTrivia %></div>
+          </div>
+          <div class="span2 top-buffer">
+            <div class="border-down">
+              <div class="magnify"><%= Resource.approved.count %></div>
+              <div><%= "Listed #{ ResourceName.pluralize }" %></div>
+            </div>
+            <div class="top-buffer border-down">
+              <div class="magnify"><%= User.count %></div>
+              <div><%= "Registered Users" %></div>
+            </div>
+            <div class="top-buffer border-down">
+              <div class="magnify"><%= Review.count %></div>
+              <div><%= "Trusted Reviews" %></div>
+            </div>
+          </div>
+          <div class="span2 top-buffer">
+            <div class="top-buffer">
+              <%= link_to "List Your Own #{ ResourceName }", new_resource_path, class: "btn top-buffer" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
   </body>
 </html>

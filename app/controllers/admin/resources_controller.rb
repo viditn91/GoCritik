@@ -1,65 +1,72 @@
 class Admin::ResourcesController < Admin::BaseController
-  before_action :set_resource, only: [:show, :edit, :update, :destroy]
+  before_action :set_resource, only: [:show, :edit, :update, :destroy, :approve]
   before_action :set_column_names, only: [:show, :index]
+  before_action :load_all_fields, only: [:new, :create, :edit, :index]
 
   ## Please don't use scaffolding when generating controllers. Please remove the json format blocks
   ## Also update the admin controllers like we did the user facing controllers.
 
   def new
     @resource = Resource.new
-    @fields = Field.all
   end
 
   def create
     @resource = Resource.new(new_resource_params)
-    respond_to do |format|
-      if @resource.save
-        format.html { redirect_to admin_resources_path, notice: "#{ ResourceName } was successfully created." }
-        format.json { render action: 'show', status: :created, location: @resource }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @resource.errors, status: :unprocessable_entity }
-      end
+    if @resource.save
+      flash[:notice] = "#{ ResourceName } was successfully created"
+      redirect_to admin_resources_path
+    else
+      render action: 'new'
     end
   end
 
   def edit
-    @fields = Field.all
   end
 
   def show
   end
 
   def index
-    @resources = Resource.includes(:fields_values)
-    @fields = Field.all
+    params[:status] ||= :approved
+    session[:status] = params[:status]
+    @resources = Resource.send(params[:status]).includes(:fields_values)
   end
 
   def update
-    respond_to do |format|
-      if @resource.update(edit_resource_params)
-        format.html { redirect_to admin_resources_path, notice: "#{ ResourceName } was successfully updated." }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @resource.errors, status: :unprocessable_entity }
-      end
+    if @resource.update(edit_resource_params)
+      flash[:notice] = "#{ ResourceName } was successfully updated"
+      redirect_to path_for_admin_resources_path
+    else
+      render action: 'edit'
     end
   end
 
   def destroy
-    @resource.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_resources_url }
-      format.json { head :no_content }
+    if @resource.destroy
+      flash[:notice] = "#{ ResourceName } successfully removed"
+    else
+      flash[:error] = "#{ ResourceName } couldn't removed, an error occured"
+    end
+    redirect_to path_for_admin_resources_path
+  end
+
+  def approve
+    if @resource.update_column(:approved, true)
+      flash[:notice] = "#{ ResourceName } approved successfully, its now listed under Approved #{  ResourceName.pluralize }"
+      redirect_to path_for_admin_resources_path
+    else
+      flash[:error] = "#{ ResourceName } couldn't be approved, Something went bad"
+      redirect_to path_for_admin_resources_path
     end
   end
 
-
 private
   def set_resource
-    resource_record = Resource.find_by_permalink(params[:id])
-    resource_record ? @resource = resource_record : redirect_to(admin_resources_path, notice: "Record not found")
+    @resource = Resource.find_by(permalink: params[:id])
+    unless @resource
+      flash[:alert] = "#{ ResourceName.capitalize } not found"
+      redirect_to admin_resources_path
+    end
   end
 
   def new_resource_params
@@ -71,7 +78,11 @@ private
   end
 
   def set_column_names
-    @resource_columns = Resource.column_names
+    @resource_columns = Resource.column_names - ['id', 'created_at', 'updated_at', 'permalink', 'approved']
+  end
+
+  def load_all_fields
+    @fields = Field.all
   end
 
 end

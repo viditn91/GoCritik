@@ -1,2 +1,6 @@
-$('#resource-header #votes').html("<%= @resource.ratings.count %>");
-$('#resource-header #score').html("<%= calc_avg_rating(@resource) %>");
+<% if flash.now[:alert].present? %>
+  alert(<%= flash.now[:alert] %>);
+<% else %>
+  $('#resource-header #votes').html("<%= @resource.ratings.count %>");
+  $('#resource-header #score').html("<%= calc_avg_rating(@resource) %>");
+<% end %>

@@ -71,7 +71,7 @@
   font-size: 11px;
 }
 body {
-  font-family: cursive !important;
+  font-family: "Arial Black", Gadget, sans-serif !important;
 }
 .timestamp {
   color: grey;
@@ -113,4 +113,25 @@ body {
 }
 .edit-profile .border-down {
   padding-bottom: 5px;
+}
+.tab-top-buffer {
+  margin-top: 30px !important;
+}
+#footer .border-down {
+  padding-bottom: 5px;
+}
+
+* {
+  margin: 0;
+}
+html, body { 
+  height: 100%;
+}
+.wrapper { 
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+}
+.footer, .push {
+  height: 4em;
 }

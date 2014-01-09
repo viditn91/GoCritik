@@ -3,8 +3,7 @@
 </div>
 
 <dl class="dl-horizontal">
-  <% attributes = @resource_columns - ['id', 'created_at', 'updated_at'] %>
-  <% attributes.each do |attr| %>
+  <% @resource_columns.each do |attr| %>
     <dt><strong><%= attr.humanize %>:</strong></dt>
     <dd><%= @resource.try attr.to_sym %></dd>
   <% end %>
@@ -15,7 +14,7 @@
 </dl>
 
 <div class="form-actions">
-  <%= link_to 'Back', admin_resources_path, :class => 'btn' %>
+  <%= link_to 'Back', path_for_admin_resources_path, :class => 'btn' %>
   <%= link_to 'Edit', edit_admin_resource_path(@resource), :class => 'btn' %>
   <%= link_to 'Remove', admin_resource_path(@resource), :method => 'delete',
               :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger' %>

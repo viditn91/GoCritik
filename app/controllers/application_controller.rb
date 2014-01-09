@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :store_location
+
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
     ## Instead of checking request.fullpath != 'some_url', we can use something like ['x', 'y', 'z'].exclude? request.fullpath
@@ -33,4 +34,13 @@ class ApplicationController < ActionController::Base
   # def previous_or_root_path
   #   session[:previous_url] || root_path
   # end
+
+  def redirect_to_back_or_default_path
+    if request.referer
+      redirect_to :back
+    else
+      redirect_to resources_path
+    end
+  end
+
 end

@@ -1,16 +1,24 @@
-<div class="page-header">
-  <h1>Listing <%= ResourceName.pluralize %></h1>
-</div>
-
+<% status = params[:status].to_sym %>
+<ul class="nav nav-tabs tab-top-buffer">
+  <li class="<%= 'active' if params[:status].to_sym == :approved %>">
+    <%= link_to "Approved #{ ResourceName.pluralize }", admin_resources_path(status: :approved) %></a>
+  </li>
+  <li class="<%= 'active' if params[:status].to_sym == :listed %>">
+    <%= link_to "Pending Approval", admin_resources_path(status: :listed) %></a>
+  </li>
+</ul>
 <% if @resources.blank? %>
-  <% flash[:notice] = "No #{ ResourceName } created. Click on 'Add new #{ ResourceName }'" %>
+  <% if status == :approved %>
+    <% flash[:error] = "No #{ ResourceName } created. Click on 'Add new #{ ResourceName }'" %>
+  <% elsif status == :listed %>
+    <% flash[:error] = "No #{ ResourceName } pending for Approval." %>
+  <% end %>
 <% else %>
-  <table class="table table-hover">
+  <% flash[:error] = nil %>
+  <table class="table table-hover tab-top-buffer">
     <thead>
       <tr>
-        <!-- Move the below to a helper method. -->
-        <% attributes = Resource.column_names - ['id', 'created_at', 'updated_at'] %>
-        <% attributes.each do |attr| %>
+        <% @resource_columns.each do |attr| %>
           <th><%= attr.humanize %></th>
         <% end %>
         <% @fields.each do |field| %>
@@ -19,11 +27,10 @@
       </tr>
     </thead>
     <tbody>
-    <%= render partial: 'resource', collection: @resources, as: :object %>
+    <%= render partial: 'resource', collection: @resources, as: :object, locals: { status: status } %>
     </tbody>
   </table>
 <% end %>
-
-<div>
-  <%= link_to "Add new #{ ResourceName }", new_admin_resource_path, :class => 'btn btn-success' %>
+<div class="tab-top-buffer">
+  <%= link_to "Add new #{ ResourceName }", new_admin_resource_path, :class => 'btn btn-success' if status == :approved %>
 </div>

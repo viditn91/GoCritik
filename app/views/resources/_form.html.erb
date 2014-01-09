@@ -1,5 +1,5 @@
-<%= form_for [:admin, @resource], :html => { :class => 'form-horizontal' } do |f| %>
-
+<%= form_for @resource, :html => { :class => 'form-horizontal offset1' } do |f| %>
+  
   <% if @resource.errors.any? %>
       <div class="alert alert-error">
         <a class="close" data-dismiss="alert">&#215;</a>
@@ -18,7 +18,7 @@
       <%= f.text_field :name %>
     </div>
   </div>
-
+  
   <div class="control-group">
     <%= f.label :description, 'Descpription*', :class => 'control-label' %>
     <div class="controls">
@@ -28,15 +28,14 @@
 
   <!-- For every field, field value of the resource is checked. If it exists as a persisted record then its a case of updation OR if it exists in the collection then its a case of validation error OR if it is a new record then a new indtance is passed to the fields_for helper-->
   <% @fields.each do |field| %>
-    <!-- Please extract the right side of the below line to a helper method. -->
     <% field_value = @resource.fields_values.find_by(field_id: field.id) || @resource.fields_values.find { |fv| fv.field_id == field.id } || @resource.fields_values.build %>
     <%= f.fields_for :fields_values, field_value do |builder| %>
-      <%= render partial: "resource_fields", locals: { f: builder, field: field } %>
+      <%= render partial: "admin/resources/resource_fields", locals: { f: builder, field: field } %>
     <% end %>
   <% end %>
 
   <div class="actions">
-    <%= f.submit action_name == 'new' ? 'Create' : 'Update', :class => 'btn btn-primary'%>
-    <%= link_to 'Cancel', path_for_admin_resources_path, :class => 'btn'%>
+    <%= f.submit 'Submit', :class => 'btn btn-primary'%>
+    <%= link_to 'Cancel', resources_path, :class => 'btn'%>
   </div>
 <% end %>

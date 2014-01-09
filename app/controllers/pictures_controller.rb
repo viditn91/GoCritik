@@ -4,10 +4,11 @@ class PicturesController < ApplicationController
   def create
     @picture = Picture.new(picture_params)
     if @picture.save
-      redirect_to @picture.imageable, notice: 'Picture successfully uploaded'
+      flash[:notice] = 'Picture successfully uploaded'
     else
-      redirect_to @picture.imageable, notice: 'An error occured'
+      flash[:error] = 'An error occured, picture cannot be uploaded'
     end
+    redirect_to @picture.imageable 
   end
 
   def show
@@ -15,13 +16,19 @@ class PicturesController < ApplicationController
 
   def update
     if @picture.update(picture_params)
-      redirect_to @picture.imageable
+      flash[:notice] = 'Picture successfully updated'
+    else
+      flash[:error] = 'An error occured, picture cannot be updated'
     end
+    redirect_to @picture.imageable
   end
 
 private
   def set_picture
     @picture = Picture.find_by(imageable_type: picture_params[:imageable_type], imageable_id: picture_params[:imageable_id])
+    unless @picture
+      flash[:error] = "Picture not found"
+    end
   end
 
   def picture_params
