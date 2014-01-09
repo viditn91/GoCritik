@@ -8,6 +8,7 @@
   <table class="table table-hover">
     <thead>
       <tr>
+        <!-- Move the below to a helper method. -->
         <% attributes = Resource.column_names - ['id', 'created_at', 'updated_at'] %>
         <% attributes.each do |attr| %>
           <th><%= attr.humanize %></th>

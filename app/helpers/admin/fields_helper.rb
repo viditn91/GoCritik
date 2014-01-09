@@ -7,6 +7,8 @@ module Admin::FieldsHelper
   end
 
   def make_hash_readable(options_hash)
+    ## This too would work:
+    ## options_hash.inject('') {|str,hash| str+= "Option: #{hash[:text]}, Value: #{hash[:value]} \n"}
     str = ''
     options_hash.each do |hash|
       str += "Option: #{hash[:text]}, Value: #{hash[:value]} \n"

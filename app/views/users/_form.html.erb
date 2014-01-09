@@ -1,11 +1,12 @@
 <%= form_for @user, :html => { :class => "form form-horizontal"} do |f| %>
-  
+
   <% if @user.errors.any? %>
     <div class="alert alert-error">
       <a class="close" data-dismiss="alert">&#215;</a>
       <h4><%= pluralize(@field.errors.count, "error") %> prohibited this field from being saved:</h4>
       <ul>
         <% @field.errors.full_messages.each do |msg| %>
+          <!-- We can move the whole below line in a helper method with 'msg' as o parameter. -->
           <%= content_tag :li, msg, :id => "error_#{msg}" if msg.is_a?(String) %>
         <% end %>
       </ul>

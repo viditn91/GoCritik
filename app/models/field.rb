@@ -12,11 +12,11 @@ class Field < ActiveRecord::Base
       return hash[:regexp] if hash[:name] == input_type
     end
   end
-  
+
 protected
-  
+
   def field_name_with_resource_attributes
-    errors.add(:name, 'is already taken.') if name =~ /^(name|description)$/i 
+    errors.add(:name, 'is already taken.') if name =~ /^(name|description)$/i
   end
 
   def ensure_not_referenced_by_resource

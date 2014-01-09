@@ -2,6 +2,9 @@ class Admin::ResourcesController < Admin::BaseController
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
   before_action :set_column_names, only: [:show, :index]
 
+  ## Please don't use scaffolding when generating controllers. Please remove the json format blocks
+  ## Also update the admin controllers like we did the user facing controllers.
+
   def new
     @resource = Resource.new
     @fields = Field.all
@@ -56,13 +59,13 @@ class Admin::ResourcesController < Admin::BaseController
 private
   def set_resource
     resource_record = Resource.find_by_permalink(params[:id])
-    resource_record ? @resource = resource_record : redirect_to(admin_resources_path, notice: "Record not found") 
+    resource_record ? @resource = resource_record : redirect_to(admin_resources_path, notice: "Record not found")
   end
 
   def new_resource_params
     params.require(:resource).permit(:name, :description, fields_values_attributes: [:value, :field_id])
   end
-  
+
   def edit_resource_params
     params.require(:resource).permit(:name, :description, fields_values_attributes: [:value, :field_id, :id])
   end

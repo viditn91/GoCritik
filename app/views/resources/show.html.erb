@@ -15,7 +15,7 @@
       </div>
       <div class="row-fluid top-buffer"><%= @resource.description %></div>
     </div>
-    <div class="span2"> 
+    <div class="span2">
       <div class="pull-right top-buffer">
         <div class="row-field top-buffer">
           <div class="rating-meter-label">
@@ -27,7 +27,7 @@
         </div>
         <div class="row-field top-buffer">
           <div class="pull-right">
-            <div class="magnify pull-right"><span id="votes"><%= @resource.ratings.count %></span><i class="icon icon-ok"></i></div> 
+            <div class="magnify pull-right"><span id="votes"><%= @resource.ratings.count %></span><i class="icon icon-ok"></i></div>
             <div>RATINGS</div>
           </div>
         </div>
@@ -44,6 +44,7 @@
     <div class="span10 offset1 top-buffer">
       <ul class="inline">
       <% @resource.fields_values.each do |field_value| %>
+        <!-- Move the below to a helper method. -->
         <% if !(field_value.field.name == 'Location' || field_value.field.name == 'City') %>
         <li class="side-buffer">
             <i class="icon-tag"></i>
@@ -53,7 +54,7 @@
       <% end %>
       </ul>
     </div>
-  </div>  
+  </div>
 </div>
 
 <div class="row-fluid">
