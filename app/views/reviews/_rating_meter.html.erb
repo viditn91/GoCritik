@@ -1,4 +1,4 @@
-<% if rating = review.get_rated_value %>
+<% if rating ||= review.get_rated_value %>
   <div class="rating-meter-label">RATED IT</div>
   <div class="rating-meter"><%= rating %></div>
 <% end %>

@@ -3,4 +3,5 @@
 <% else %>
   $('#resource-header #votes').html("<%= @resource.ratings.count %>");
   $('#resource-header #score').html("<%= @resource.calc_avg_rating %>");
+  $('.review-container .my-review').html("<%= escape_javascript render(partial:'reviews/rating_meter', locals: { rating: @rating.value}) %>");
 <% end %>

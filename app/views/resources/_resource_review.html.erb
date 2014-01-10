@@ -8,7 +8,11 @@
       <div><i class="icon-pencil"></i><%= review.user.reviews.count %><%= ' review'.pluralize(review.user.reviews.count) %></div>
       <div><i class="icon-ok"></i><%= review.user.ratings.count %><%= ' rating'.pluralize(review.user.reviews.count) %></div>
     </div>
+    <% if my_review?(review) %>
+    <div class="my-review pull-right">
+    <% else %>
     <div class="pull-right">
+    <% end %>
       <%= render partial: 'reviews/rating_meter', locals: { review: review } %>
     </div>
   </div>
