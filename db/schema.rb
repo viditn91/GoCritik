@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140109160545) do
+ActiveRecord::Schema.define(version: 20140112170429) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20140109160545) do
     t.boolean  "unique"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "searchable"
+    t.boolean  "sortable"
   end
 
   create_table "fields_values", force: true do |t|
@@ -80,7 +82,11 @@ ActiveRecord::Schema.define(version: 20140109160545) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "permalink"
-    t.boolean  "approved",    default: true
+    t.boolean  "approved",                               default: true
+    t.integer  "ratings_count"
+    t.integer  "reviews_count"
+    t.decimal  "rating",        precision: 16, scale: 2, default: 0.0
+    t.boolean  "delta",                                  default: true, null: false
   end
 
   add_index "resources", ["permalink"], name: "index_resources_on_permalink", using: :btree
@@ -109,6 +115,8 @@ ActiveRecord::Schema.define(version: 20140109160545) do
     t.boolean  "admin",                  default: false
     t.string   "first_name",             default: "GoCritik"
     t.string   "last_name",              default: "Member"
+    t.integer  "ratings_count"
+    t.integer  "reviews_count"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

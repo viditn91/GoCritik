@@ -12,4 +12,12 @@ class CheckBoxField < Field
   	false
   end
 
+  def searchable
+  	false
+  end
+
+  def sortable
+    false
+  end
+
 end

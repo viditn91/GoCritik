@@ -36,17 +36,14 @@ add_options = function(form_scope) {
 show_or_hide_elements = function(scope) {
   var field_type = scope.find('option:selected').text();
   var form_scope = scope.closest('.form');
-  form_scope.find('.default-field, .is-unique-field, .options-field, .input-type-field').show();
+  form_scope.find('.default-field, .is-unique-field, .options-field, .input-type-field, .is-searchable-field').show();
   if(field_type == 'Select Box' || field_type == 'Radio Buttons') {
     adjust_options(form_scope);
-    form_scope.find('.default-field, .is-unique-field').hide();
-    // form_scope.find('#field_unique option').find('option[value="false"]').attr('selected', true);
+    form_scope.find('.default-field, .is-unique-field, .is-searchable-field').hide();
   } else if(field_type == 'Check Box') {
-    form_scope.find('.options-field, .default-field, .input-type-field, .is-unique-field').hide();
-    // form_scope.find('#field_input_type').find('option[value="Integer"]').attr('selected', true);
-    // form_scope.find('#field_unique').find('option[value="false"]').attr('selected', true);
+    form_scope.find('.options-field, .default-field, .input-type-field, .is-unique-field, .is-searchable-field, .is-sortable-field').hide();
   } else {
-    form_scope.find('.options-field').hide();
+    form_scope.find('.options-field, .is-sortable-field').hide();
   }
 }
 

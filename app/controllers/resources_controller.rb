@@ -20,7 +20,14 @@ class ResourcesController < ApplicationController
   end
 
   def index
-    @resources = Resource.approved
+    # @articles = Article.search params[:search], :include => :author, :match_mode => :boolean
+    if params[:search].empty?
+      @resources = Resource.search params[:search], :include => :fields_values,
+        :select => '(rating/ratings_count) as rating_value',
+        :order  => 'rating_value DESC'
+    else
+      @resources = Resource.search params[:search], :include => :fields_values
+    end
   end
 
   def show

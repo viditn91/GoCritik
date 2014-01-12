@@ -10,4 +10,8 @@ class SelectBoxField < Field
     false
   end
 
+  def searchable
+    false
+  end
+
 end

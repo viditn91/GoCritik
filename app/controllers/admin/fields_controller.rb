@@ -54,7 +54,7 @@ private
   end
 
   def field_params
-    params.require(:field).permit(:name, :input_type, :type, :default_value, :required, :unique).tap do |whitelisted|
+    params.require(:field).permit(:name, :input_type, :type, :default_value, :required, :unique, :searchable, :sortable).tap do |whitelisted|
       whitelisted[:options] = params[:field][:options]
     end
   end

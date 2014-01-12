@@ -9,4 +9,8 @@ class RadioButtonField < Field
   def default_value
   	nil
   end
+
+  def searchable
+    false
+  end
 end

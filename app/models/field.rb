@@ -6,6 +6,11 @@ class Field < ActiveRecord::Base
 
   before_destroy :ensure_not_referenced_by_resource
   before_update :check_for_updated_fields
+  # callbacks for delta-indexing resource once a field-value is changed corresponding to a searchable field
+  after_save :set_resource_delta_flag
+  after_update :set_resource_delta_flag
+  after_destroy :set_resource_delta_flag
+
 
   def get_regexp
     InputTypeHash.each do |hash|
@@ -35,6 +40,16 @@ protected
       return true if field_id == self.id
     end
     false
+  end
+
+  def set_resource_delta_flag
+    unless !searchable
+      FieldsValue.where(field_id: id).each do |field_value|
+        resource_obj = field_value.resource
+        resource_obj.delta = true
+        resource_obj.save(validate: false)
+      end
+    end
   end
 
 end

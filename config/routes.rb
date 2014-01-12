@@ -17,6 +17,7 @@ GoCritik::Application.routes.draw do
   end
   resources :users, only: [:show, :edit, :update]
   resources :pictures, only: [:create, :show, :update, :destroy]
-  root 'resources#index'
+  # root 'resources#index'
+  root 'query#home'
 
 end

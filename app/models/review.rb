@@ -1,6 +1,6 @@
 class Review < ActiveRecord::Base
-  belongs_to :resource
-  belongs_to :user
+  belongs_to :resource, counter_cache: true
+  belongs_to :user, counter_cache: true
   with_options dependent: :destroy do |assoc|
     assoc.has_many :comments
     assoc.has_many :likes, as: :likeable

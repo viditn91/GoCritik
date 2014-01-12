@@ -1,79 +1,95 @@
-<%= form_for [:admin, @field.becomes(Field)], :html => { :class => "form form-horizontal" } do |f| %>
-  
-  <% if @field.errors.any? %>
-    <div class="alert alert-error">
-      <a class="close" data-dismiss="alert">&#215;</a>
-      <h4><%= pluralize(@field.errors.count, "error") %> prohibited this field from being saved:</h4>
-      <ul>
-        <% @field.errors.full_messages.each do |msg| %>
-          <%= content_tag :li, msg, :id => "error_#{msg}" if msg.is_a?(String) %>
-        <% end %>
-      </ul>
-    </div>
- <% end %>
-
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name %>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :type, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select :type, FieldTypeArray %>
-    </div>
-  </div>
-
-  <div class="control-group input-type-field">
-    <%= f.label :input_type, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select :input_type, get_input_types %>
-    </div>
-  </div>
-
-  <div class="control-group default-field">
-    <%= f.label :default_value, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :default_value %>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :required, 'Is the field Required?', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select :required, [['Yes', true], ['No', false]] %>
-    </div>
-  </div>
-
-  <div class="control-group is-unique-field">
-    <%= f.label :unique, 'Should the field be unique?', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select :unique, [['Yes', true], ['No', false]] %>
-    </div>
-  </div>
-
-  <div class="control-group options-field">
-    <%= f.label 'Options', :class => 'control-label' %>
-    <div class="controls">
-      <div id="options_container" >
-        <% if @field.options.present? %>
-          <% @field.options.each do |hash| %>
-            <div class="options-row">
-              <input class="input-small" placeholder="Display Text" name="field[options][][text]" type="text" value="<%= hash[:text] %>" />
-              <input class="input-small" placeholder="Value" name="field[options][][value]" type="text" value="<%= hash[:value] %>" />
-              <a class="link_to_remove_option">[-] Remove</a>
-            </div>     
+<div class="offset1">
+  <%= form_for [:admin, @field.becomes(Field)], :html => { :class => "form form-horizontal" } do |f| %>
+    
+    <% if @field.errors.any? %>
+      <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">&#215;</a>
+        <h4><%= pluralize(@field.errors.count, "error") %> prohibited this field from being saved:</h4>
+        <ul>
+          <% @field.errors.full_messages.each do |msg| %>
+            <%= content_tag :li, msg, :id => "error_#{msg}" if msg.is_a?(String) %>
           <% end %>
-          <a class="link_to_add_option">[+] Add Another Option</a>
-        <% end %>
+        </ul>
+      </div>
+   <% end %>
+
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name %>
       </div>
     </div>
-  </div>
 
-  <div class="actions">
-    <%= f.submit action_name == 'new' ? 'Create' : 'Update', :class => 'btn btn-primary'%>
-    <%= link_to 'Cancel', admin_fields_path, :class => "btn" %>
-  </div>
-<% end %>
+    <div class="control-group">
+      <%= f.label :type, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :type, FieldTypeArray %>
+      </div>
+    </div>
+
+    <div class="control-group input-type-field">
+      <%= f.label :input_type, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :input_type, get_input_types %>
+      </div>
+    </div>
+
+    <div class="control-group default-field">
+      <%= f.label :default_value, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :default_value %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :required, 'Is the field Required?', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :required, [['Yes', true], ['No', false]] %>
+      </div>
+    </div>
+
+    <div class="control-group is-unique-field">
+      <%= f.label :unique, 'Should the field be unique?', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :unique, [['Yes', true], ['No', false]] %>
+      </div>
+    </div>
+
+    <div class="control-group is-searchable-field">
+      <%= f.label :searchable, "Should this field be considered while searching #{ ResourceName.pluralize }?", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :searchable, [['Yes', true], ['No', false]] %>
+      </div>
+    </div>
+
+    <div class="control-group is-sortable-field">
+      <%= f.label :sortable, "Should this field be considered while sorting #{ ResourceName.pluralize }?", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :sortable, [['Yes', true], ['No', false]] %>
+      </div>
+    </div>
+
+    <div class="control-group options-field">
+      <%= f.label 'Options', :class => 'control-label' %>
+      <div class="controls">
+        <div id="options_container" >
+          <% if @field.options.present? %>
+            <% @field.options.each do |hash| %>
+              <div class="options-row">
+                <input class="input-small" placeholder="Display Text" name="field[options][][text]" type="text" value="<%= hash[:text] %>" />
+                <input class="input-small" placeholder="Value" name="field[options][][value]" type="text" value="<%= hash[:value] %>" />
+                <a class="link_to_remove_option">[-] Remove</a>
+              </div>     
+            <% end %>
+            <a class="link_to_add_option">[+] Add Another Option</a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit action_name == 'new' ? 'Create' : 'Update', :class => 'btn btn-primary'%>
+      <%= link_to 'Cancel', admin_fields_path, :class => "btn" %>
+    </div>
+  <% end %>
+</div>

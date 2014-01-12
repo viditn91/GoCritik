@@ -78,7 +78,7 @@ private
   end
 
   def set_column_names
-    @resource_columns = Resource.column_names - ['id', 'created_at', 'updated_at', 'permalink', 'approved']
+    @resource_columns = Resource.column_names - ['id', 'created_at', 'updated_at', 'permalink', 'approved', 'ratings_count', 'reviews_count', 'rating', 'delta']
   end
 
   def load_all_fields

@@ -4,4 +4,9 @@ class TextAreaField < Field
   def options
   	nil
   end
+
+  def sortable
+    false
+  end
+  
 end

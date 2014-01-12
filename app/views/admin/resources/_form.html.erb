@@ -1,43 +1,45 @@
-<%= form_for [:admin, @resource], :html => { :class => 'form-horizontal' } do |f| %>
+<div class="offset1">
+  <%= form_for [:admin, @resource], :html => { :class => 'form-horizontal' } do |f| %>
 
-  <% if @resource.errors.any? %>
-      <div class="alert alert-error">
-        <a class="close" data-dismiss="alert">&#215;</a>
-        <h4><%= pluralize(@resource.errors.count, "error") %> prohibited this <%= ResourceName %> from being saved:</h4>
-        <ul>
-          <% @resource.errors.full_messages.each do |msg| %>
-            <%= content_tag :li, msg, :id => "error_#{msg}" if msg.is_a?(String) %>
-          <% end %>
-        </ul>
-      </div>
-  <% end %>
-
-  <div class="control-group">
-    <%= f.label :name, 'Name*', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name %>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :description, 'Descpription*', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :description %>
-    </div>
-  </div>
-
-  <!-- For every field, field value of the resource is checked. If it exists as a persisted record then its a case of updation OR if it exists in the collection then its a case of validation error OR if it is a new record then a new indtance is passed to the fields_for helper-->
-  <% @fields.each do |field| %>
-    <!-- fixed -->
-    <!-- Please extract the right side of the below line to a helper method. -->
-    <% @field_value = get_field_value_instance(@resource, field) %>
-    <%= f.fields_for :fields_values, @field_value do |builder| %>
-      <%= render partial: "resource_fields", locals: { f: builder, field: field } %>
+    <% if @resource.errors.any? %>
+        <div class="alert alert-error">
+          <a class="close" data-dismiss="alert">&#215;</a>
+          <h4><%= pluralize(@resource.errors.count, "error") %> prohibited this <%= ResourceName %> from being saved:</h4>
+          <ul>
+            <% @resource.errors.full_messages.each do |msg| %>
+              <%= content_tag :li, msg, :id => "error_#{msg}" if msg.is_a?(String) %>
+            <% end %>
+          </ul>
+        </div>
     <% end %>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit action_name == 'new' ? 'Create' : 'Update', :class => 'btn btn-primary'%>
-    <%= link_to 'Cancel', path_for_admin_resources_path, :class => 'btn'%>
-  </div>
-<% end %>
+    <div class="control-group">
+      <%= f.label :name, 'Name*', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :description, 'Descpription*', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :description %>
+      </div>
+    </div>
+
+    <!-- For every field, field value of the resource is checked. If it exists as a persisted record then its a case of updation OR if it exists in the collection then its a case of validation error OR if it is a new record then a new indtance is passed to the fields_for helper-->
+    <% @fields.each do |field| %>
+      <!-- fixed -->
+      <!-- Please extract the right side of the below line to a helper method. -->
+      <% @field_value = get_field_value_instance(@resource, field) %>
+      <%= f.fields_for :fields_values, @field_value do |builder| %>
+        <%= render partial: "resource_fields", locals: { f: builder, field: field } %>
+      <% end %>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit action_name == 'new' ? 'Create' : 'Update', :class => 'btn btn-primary'%>
+      <%= link_to 'Cancel', path_for_admin_resources_path, :class => 'btn'%>
+    </div>
+  <% end %>
+</div>
