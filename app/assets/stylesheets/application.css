@@ -145,3 +145,15 @@ html, body {
 .bleach {
   color: white;
 }
+.rating-container {
+  font-size: 12px;
+  padding-top: 20px;
+  padding-bottom: 0px;
+  border-bottom: solid 1px #eee;
+}
+.rating-container .rating-meter-label {
+  font-size: 11px !important;
+}
+.rating-container .rating-meter {
+  font-size: 16px !important;
+}

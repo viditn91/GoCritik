@@ -1,3 +1,6 @@
+<div id="resource-header" class="page-header title-style fill-grey">
+  <h1 class="heading offset1">Listing <%= ResourceName.pluralize %></h1>
+</div>
 <% status = params[:status].to_sym %>
 <ul class="nav nav-tabs tab-top-buffer">
   <li class="<%= 'active' if params[:status].to_sym == :approved %>">

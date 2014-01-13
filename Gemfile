@@ -63,3 +63,6 @@ gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 #Thinking Sphinx
 gem 'thinking-sphinx', '3.0.6'
+
+#Liquid
+gem 'liquid'

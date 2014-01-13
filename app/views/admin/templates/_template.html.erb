@@ -1,0 +1,9 @@
+<tr>
+  <% @template_columns.each do |attr| %>
+    <td><%= attr == 'content' ? truncate(template.try(attr.to_sym), length: 50) : template.try(attr.to_sym) %></td>
+  <% end %>
+  <td>
+    <%= link_to 'Show', admin_template_path(template), :class => 'btn btn-mini' %>
+    <%= link_to 'Edit', edit_admin_template_path(template), :class => 'btn btn-mini btn-info' %>
+  </td>
+</tr>

@@ -6,10 +6,7 @@
       </div>
       <div>
         <div><h4 class="heading"><%= link_to object.name, object, 'data-no-turbolink' => true %></h4></div>
-        <div><i class="icon-map-marker">
-          <%= get_field_value(object, @location_field) %>
-          <%= get_field_value(object, @city_field) %>
-        </i></div>
+        <%= liquidize(@keywords_template.content, 'resource' => object).html_safe %>
       </div>
     </div>
     <div class="row-fluid top-buffer">
@@ -23,13 +20,13 @@
     </div>
     <div class="row-field top-buffer">
       <div class="pull-right">
-        <div id="votes" class="magnify pull-right"><%= object.ratings.count %><i class="icon icon-ok"></i></div> 
+        <div id="votes" class="magnify pull-right"><%= object.ratings_count || 0%><i class="icon icon-ok"></i></div> 
         <div class="minify">RATINGS</div>
       </div>
     </div>
     <div class="row-field">
       <div class="pull-right">
-        <div class="magnify pull-right"><%= object.reviews.count %><i class="icon icon-pencil"></i></div>
+        <div class="magnify pull-right"><%= object.reviews_count || 0 %><i class="icon icon-pencil"></i></div>
         <div class="minify">REVIEWS</div>
       </div>
     </div>

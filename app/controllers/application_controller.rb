@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
   def after_sign_up_path_for(resource)
     previous_or_root_path
   end
+
 private
   ## fixed
   ## We can use this method in all the three methods above
@@ -45,5 +46,6 @@ private
       redirect_to resources_path
     end
   end
+
 
 end

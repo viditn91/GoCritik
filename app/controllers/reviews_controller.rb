@@ -17,6 +17,7 @@ class ReviewsController < ApplicationController
   end
 
   def show
+    @resource_keywords_template = Template.find_by(controller: 'reviews', action: 'show', view_element: 'resource keywords')
   end
 
   def destroy

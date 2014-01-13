@@ -12,6 +12,8 @@ class FieldsValue < ActiveRecord::Base
   after_save :set_resource_delta_flag
   after_update :set_resource_delta_flag
   after_destroy :set_resource_delta_flag
+  # liquid template requirement
+  liquid_methods :field, :value
 
 
   def is_value_unique?

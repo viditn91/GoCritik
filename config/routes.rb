@@ -6,6 +6,7 @@ GoCritik::Application.routes.draw do
     resources :resources, path: ResourceName.pluralize.downcase do
       put 'approve', on: :member
     end
+    resources :templates, only: [:edit, :update, :index, :show]
     get '/' => 'base#home'
   end
   resources :resources, only: [:new, :create, :index, :show], path: ResourceName.pluralize.downcase

@@ -1,0 +1,13 @@
+<% resource_obj = rating.resource %>
+<div class="span6 rating-container listing">
+  <div class="span2 pull-left">
+    <%= image_tag "resource.jpg", size: "60" %>
+  </div>
+  <div class="span6">
+    <div><h5 class="heading"><%= link_to resource_obj.name, resource_obj, 'data-no-turbolink' => true %></h5></div>
+    <%= liquidize(@rating_keywords_template.content, 'resource' => resource_obj).html_safe %>
+  </div>
+  <div class="pull-right">
+    <%= render partial: 'reviews/rating_meter', locals: { rating: rating.value } %>
+  </div>
+</div>

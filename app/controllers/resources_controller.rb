@@ -1,7 +1,6 @@
 class ResourcesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   before_action :set_resource, only: :show
-  before_action :get_fields, only: [:show, :index]
   before_action :load_all_fields, only: [:new, :create]
 
   def new
@@ -20,17 +19,19 @@ class ResourcesController < ApplicationController
   end
 
   def index
-    # @articles = Article.search params[:search], :include => :author, :match_mode => :boolean
-    if params[:search].empty?
+    if params[:search].in? [ nil, '' ]
       @resources = Resource.search params[:search], :include => :fields_values,
         :select => '(rating/ratings_count) as rating_value',
         :order  => 'rating_value DESC'
     else
       @resources = Resource.search params[:search], :include => :fields_values
     end
+    @keywords_template = Template.find_by(controller: 'resources', action: 'index', view_element: 'keywords')
   end
 
   def show
+    @keywords_template = Template.find_by(controller: 'resources', action: 'show', view_element: 'keywords')
+    @tags_template = Template.find_by(controller: 'resources', action: 'show', view_element: 'tags')
   end
 
 private
@@ -44,11 +45,6 @@ private
       flash[:alert] = "#{ ResourceName.capitalize } not found"
       redirect_to_back_or_default_path
     end
-  end
-
-  def get_fields
-    @location_field = Field.find_by(name: 'Location')
-    @city_field = Field.find_by(name: 'City')
   end
 
   def resource_params

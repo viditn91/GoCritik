@@ -1,0 +1,28 @@
+<div class="offset1">
+  <%= form_for [:admin, @template], :html => { :class => "form form-horizontal" } do |f| %>
+    
+    <% if @template.errors.any? %>
+      <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">&#215;</a>
+        <h4><%= pluralize(@template.errors.count, "error") %> prohibited this template from being saved:</h4>
+        <ul>
+          <% @template.errors.full_messages.each do |msg| %>
+            <%= content_tag :li, msg, :id => "error_#{msg}" if msg.is_a?(String) %>
+          <% end %>
+        </ul>
+      </div>
+   <% end %>
+
+    <div class="control-group">
+      <%= f.label :content, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :content, rows: 12, class: "span12" %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Update', :class => 'btn btn-primary'%>
+      <%= link_to 'Cancel', admin_templates_path, :class => "btn" %>
+    </div>
+  <% end %>
+</div>

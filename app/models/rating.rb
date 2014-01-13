@@ -13,7 +13,7 @@ class Rating < ActiveRecord::Base
 
   def update_resource_rating(change=nil)
     change ||= value
-    resource_obj = self.resource
+    resource_obj = resource
     resource_obj.rating += change
     resource_obj.save(validate: false)
   end

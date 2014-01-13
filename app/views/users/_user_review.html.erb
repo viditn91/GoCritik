@@ -6,10 +6,7 @@
     </div>
     <div class="span8">
       <div><h4 class="heading"><%= link_to resource_obj.name, resource_obj, 'data-no-turbolink' => true %></h4></div>
-      <div><i class="icon-map-marker">
-        <%= get_field_value(resource_obj, @location_field) %>,
-        <%= get_field_value(resource_obj, @city_field) %>
-      </i></div>
+      <%= liquidize(@review_keywords_template.content, 'resource' => resource_obj).html_safe %>
     </div>
     <div class="pull-right">
       <%= render partial: 'reviews/rating_meter', locals: { review: review } %>

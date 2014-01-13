@@ -8,13 +8,10 @@
         </div>
       </div>
       <div class="row-fluid">
-        <h4><i class="icon-map-marker">
-          <%= get_field_value(@resource, @location_field) %>
-          <%= get_field_value(@resource, @city_field) %>
-        </i></h4>
+        <%= liquidize(@keywords_template.content, 'resource' => @resource).html_safe %>
       </div>
       <div class="row-fluid top-buffer"><%= @resource.description %></div>
-    </div>
+    </div>  
     <div class="span2">
       <div class="pull-right top-buffer">
         <div class="row-field top-buffer">
@@ -38,16 +35,15 @@
   </div>
   <div class="row-fluid">
     <div class="span10 offset1 top-buffer">
+      <%= liquidize(@tags_template.content, 'resource' => @resource).html_safe %>
       <ul class="inline">
       <% @resource.fields_values.each do |field_value| %>
         <!-- fixed -->
         <!-- Move the below to a helper method. -->
-        <% if taggable_field?(field_value) %>
           <li class="side-buffer">
-              <i class="icon-tag"></i>
-              <%= field_value.field.name %>: <%= get_field_value(@resource, field_value.field) %>
+            <i class="icon-tag"></i>
+            <%= field_value.field.name %>: <%= @resource.get_field_value(field_value.field) %>
           </li>
-        <% end %>
       <% end %>
       </ul>
     </div>

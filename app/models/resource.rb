@@ -18,15 +18,23 @@ class Resource < ActiveRecord::Base
   scope :approved, -> { where(approved: true) }
   scope :listed,   -> { where(approved: false) }
 
+  liquid_methods :fields_values, :get_field_value
+
   def calc_avg_rating
     ## fixed
     ## This method can be moved to Resource model.
-    if ratings.present?
-      rating_array = ratings.pluck(:value)
-      (rating_array.inject{ |sum, el| sum + el }.to_f / rating_array.size).round(2)
-    else
-      0.00
-    end
+    avg_rating = ratings_count ? (rating/ratings_count) : 0
+    avg_rating.round(2)
+  end
+
+
+  def get_field_value(field)
+    value = fields_values.find_by(field_id: field.id).try(:value) 
+    value = field.get_disp_text(value) if field.options.present?
+    # Showing Check Box value as 'Yes' if checked
+    value = "Yes" if field.type == 'CheckBoxField' && value.present?
+    # handling boolean value 'false' exception
+    value.blank? ? (value == false ? 'false' : '- NA -') : value
   end
 
 private
@@ -47,6 +55,5 @@ private
     end
     fields_values.destroy empty_fields_collection
   end
-
 
 end

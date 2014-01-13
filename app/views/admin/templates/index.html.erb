@@ -1,0 +1,15 @@
+<div id="resource-header" class="page-header title-style fill-grey">
+  <h1 class="heading offset1">Listing Templates</h1>
+</div>
+<table class="table table-hover tab-top-buffer">
+  <thead>
+    <tr>
+      <% @template_columns.each do |attr| %>
+        <th><%= attr.humanize %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+  <%= render @templates %>
+  </tbody>
+</table>

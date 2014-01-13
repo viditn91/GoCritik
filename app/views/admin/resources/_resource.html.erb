@@ -3,7 +3,7 @@
     <td><%= attr == 'description' ? truncate(object.try(attr.to_sym), length: 50) : object.try(attr.to_sym) %></td>
   <% end %>
   <% @fields.each do |field| %>
-    <td><%= get_field_value(object, field) %></td>
+    <td><%= object.get_field_value(field) %></td>
   <% end %>
   <td>
     <%= link_to 'Show', admin_resource_path(object), :class => 'btn btn-mini' %>

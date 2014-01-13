@@ -1,6 +1,8 @@
 <% if flash.now[:alert].present? %>
   alert(<%= flash.now[:alert] %>);
 <% else %>
+  // here resource is reloaded as @resource contains the previous instance i.e. before updation
+  <% @resource.reload %>
   $('#resource-header #votes').html("<%= @resource.ratings.count %>");
   $('#resource-header #score').html("<%= @resource.calc_avg_rating %>");
   $('.review-container .my-review').html("<%= escape_javascript render(partial:'reviews/rating_meter', locals: { rating: @rating.value}) %>");

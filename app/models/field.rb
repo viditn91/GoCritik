@@ -10,12 +10,21 @@ class Field < ActiveRecord::Base
   after_save :set_resource_delta_flag
   after_update :set_resource_delta_flag
   after_destroy :set_resource_delta_flag
+  # liquid template requirement
+  liquid_methods :name, :get_disp_text
 
 
   def get_regexp
     InputTypeHash.each do |hash|
       return hash[:regexp] if hash[:name] == input_type
     end
+  end
+
+  def get_disp_text(value)
+    options.each do |hash|
+      return hash[:text] if hash[:value] == value.to_s
+    end
+    nil
   end
 
 protected

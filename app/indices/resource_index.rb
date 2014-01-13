@@ -9,8 +9,6 @@ ThinkingSphinx::Index.define :resource, :delta => true, :with => :active_record 
   
   indexes [fields_values.string_val, fields_values.text_val], as: :value, :facet => true
   where "fields.searchable = true"
-  # indexes fields_values.fields(:name)
-  # indexes description
   has rating, ratings_count, reviews_count
 
   set_property :field_weights => {

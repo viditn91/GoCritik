@@ -3,8 +3,8 @@ class UsersController < ApplicationController
   before_action :verify_user, only: :edit
 
   def show
-    @location_field = Field.find_by_name(:Location)
-    @city_field = Field.find_by_name(:City)
+    @review_keywords_template = Template.find_by(controller: 'users', action: 'show', view_element: 'review keywords')
+    @rating_keywords_template = Template.find_by(controller: 'users', action: 'show', view_element: 'rating keywords')
   end
 
   def edit
