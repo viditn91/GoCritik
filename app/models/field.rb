@@ -11,7 +11,7 @@ class Field < ActiveRecord::Base
   after_update :set_resource_delta_flag
   after_destroy :set_resource_delta_flag
   # liquid template requirement
-  liquid_methods :name, :get_disp_text
+  liquid_methods :id, :name
 
 
   def get_regexp

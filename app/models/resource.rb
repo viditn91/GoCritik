@@ -18,7 +18,7 @@ class Resource < ActiveRecord::Base
   scope :approved, -> { where(approved: true) }
   scope :listed,   -> { where(approved: false) }
 
-  liquid_methods :fields_values, :get_field_value
+  liquid_methods :id, :fields_values
 
   def calc_avg_rating
     ## fixed

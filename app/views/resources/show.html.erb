@@ -36,16 +36,6 @@
   <div class="row-fluid">
     <div class="span10 offset1 top-buffer">
       <%= liquidize(@tags_template.content, 'resource' => @resource).html_safe %>
-      <ul class="inline">
-      <% @resource.fields_values.each do |field_value| %>
-        <!-- fixed -->
-        <!-- Move the below to a helper method. -->
-          <li class="side-buffer">
-            <i class="icon-tag"></i>
-            <%= field_value.field.name %>: <%= @resource.get_field_value(field_value.field) %>
-          </li>
-      <% end %>
-      </ul>
     </div>
   </div>
 </div>
