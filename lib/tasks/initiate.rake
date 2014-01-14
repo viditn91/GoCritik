@@ -27,5 +27,7 @@ namespace :db do
         end
       end while 1
     end
+    task :templates => :environment do
+    end
   end
 end

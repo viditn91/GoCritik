@@ -150,6 +150,7 @@ html, body {
   padding-top: 20px;
   padding-bottom: 0px;
   border-bottom: solid 1px #eee;
+  margin-left: 5px !important;
 }
 .rating-container .rating-meter-label {
   font-size: 11px !important;
