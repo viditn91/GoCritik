@@ -27,7 +27,19 @@ namespace :db do
         end
       end while 1
     end
+    desc "load liquid templates"
     task :templates => :environment do
+      template_array = [
+        {content: '--liquid code goes here--', controller: 'resources', action: 'show', view_element: 'keywords'},
+        {content: '--liquid code goes here--', controller: 'resources', action: 'show', view_element: 'tags'},
+        {content: '--liquid code goes here--', controller: 'resources', action: 'index', view_element: 'keywords'},
+        {content: '--liquid code goes here--', controller: 'users', action: 'show', view_element: 'review keywords'},
+        {content: '--liquid code goes here--', controller: 'users', action: 'show', view_element: 'rating keywords'},
+        {content: '--liquid code goes here--', controller: 'users', action: 'show', view_element: 'resource keywords'},
+      ]
+      template_array.each do |attr_hash|
+        Template.create attr_hash
+      end
     end
   end
 end
