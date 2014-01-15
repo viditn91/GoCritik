@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :store_location
+  helper_method :get_searchable_fields
+
+private
 
   def store_location
     # store location - this is needed for post-login/logout or post-signup redirect to whatever the user last visited.
@@ -13,7 +16,7 @@ class ApplicationController < ActionController::Base
       session[:previous_url] = request.fullpath
     end
   end
-
+  
   def after_sign_in_path_for(resource)
     previous_or_root_path
   end
@@ -25,8 +28,6 @@ class ApplicationController < ActionController::Base
   def after_sign_up_path_for(resource)
     previous_or_root_path
   end
-
-private
   ## fixed
   ## We can use this method in all the three methods above
   def previous_or_root_path
@@ -47,5 +48,8 @@ private
     end
   end
 
+  def get_searchable_fields
+    Field.all.where(searchable: true).pluck(:name).prepend('name').map(&:downcase)
+  end
 
 end

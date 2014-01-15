@@ -40,7 +40,6 @@
 
 .title-style {
   border-top: solid #ddd 1px;  
-  border-left: solid green 2px;  
 }
 .fill-grey {
   background-color: #F9F9F7;
@@ -49,6 +48,13 @@
   color: #444444;
   font-weight: normal;
   margin-bottom: 0px;
+}
+.sub-heading {
+  color: #444444;
+  font-weight: normal;
+  margin-bottom: 0px;
+  font-size: 25px;
+  border-bottom: solid 1px #eee
 }
 .magnify  {
   font-size: 20px;

@@ -52,34 +52,31 @@
               </p>
             <% end %>
             <ul class="pull-right nav">
-              <% if user_signed_in? %>
-                <% if current_user.admin? %>
-                  <%= link_to "Admin Panel", admin_path, :class => 'btn btn-small btn-success', :id => "sign-up-btn" %>
-                <% end %>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <%= get_name(current_user) %>
-                    <b class="caret"></b>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <%= render partial: 'layouts/settings_menu' %>
-                  </ul>
-                </li>
-              <% else %>
-                <%= link_to "Sign up", "#sign_up", "data-toggle" => "modal", :class => 'btn btn-small btn-success', :id => "sign-up-btn" %>
-                <%= link_to "Login", "#login", "data-toggle" => "modal", :class => 'btn btn-small', :id => "login-btn"%>
-              <% end %>
+              <%= link_to "Admin Panel", admin_path, :class => 'btn btn-small btn-success', :id => "sign-up-btn" %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <%= get_name(current_user) %>
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <%= render partial: 'layouts/settings_menu' %>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
+    <div class="container-fluid nav-collapse">
+      <%= render 'layouts/navbar' %>
+    </div>
     <div class="wrapper">
       <div class="container-fluid">
         <div class="row-fluid">
           <div class="span12">
+          <div class="row-fluid"><h1 class="span5 sub-heading"><%= yield(:sub_heading) %></h1></div>
             <%= bootstrap_flash %>
-            <%= yield %>
+            <div class="row-fluid tab-top-buffer"><%= yield %></div>
           </div>
         </div>
       </div>

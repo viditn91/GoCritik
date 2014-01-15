@@ -1,6 +1,6 @@
-<div id="template-header" class="page-header title-style fill-grey">
-  <h1 class="heading offset1">Showing Template</h1>
-</div>
+<% content_for :sub_heading do %>
+  Showing Template
+<% end %>
 <div class="span8 offset1">
   <dl class="dl-horizontal">
     <% @template_columns.each do |attr| %>

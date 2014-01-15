@@ -3,6 +3,6 @@ class AddDeltaToResources < ActiveRecord::Migration
     add_column :resources, :delta, :boolean, :default => true, :null => false
   end
   def self.down
-    remove_column :articles, :delta
+    remove_column :resources, :delta
   end
 end

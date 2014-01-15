@@ -1,6 +1,12 @@
-<div id="resource-header" class="page-header title-style fill-grey">
-  <h1 class="heading offset1">Search Results</h1>
-</div>
-<div class="span8 offset1">
-  <%= render partial: 'resource', collection: @resources, as: :object %>
+<div class="span8 offset1 tab-top-buffer">
+  <div id="resource-header">
+	<% if params[:search].present? %>
+	  <h1 class="sub-heading">Listing search results for "<%= params[:search] %>".. </h1>
+	<% else %>
+	  <h1 class="sub-heading">Listing all <%= ResourceName.pluralize %>.. </h1>
+	<% end %>
+  </div>
+  <div class="tab-top-buffer">
+   <%= render partial: 'resource', collection: @resources, as: :object %>
+  </div>
 </div>

@@ -1,21 +1,21 @@
 <div id="user-header" class="page-header title-style fill-grey">
   <div class="row-fluid">
-    <div class="span3 offset1 top-buffer">
+    <div class="span2 offset1 top-buffer">
       <%= image_tag @user.picture.photo.url(:profile), class: "img-polaroid" %>
     </div>
-    <div class="span5 top-buffer">
+    <div class="span6 top-buffer">
       <div class="row-fluid">
         <div class="pull-left"><h1 class="heading"><%= get_name(@user) %></h1></div>
       </div>
       <div class="row-fluid top-buffer">
         <div class="pull-left row-fluid">
           <div class="span2">
-            <div class="magnify"><%= @user.ratings.count %></div>
-            <div><%= 'rating'.pluralize(@user.ratings.count).upcase %></div>
+            <div class="magnify"><%= @user.ratings_count %></div>
+            <div><%= 'rating'.pluralize(@user.ratings_count).upcase %></div>
           </div>
           <div class="span2">
-            <div class="magnify"><%= @user.reviews.count %></div>
-            <div><%= 'review'.pluralize(@user.reviews.count).upcase %></div>
+            <div class="magnify"><%= @user.reviews_count %></div>
+            <div><%= 'review'.pluralize(@user.reviews_count).upcase %></div>
           </div>
         </div>
       </div>

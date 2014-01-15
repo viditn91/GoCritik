@@ -1,5 +1,3 @@
-<ul class="nav nav-pills">
-  <li><%= link_to ResourceName.pluralize, admin_resources_path %></li>
-  <li><%= link_to "Fields", admin_fields_path %></li>
-  <li><%= link_to "Templates", admin_templates_path %></li>
-</ul>
+<% content_for :sub_heading do %>
+  Welcome Admin
+<% end %>

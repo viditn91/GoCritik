@@ -20,14 +20,14 @@
         </div>
         <div class="row-field top-buffer">
           <div class="pull-right">
-            <div class="magnify pull-right"><span id="votes"><%= @resource.ratings.count %></span><i class="icon icon-ok"></i></div>
-            <div><%= 'rating'.pluralize(@resource.ratings.count).upcase %></div>
+            <div class="magnify pull-right"><span id="votes"><%= @resource.ratings_count %></span><i class="icon icon-ok"></i></div>
+            <div><%= 'rating'.pluralize(@resource.ratings_count).upcase %></div>
           </div>
         </div>
         <div class="row-field pull-right top-buffer">
           <div class="pull-right">
-            <div class="magnify pull-right"><%= @resource.reviews.count %><i class="icon icon-pencil"></i></div>
-            <div><%= 'review'.pluralize(@resource.reviews.count).upcase %></div>
+            <div class="magnify pull-right"><%= @resource.reviews_count %><i class="icon icon-pencil"></i></div>
+            <div><%= 'review'.pluralize(@resource.reviews_count).upcase %></div>
           </div>
         </div>
       </div>

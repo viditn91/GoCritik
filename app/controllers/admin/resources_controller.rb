@@ -53,7 +53,8 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def approve
-    if @resource.update_column(:approved, true)
+    @resource.approved = true
+    if @resource.save(validate: false)
       flash[:notice] = "#{ ResourceName } approved successfully, its now listed under Approved #{  ResourceName.pluralize }"
       redirect_to path_for_admin_resources_path
     else

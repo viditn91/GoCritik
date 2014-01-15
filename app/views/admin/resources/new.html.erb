@@ -1,6 +1,6 @@
-<div id="resource-header" class="page-header title-style fill-grey">
-  <h1 class="heading offset1">New <%= ResourceName %></h1>
-</div>
+<% content_for :sub_heading do %>
+  New <%= ResourceName %>
+<% end %>
 <div class="span8 offset1">
   <%= render 'form' %>
 </div>

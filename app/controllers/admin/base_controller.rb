@@ -1,4 +1,5 @@
 class Admin::BaseController < ApplicationController
+  layout "admin"
   before_action :require_admin_user
   helper_method :path_for_admin_resources_path
 
