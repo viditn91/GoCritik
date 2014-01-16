@@ -6,7 +6,7 @@
         <% params_dup = params.dup %>
         <% if params["#{filter.id}"] == el.second %>
           <% params_dup.delete("#{ filter.id }") %>
-          <%= link_to "<span class='box'></span>#{ el.first }".html_safe,
+          <%= link_to "<span class='box clicked'></span>#{ el.first }".html_safe,
             resources_path(params_dup) %>
         <% else %>
           <%= link_to "<span class='box'></span>#{ el.first }".html_safe,

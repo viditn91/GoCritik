@@ -187,3 +187,6 @@ html, body {
 .filter-container .inner-text {
   font-size: 10px !important;
 }
+.clicked {
+  background-color: green;
+}
