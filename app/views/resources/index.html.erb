@@ -1,12 +1,22 @@
-<div class="span8 offset1 tab-top-buffer">
-  <div id="resource-header">
-	<% if params[:search].present? %>
-	  <h1 class="sub-heading">Listing search results for "<%= params[:search] %>".. </h1>
-	<% else %>
-	  <h1 class="sub-heading">Listing all <%= ResourceName.pluralize %>.. </h1>
-	<% end %>
+<div class="resource-index-header page-header title-style fill-grey">
+  <div class="row-fluid">
+    <div class="span8 offset1 tab-top-buffer">
+      <div class="row-fluid">
+		<% if params[:search].present? %>
+		  <h1 class="sub-heading">Listing search results matching "<%= params[:search] %>" </h1>
+		<% else %>
+		  <h1 class="sub-heading">Listing all <%= ResourceName.pluralize %> </h1>
+		<% end %>
+	  </div>
+      <div class="filter-container row-fluid top-buffer">
+      	<div>Filter By-</div>
+      	<ul class="inline list"><%= render partial: 'filter', collection: @fields.sortable %></ul>
+	  </div>
+	</div>
   </div>
+</div>
+<div class="span8 offset1 tab-top-buffer">
   <div class="tab-top-buffer">
-   <%= render partial: 'resource', collection: @resources, as: :object %>
+    <%= render partial: 'resource', collection: @resources, as: :object %>
   </div>
 </div>

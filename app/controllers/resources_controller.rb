@@ -1,7 +1,7 @@
 class ResourcesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   before_action :set_resource, only: :show
-  before_action :load_all_fields, only: [:new, :create]
+  before_action :load_all_fields, only: [:new, :create, :index]
 
   def new
     @resource = Resource.new
@@ -19,14 +19,13 @@ class ResourcesController < ApplicationController
   end
 
   def index
-    if params[:search].in? [ nil, '' ]
-      @resources = Resource.search params[:search], :include => :fields_values,
-        :select => '(rating/ratings_count) as rating_value',
-        :order  => 'rating_value DESC'
-    else
-      @resources = Resource.search params[:search], :include => :fields_values
-    end
+    @resources = Resource.search params[:search], :include => :fields_values
     @keywords_template = Template.find_by(controller: 'resources', action: 'index', view_element: 'keywords')
+    request.query_parameters.each do |a, b|
+      unless a == "search" || a == "utf8"
+        @resources = filter_results(a.to_i, b)
+      end
+    end
   end
 
   def show
@@ -38,7 +37,7 @@ private
   def set_resource
     ## fixed
     ## Please use find_by or where
-    @resource = Resource.approved.find_by(permalink: params[:id])
+    @resource = Resource.approved.includes(:fields_values).find_by(permalink: params[:id])
     ## fixed
     ## Same as described in comments_controller
     unless @resource
@@ -55,4 +54,10 @@ private
     @fields = Field.all
   end
 
+  def filter_results(a, b)
+    @resources.select do |resource|
+      resource if(resource.fields_values.map(&:field_id).include?(a) &&
+        resource.fields_values.find_by(field_id: a).value.to_s == b)
+    end
+  end
 end

@@ -2,16 +2,16 @@ class SelectBoxField < Field
   validates :options, presence: true
   validates_with OptionsValidator
 
-  def default_value
-    nil
+  def unique=(value)
+    super false
   end
 
-  def unique
-    false
+  def default_value=(value)
+    super false
   end
 
-  def searchable
-    false
+  def searchable=(value)
+    super false
   end
 
 end

@@ -13,6 +13,9 @@ class Field < ActiveRecord::Base
   # liquid template requirement
   liquid_methods :id, :name
 
+  scope :searchable, -> { where(searchable: true) }
+  scope :sortable,   -> { where(sortable: true) }
+
 
   def get_regexp
     InputTypeHash.each do |hash|

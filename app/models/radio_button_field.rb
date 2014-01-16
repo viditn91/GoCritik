@@ -2,15 +2,15 @@ class RadioButtonField < Field
   validates :options, presence: true
   validates_with OptionsValidator
 
-  def unique
-  	false
+  def unique=(value)
+  	super false
   end
 
-  def default_value
-  	nil
+  def default_value=(value)
+    super false
   end
 
-  def searchable
-    false
+  def searchable=(value)
+    super false
   end
 end

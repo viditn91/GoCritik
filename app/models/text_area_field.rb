@@ -1,12 +1,12 @@
 class TextAreaField < Field
   validates_with DefaultValueRegexpValidator
 
-  def options
-  	nil
+  def options=(value)
+  	super nil
   end
 
-  def sortable
-    false
+  def sortable=(value)
+    super false
   end
   
 end

@@ -8,10 +8,6 @@ class FieldsValue < ActiveRecord::Base
   validates_with FieldValueValidator
 
   after_validation :populate_value_to_table
-  # callbacks for delta-indexing resource once a field-value is changed corresponding to a searchable field
-  after_save :set_resource_delta_flag
-  after_update :set_resource_delta_flag
-  after_destroy :set_resource_delta_flag
   # liquid template requirement
   liquid_methods :field, :value
 
@@ -41,14 +37,6 @@ private
 
   def get_column_name
     "#{ field.input_type.downcase }_val".to_sym
-  end
-
-  def set_resource_delta_flag
-    unless !field.searchable
-      resource_obj = self.resource
-      resource_obj.delta = true
-      resource_obj.save(validate: false)
-    end
   end
 
 end

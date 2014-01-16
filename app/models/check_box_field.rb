@@ -1,23 +1,23 @@
 class CheckBoxField < Field
 
-  def default_value
-  	nil
+  def default_value=(value)
+  	super nil
   end
 
-  def options
-  	nil
+  def options=(value)
+  	super nil
   end
 
-  def unique
-  	false
+  def unique=(value)
+  	super false
   end
 
-  def searchable
-  	false
+  def searchable=(value)
+  	super false
   end
 
-  def sortable
-    false
+  def sortable=(value)
+    super false
   end
 
 end

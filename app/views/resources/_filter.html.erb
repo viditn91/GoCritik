@@ -1,0 +1,18 @@
+<li class="inline cell span3">
+  <div><%= filter.name %></div>
+  <ul class="inline">
+    <% options_array_from_hash(filter.options).each do |el| %>
+      <li class="inner-text">
+        <% params_dup = params.dup %>
+        <% if params["#{filter.id}"] == el.second %>
+          <% params_dup.delete("#{ filter.id }") %>
+          <%= link_to "<span class='box'></span>#{ el.first }".html_safe,
+            resources_path(params_dup) %>
+        <% else %>
+          <%= link_to "<span class='box'></span>#{ el.first }".html_safe,
+            resources_path(params.merge({"#{ filter.id }" => el.second})) %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</li>

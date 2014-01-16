@@ -32,6 +32,7 @@ class Admin::ResourcesController < Admin::BaseController
     params[:status] ||= :approved
     session[:status] = params[:status]
     @resources = Resource.send(params[:status]).includes(:fields_values)
+    # @fields_values = FieldsValue.includes(:fields).where(id: @resources.ids)
   end
 
   def update
