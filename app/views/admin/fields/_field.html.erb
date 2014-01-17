@@ -1,12 +1,12 @@
 <tr>
   <% attributes.each do |attr| %>
     <td>
-      <% if attr == 'options' && field.try(attr.to_sym) %>
+      <% if options_field?(attr) %>
         <pre><%= make_hash_readable(field.send(attr.to_sym))%></pre>
-      <% elsif attr.in? ['required', 'unique', 'searchable', 'sortable']%>
+      <% elsif boolean_field?(attr)%>
         <% value = field.send(attr.to_sym) %>
         <%= value == true ? 'Yes' : 'No' %>
-      <% elsif attr == 'type' %>
+      <% elsif type_field?(attr) %>
         <% value = field.send(attr.to_sym) %>
         <%= get_field_type_display_value(value) %>
       <% else %>

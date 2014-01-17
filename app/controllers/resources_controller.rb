@@ -22,7 +22,7 @@ class ResourcesController < ApplicationController
     @resources = Resource.search params[:search], :include => :fields_values
     @keywords_template = Template.find_by(controller: 'resources', action: 'index', view_element: 'keywords')
     request.query_parameters.each do |a, b|
-      unless a == "search" || a == "utf8"
+      unless ['search', 'utf8'].include?(a)
         @resources = filter_results(a.to_i, b)
       end
     end
