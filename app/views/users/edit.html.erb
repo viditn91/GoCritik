@@ -6,8 +6,8 @@
     <div class="span2 offset1">
       <%= image_tag @user.picture.photo.url(:full), class: "img-polaroid" %>
       <div class="pull-right">
-        <% if @user.picture %>
-          <%= link_to "Remove", picture_path(@user.picture), method: :delete %>
+        <% if has_profile_picture?(@user) %>
+          <%= link_to "Remove", picture_path(@user.picture, imageable_id: @user.id, imageable_type: @user.class.name), method: :delete %>
         <% else %>
           No Image uploaded
         <% end %>

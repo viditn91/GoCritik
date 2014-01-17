@@ -1,5 +1,5 @@
 class PicturesController < ApplicationController
-  before_action :set_picture, only: [:show, :update]
+  before_action :set_picture, only: [:show, :update, :destroy]
 
   def create
     @picture = Picture.new(picture_params)
@@ -23,15 +23,26 @@ class PicturesController < ApplicationController
     redirect_to @picture.imageable
   end
 
+  def destroy
+    @picture.photo = nil
+    if @picture.save
+      flash[:notice] = 'Picture successfully Removed'
+    else
+      flash[:error] = 'An error occured, picture couldnot be removed'
+    end
+    redirect_to @picture.imageable
+  end
+
 private
   def set_picture
-    @picture = Picture.find_by(imageable_type: picture_params[:imageable_type], imageable_id: picture_params[:imageable_id])
+    @picture = Picture.find_by(imageable_type: params[:imageable_type], imageable_id: params[:imageable_id])
     unless @picture
       flash[:error] = "Picture not found"
     end
   end
 
   def picture_params
-    params.require(:picture).permit(:photo, :imageable_type, :imageable_id)
+    params.require(:picture).permit(:photo)
   end
+
 end

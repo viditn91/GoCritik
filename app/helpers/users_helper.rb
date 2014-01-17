@@ -20,4 +20,8 @@ module UsersHelper
     current_user && current_user == user 
   end
 
+  def has_profile_picture?(user)
+    user.picture.photo.url != '/images/default/original/missing.jpg'
+  end
+
 end
