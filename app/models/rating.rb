@@ -11,6 +11,7 @@ class Rating < ActiveRecord::Base
   after_update :set_resource_delta_flag
   after_destroy :set_resource_delta_flag
 
+private
   def update_resource_rating(change=nil)
     change ||= value
     resource_obj = resource

@@ -1,21 +1,25 @@
 class Field < ActiveRecord::Base
 
   serialize :options
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
-  validate :field_name_with_resource_attributes
+
+  scope :searchable, -> { where(searchable: true) }
+  scope :sortable,   -> { where(sortable: true) }
+
   has_many :fields_values
 
+  before_validation :check_for_form_tempering
   before_destroy :ensure_not_referenced_by_resource
   before_update :check_for_updated_fields
   # callbacks for delta-indexing resource once a field-value is changed corresponding to a searchable field
   after_save :set_resource_delta_flag
   after_update :set_resource_delta_flag
   after_destroy :set_resource_delta_flag
+  
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validate :field_name_with_resource_attributes
+  
   # liquid template requirement
   liquid_methods :id, :name
-
-  scope :searchable, -> { where(searchable: true) }
-  scope :sortable,   -> { where(sortable: true) }
 
 
   def get_regexp
@@ -31,7 +35,8 @@ class Field < ActiveRecord::Base
     nil
   end
 
-protected
+private
+
 
   def field_name_with_resource_attributes
     errors.add(:name, 'is already taken.') if name =~ /^(name|description)$/i
@@ -65,4 +70,22 @@ protected
     end
   end
 
+  # def check_for_form_tempering
+  #   raise Exceptions::FormBreachError.new "Please do not try to temper with the form, it wont do any good" if was_form_tempered?
+  # end
+
+  # def was_form_tempered?
+  #   if input_type_excluded? ||
+  #     [:required, :unique, :sortable, :searchable].find { |el| boolean_value_excluded?(el) == true }
+  #   end
+  # end
+
+  # def input_type_excluded?
+  #   InputTypeHash.map{ |el| el[:name] }.exclude?(input_type)
+  # end
+
+  # def boolean_value_excluded?(attribute)
+  #   [true, false].exclude?(send attribute)
+  # end
+  
 end

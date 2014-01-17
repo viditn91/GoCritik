@@ -7,7 +7,7 @@ class RadioButtonField < Field
   end
 
   def default_value=(value)
-    super false
+    super nil
   end
 
   def searchable=(value)

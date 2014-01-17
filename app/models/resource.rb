@@ -1,7 +1,11 @@
 class Resource < ActiveRecord::Base
   has_permalink :name
+
+  scope :approved, -> { where(approved: true) }
+  scope :listed,   -> { where(approved: false) }
+
   with_options dependent: :destroy do |assoc|
-    assoc.has_many :fields_values, -> { includes :field }, inverse_of: :resource, validate: false
+    assoc.has_many :fields_values, inverse_of: :resource, validate: false
     assoc.has_many :reviews
     assoc.has_many :ratings
     assoc.has_one :picture, as: :imageable
@@ -10,13 +14,10 @@ class Resource < ActiveRecord::Base
   accepts_nested_attributes_for :fields_values
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
-  validates :description, presence: true, uniqueness: true
+  validates :description, presence: true
   validate :validate_associated_fields
 
   after_validation :destroy_empty_associated_field_values
-
-  scope :approved, -> { where(approved: true) }
-  scope :listed,   -> { where(approved: false) }
 
   liquid_methods :id, :fields_values
 
@@ -30,10 +31,10 @@ class Resource < ActiveRecord::Base
 
   def get_field_value(field)
     value = fields_values.find { |el| el.field_id == field.id }.try(:value)
-    if value.present? 
+    if value 
       if field.options.present?
         field.get_disp_text(value)
-      elsif field.type == 'CheckBoxField' && value.present?
+      elsif field.type == 'CheckBoxField'
         # Showing Check Box value as 'Yes' if checked
         "Yes"
       else

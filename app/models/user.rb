@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   
   before_create :create_associated_picture
 
+private
   def create_associated_picture
     build_picture
   end

@@ -1,6 +1,9 @@
 class Admin::FieldsController < Admin::BaseController
   before_action :set_field, only: [:edit, :update, :destroy]
   rescue_from Exceptions::RequiredFieldError, with: :drop_action_on_required_field
+  rescue_from ActiveRecord::SubclassNotFound, with: :prevent_breach
+  # rescue_from Exceptions::FormBreachError, with: :prevent_form_attack
+
 
   def new
     @field = Field.new
@@ -61,8 +64,20 @@ private
 
   def drop_action_on_required_field(exception)
     logger.error exception.message
-    flash[:notice] = exception.message
+    flash[:error] = exception.message
     redirect_to_back_or_default_path
   end
+
+  def prevent_breach(exception)
+    logger.error exception.message
+    flash[:error] = "Do not temper with the form, Choose the field type from the select-box"
+    redirect_to_back_or_default_path
+  end
+
+  # def prevent_form_attack(exception)
+  #   logger.error exception.message
+  #   flash[:error] = exception.message
+  #   redirect_to_back_or_default_path
+  # end
 
 end
