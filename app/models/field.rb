@@ -3,6 +3,7 @@ class Field < ActiveRecord::Base
   serialize :options
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validate :field_name_with_resource_attributes
+  has_many :fields_values
 
   before_destroy :ensure_not_referenced_by_resource
   before_update :check_for_updated_fields

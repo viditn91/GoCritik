@@ -1,8 +1,8 @@
 class Resource < ActiveRecord::Base
   has_permalink :name
   with_options dependent: :destroy do |assoc|
-    assoc.has_many :fields_values, inverse_of: :resource, validate: false
-    assoc.has_many :reviews, inverse_of: :resource
+    assoc.has_many :fields_values, -> { includes :field }, inverse_of: :resource, validate: false
+    assoc.has_many :reviews
     assoc.has_many :ratings
     assoc.has_one :picture, as: :imageable
   end
@@ -29,12 +29,22 @@ class Resource < ActiveRecord::Base
 
 
   def get_field_value(field)
-    value = fields_values.find_by(field_id: field.id).try(:value) 
-    value = field.get_disp_text(value) if field.options.present?
-    # Showing Check Box value as 'Yes' if checked
-    value = "Yes" if field.type == 'CheckBoxField' && value.present?
-    # handling boolean value 'false' exception
-    value.blank? ? (value == false ? 'false' : '- NA -') : value
+    value = fields_values.find { |el| el.field_id == field.id }.try(:value)
+    if value.present? 
+      if field.options.present?
+        field.get_disp_text(value)
+      elsif field.type == 'CheckBoxField' && value.present?
+        # Showing Check Box value as 'Yes' if checked
+        "Yes"
+      else
+        value
+      end
+    elsif value == false
+      # handling boolean value 'false' exception
+      'false'
+    else
+      '- NA -'
+    end
   end
 
 private

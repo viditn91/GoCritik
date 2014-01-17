@@ -66,6 +66,12 @@ namespace :db do
           action: 'show', 
           view_element: 'resource keywords'
         },
+        {
+          content: '<div> <i class="icon-map-marker"> {% for field_value in resource.fields_values %} {% if field_value.field.name == "Location" %} {{ field_value.value }}, {% elsif field_value.field.name == "City" %} {{ field_value.value }} {% endif %} {% endfor %} </i> </div>', 
+          controller: 'reviews', 
+          action: 'show', 
+          view_element: 'resource keywords'
+        }
       ]
       template_array.each do |attr_hash|
         Template.create attr_hash

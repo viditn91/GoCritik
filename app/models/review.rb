@@ -6,7 +6,12 @@ class Review < ActiveRecord::Base
     assoc.has_many :likes, as: :likeable
   end
 
-  validates :content, :user_id, :resource_id, presence: true
+  validates :user_id, :resource_id, presence: true
+  validates :content, length: {
+    minimum: 50,
+    tokenizer: lambda { |str| str.scan(/\w+/) },
+    too_short: "must have at least %{count} words"
+  }
 
   def get_rated_value
   	## fixed

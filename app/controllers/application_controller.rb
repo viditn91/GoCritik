@@ -49,7 +49,7 @@ private
   end
 
   def get_searchable_fields
-    Field.all.where(searchable: true).pluck(:name).prepend('name').map(&:downcase)
+    Field.searchable.pluck(:name).prepend('name').map(&:downcase)
   end
 
 end

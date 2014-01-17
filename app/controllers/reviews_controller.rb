@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
     else
       ## fixed
       ## Please show an error message when review not saved successfully
-      flash[:error] = "Some error occured, Review couldn't be saved"
+      flash[:error] = @review.errors
       redirect_to_back_or_default_path
     end
   end

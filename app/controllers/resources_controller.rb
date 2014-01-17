@@ -37,7 +37,7 @@ private
   def set_resource
     ## fixed
     ## Please use find_by or where
-    @resource = Resource.approved.includes(:fields_values).find_by(permalink: params[:id])
+    @resource = Resource.approved.find_by(permalink: params[:id])
     ## fixed
     ## Same as described in comments_controller
     unless @resource
