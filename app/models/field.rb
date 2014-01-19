@@ -17,6 +17,14 @@ class Field < ActiveRecord::Base
   
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validate :field_name_with_resource_attributes
+  validates :input_type, inclusion: { in: InputTypeHash.map{ |hash| hash[:name] }, 
+    message: "%{value} is not a valid Input-Type" }
+  validates :type, inclusion: { in: FieldTypeArray.map{ |display_text, type| type }, 
+    message: "%{value} is not a valid Field-Type" }
+  validates_each :required, :unique, :searchable, :sortable do |record, attr, value|
+    value_input = record.send("#{ attr }_before_type_cast".to_sym)
+    record.errors[:base] << "'#{ value_input }' is not a valid value for #{ attr.capitalize } Field" unless value_input.to_s.in? ['true', 'false']
+  end
   
   # liquid template requirement
   liquid_methods :id, :name
@@ -67,22 +75,4 @@ private
     end
   end
 
-  # def check_for_form_tempering
-  #   raise Exceptions::FormBreachError.new "Please do not try to temper with the form, it wont do any good" if was_form_tempered?
-  # end
-
-  # def was_form_tempered?
-  #   if input_type_excluded? ||
-  #      [:required, :unique, :sortable, :searchable].find { |el| boolean_value_excluded?(el) == true }
-  #   end
-  # end
-
-  # def input_type_excluded?
-  #   InputTypeHash.map{ |el| el[:name] }.exclude?(input_type)
-  # end
-
-  # def boolean_value_excluded?(attribute)
-  #   [true, false].exclude?(send attribute)
-  # end
-  
 end
