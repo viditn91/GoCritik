@@ -1,7 +1,7 @@
 <tr>
   <% attributes.each do |attr| %>
     <td>
-      <% if options_field?(attr) %>
+      <% if options_field?(attr, field) %>
         <pre><%= make_hash_readable(field.send(attr.to_sym))%></pre>
       <% elsif boolean_field?(attr)%>
         <% value = field.send(attr.to_sym) %>

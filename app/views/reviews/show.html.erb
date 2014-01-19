@@ -1,7 +1,7 @@
 <div class="span8 offset1">
   <div class="row-fluid">
     <div>
-      <h2 class="heading border-down bottom-buffer"><%= link_to get_name(@review.user), @review.user %>'s review for <%= @review.resource.name %></h2>
+      <h2 class="heading border-down bottom-buffer"><%= link_to get_full_name(@review.user), @review.user %>'s review for <%= @review.resource.name %></h2>
     </div>
   </div>
   <% resource_obj = @review.resource %>

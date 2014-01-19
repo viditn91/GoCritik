@@ -14,7 +14,7 @@ class FieldsValue < ActiveRecord::Base
 
   def is_value_unique?
     attribute = get_column_name
-    FieldsValue.where(field_id: field_id).each do |field_value|
+    field.fields_values.each do |field_value|
       return false if value == field_value.try(attribute) && id != field_value.id
     end
   end

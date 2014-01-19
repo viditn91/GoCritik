@@ -18,12 +18,12 @@ module Admin::FieldsHelper
     end
   end
 
-  def options_field?(attr)
+  def options_field?(attr, field)
     attr == 'options' && field.try(attr.to_sym)
-  end
+  end 
 
   def boolean_field?(attr)
-    attr.in?['required', 'unique', 'searchable', 'sortable']
+    attr.in? ['required', 'unique', 'searchable', 'sortable']
   end
 
   def type_field?(attr)

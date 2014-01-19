@@ -7,7 +7,7 @@ class Field < ActiveRecord::Base
 
   has_many :fields_values
 
-  before_validation :check_for_form_tempering
+  # before_validation :check_for_form_tempering
   before_destroy :ensure_not_referenced_by_resource
   before_update :check_for_updated_fields
   # callbacks for delta-indexing resource once a field-value is changed corresponding to a searchable field
@@ -47,22 +47,19 @@ private
   end
 
   def check_for_updated_fields
-    hash = self.changes
+    hash = changes
     if hash.keys.include?('input_type') || hash.keys.include?('type')
       raise Exceptions::RequiredFieldError.new "Field-Type/Input-Type Cannot be updated. Records depend on this field" if field_exists_in_resource?
     end
   end
 
   def field_exists_in_resource?
-    FieldsValue.pluck(:field_id).each do |field_id|
-      return true if field_id == self.id
-    end
-    false
+    fields_values.present?
   end
 
   def set_resource_delta_flag
-    unless !searchable
-      FieldsValue.where(field_id: id).each do |field_value|
+    if searchable_changed?
+      fields_values.each do |field_value|
         resource_obj = field_value.resource
         resource_obj.delta = true
         resource_obj.save(validate: false)
@@ -76,7 +73,7 @@ private
 
   # def was_form_tempered?
   #   if input_type_excluded? ||
-  #     [:required, :unique, :sortable, :searchable].find { |el| boolean_value_excluded?(el) == true }
+  #      [:required, :unique, :sortable, :searchable].find { |el| boolean_value_excluded?(el) == true }
   #   end
   # end
 

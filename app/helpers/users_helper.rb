@@ -1,6 +1,6 @@
 module UsersHelper
 
-  def get_name(user)
+  def get_full_name(user)
     user.first_name.capitalize + " " + user.last_name.capitalize
   end
 
@@ -8,7 +8,7 @@ module UsersHelper
     if my_profile?(user)
       "My #{title.capitalize}"
     else
-      "#{title.capitalize} by #{get_name(user)}"
+      "#{title.capitalize} by #{ get_full_name(user) }"
     end
   end
 
@@ -18,10 +18,6 @@ module UsersHelper
 
   def my_profile?(user)
     current_user && current_user == user 
-  end
-
-  def has_profile_picture?(user)
-    user.picture.photo.url != '/images/default/original/missing.jpg'
   end
 
 end

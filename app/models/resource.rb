@@ -22,8 +22,6 @@ class Resource < ActiveRecord::Base
   liquid_methods :id, :fields_values
 
   def calc_avg_rating
-    ## fixed
-    ## This method can be moved to Resource model.
     avg_rating = ratings_count == 0 ? 0 : (rating/ratings_count)
     avg_rating.round(2)
   end

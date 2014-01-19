@@ -4,7 +4,7 @@
       <%= image_tag review.user.picture.photo.url(:small) %>
     </div>
     <div class="span8">
-      <div><h4 class="heading"><%= link_to get_name(review.user), review.user %></h4></div>
+      <div><h4 class="heading"><%= link_to get_full_name(review.user), review.user %></h4></div>
       <div><i class="icon-pencil"></i><%= review.user.reviews_count %><%= ' review'.pluralize(review.user.reviews_count) %></div>
       <div><i class="icon-ok"></i><%= review.user.ratings_count %><%= ' rating'.pluralize(review.user.ratings_count) %></div>
     </div>
