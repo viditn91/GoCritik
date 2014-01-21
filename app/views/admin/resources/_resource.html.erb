@@ -8,7 +8,7 @@
   <td>
     <%= link_to 'Show', admin_resource_path(object), :class => 'btn btn-mini' %>
     <%= link_to 'Edit', edit_admin_resource_path(object), :class => 'btn btn-mini btn-info' %>
-    <%= link_to 'Approve', approve_admin_resource_path(object), method: :put, :class => 'btn btn-mini btn-success' if status == :listed %>
+    <%= link_to 'Approve', approve_admin_resource_path(object), method: :put, :class => 'btn btn-mini btn-success' if status == :pending %>
     <%= link_to 'Destroy', admin_resource_path(object), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
   </td>
 </tr>

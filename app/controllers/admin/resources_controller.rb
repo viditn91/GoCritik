@@ -14,6 +14,7 @@ class Admin::ResourcesController < Admin::BaseController
 
   def create
     @resource = Resource.new(new_resource_params)
+    @resource.state = true
     if @resource.save
       flash[:notice] = "#{ ResourceName } was successfully created"
       redirect_to admin_resources_path
@@ -32,7 +33,6 @@ class Admin::ResourcesController < Admin::BaseController
     params[:status] ||= :approved
     session[:status] = params[:status]
     @resources = Resource.send(params[:status]).includes(:fields_values)
-    # @fields_values = FieldsValue.includes(:fields).where(id: @resources.ids)
   end
 
   def update
@@ -54,8 +54,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def approve
-    @resource.approved = true
-    if @resource.save(validate: false)
+    if @resource.approve
       flash[:notice] = "#{ ResourceName } approved successfully, its now listed under Approved #{  ResourceName.pluralize }"
       redirect_to path_for_admin_resources_path
     else

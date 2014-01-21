@@ -6,14 +6,14 @@
   <li class="<%= 'active' if params[:status].to_sym == :approved %>">
     <%= link_to "Approved #{ ResourceName.pluralize }", admin_resources_path(status: :approved) %></a>
   </li>
-  <li class="<%= 'active' if params[:status].to_sym == :listed %>">
-    <%= link_to "Pending Approval", admin_resources_path(status: :listed) %></a>
+  <li class="<%= 'active' if params[:status].to_sym == :pending %>">
+    <%= link_to "Pending Approval", admin_resources_path(status: :pending) %></a>
   </li>
 </ul>
 <% if @resources.blank? %>
   <% if status == :approved %>
     <% flash[:error] = "No #{ ResourceName } created. Click on 'Add new #{ ResourceName }'" %>
-  <% elsif status == :listed %>
+  <% elsif status == :pending %>
     <% flash[:error] = "No #{ ResourceName } pending for Approval." %>
   <% end %>
 <% else %>
@@ -35,5 +35,5 @@
   </table>
 <% end %>
 <div class="tab-top-buffer">
-  <%= link_to "Add new #{ ResourceName }", new_admin_resource_path, :class => 'btn btn-success' if status == :approved %>
+  <%= link_to "Add a new #{ ResourceName.singularize }", new_admin_resource_path, :class => 'btn btn-success' if status == :approved %>
 </div>

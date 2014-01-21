@@ -1,8 +1,17 @@
 class Resource < ActiveRecord::Base
   has_permalink :name
 
-  scope :approved, -> { where(approved: true) }
-  scope :listed,   -> { where(approved: false) }
+  scope :approved, -> { with_state(:approved) }
+  scope :pending,  -> { with_state(:pending) }
+
+  state_machine initial: :pending do
+    state :pending, value: false
+    state :approved, value: true
+
+    event :approve do
+      transition :pending => :approved
+    end
+  end
 
   with_options dependent: :destroy do |assoc|
     assoc.has_many :fields_values, inverse_of: :resource, validate: false

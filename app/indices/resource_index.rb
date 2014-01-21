@@ -2,10 +2,10 @@ ThinkingSphinx::Index.define :resource, :delta => true, :with => :active_record 
   join fields_values.field
 
   indexes :name, as: :name, facet: true
-  where "approved = true"
+  where "state = true"
 
   indexes description, as: :description, facet: true
-  where "approved = true"
+  where "state = true"
   
   indexes [fields_values.string_val, fields_values.text_val], as: :value, :facet => true
   where "fields.searchable = true"

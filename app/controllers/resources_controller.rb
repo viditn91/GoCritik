@@ -9,7 +9,6 @@ class ResourcesController < ApplicationController
 
   def create
     @resource = Resource.new(resource_params)
-    @resource.approved = false
     if @resource.save
       flash[:notice] = "Your request for a new #{ ResourceName } is submitted"
       redirect_to resources_path

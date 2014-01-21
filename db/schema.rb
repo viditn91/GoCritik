@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115063719) do
+ActiveRecord::Schema.define(version: 20140121054854) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -82,11 +82,11 @@ ActiveRecord::Schema.define(version: 20140115063719) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "permalink"
-    t.boolean  "approved",                               default: true
     t.integer  "ratings_count",                          default: 0
     t.integer  "reviews_count",                          default: 0
     t.decimal  "rating",        precision: 16, scale: 2, default: 0.0
     t.boolean  "delta",                                  default: true, null: false
+    t.boolean  "state"
   end
 
   add_index "resources", ["permalink"], name: "index_resources_on_permalink", using: :btree
