@@ -120,6 +120,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    state_machine (1.2.0)
     thinking-sphinx (3.0.6)
       activerecord (>= 3.1.0)
       builder (>= 2.1.2)
@@ -164,6 +165,7 @@ DEPENDENCIES
   rails-rateit
   sass-rails (~> 4.0.0)
   sdoc
+  state_machine
   thinking-sphinx (= 3.0.6)
   turbolinks
   twitter-bootstrap-rails

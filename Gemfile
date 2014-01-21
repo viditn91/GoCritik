@@ -66,3 +66,6 @@ gem 'thinking-sphinx', '3.0.6'
 
 #Liquid
 gem 'liquid'
+
+#State Machine
+gem 'state_machine'
