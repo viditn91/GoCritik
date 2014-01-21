@@ -25,7 +25,7 @@ This application is a means to create a Review Website, where users can pour in 
 
 - Run db:setup:admin to create any normal user of this website an admin
 - Run db:setup:templates to generate liquid templates for styling the dynamic components in the app
-- Run rake ts:index ( To index the search from the fields marked as searchable )
+- Run rake ts:index ( To index the search from the fields marked as searchable	 )
 - Run rake ts:start ( To start the searchd daemon )
 
 ## Features
@@ -36,6 +36,8 @@ This application is a means to create a Review Website, where users can pour in 
 - A user can create reviews, make ratings on resource
 - A review can be liked, commented upon by user
 - A comment can be liked by user
+- A user can suggest a resource to the admin, which gets listed on admin's approval.
+- To keep the dynamicity at front-end, liquid templates can be edited by the admin of the website.
 
 ## Reporting issues
 - If you face any issue, report me at vidit@vinsol.com
