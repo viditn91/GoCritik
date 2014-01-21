@@ -3,18 +3,30 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :store_location
-  helper_method :get_searchable_fields
+  before_action :set_locale
+  helper_method :get_searchable_fields, :previous_or_root_path
 
 private
 
   def store_location
     # store location - this is needed for post-login/logout or post-signup redirect to whatever the user last visited.
-    ## fixed
-    ## Instead of checking request.fullpath != 'some_url', we can use something like ['x', 'y', 'z'].exclude? request.fullpath
-    ## Also, if we encounter more than one "&&" in an if condition, we should create a method for the same.
     if current_path_useful?
       session[:previous_url] = request.fullpath
     end
+  end
+
+  def set_locale
+    if params[:locale]
+      if I18n.available_locales.include?(params[:locale].to_sym)
+        I18n.locale = params[:locale]
+      else
+        flash.now[:error] = "#{params[:locale]} translation not available"
+      end
+    end
+  end
+  
+  def default_url_options
+    { locale: I18n.locale }
   end
   
   def after_sign_in_path_for(resource)
@@ -28,14 +40,14 @@ private
   def after_sign_up_path_for(resource)
     previous_or_root_path
   end
-  ## fixed
-  ## We can use this method in all the three methods above
+
   def previous_or_root_path
     session[:previous_url] || root_path
   end
 
   def current_path_useful?
-    ['/users/sign_in', '/users/sign_up', '/users/sign_out'].exclude?(request.fullpath) &&
+    request_path = params[:locale] ? request.fullpath.sub(/\/[\w]+/, '') : request.fullpath
+    ['/users/sign_in', '/users/sign_up', '/users/sign_out'].exclude?(request_path) &&
       !request.post? && # don't store post calls
       !request.xhr? # don't store ajax calls
   end

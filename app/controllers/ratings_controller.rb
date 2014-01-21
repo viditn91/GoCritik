@@ -38,8 +38,8 @@ private
   def set_resource
     @resource = Resource.find_by(permalink: rating_params[:permalink])
     unless @resource
-      flash[:error] = "#{ ResourceName.capitalize } not found"
-      redirect_to_back_or_default_url
+      flash[:error] = "#{ ResourceName.capitalize.singularize } not found"
+      redirect_to_back_or_default_path
     end
   end
 

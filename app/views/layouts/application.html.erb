@@ -52,11 +52,14 @@
               </p>
             <% end %>
             <ul class="pull-right nav">
+              <li class="dropdown">
+                <%= render partial: 'layouts/language_menu' %>
+              </li>
               <% if user_signed_in? %>
                 <% if current_user.admin? %>
-                  <%= link_to "Admin Panel", admin_path, :class => 'btn btn-small btn-success', :id => "sign-up-btn" %>
+                  <%= link_to t(:panel), admin_path, :class => 'btn btn-small btn-success', :id => "sign-up-btn" %>
                 <% end %>
-                <li class="dropdown">
+                <li class="dropdown offset1">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <%= get_full_name(current_user) %>
                     <b class="caret"></b>
@@ -66,8 +69,10 @@
                   </ul>
                 </li>
               <% else %>
-                <%= link_to "Sign up", "#sign_up", "data-toggle" => "modal", :class => 'btn btn-small btn-success', :id => "sign-up-btn" %>
-                <%= link_to "Login", "#login", "data-toggle" => "modal", :class => 'btn btn-small', :id => "login-btn"%>
+                <span class="dropdown offset1">
+                  <%= link_to t(:sign_up), "#sign_up", "data-toggle" => "modal", :class => 'btn btn-small btn-success', :id => "sign-up-btn" %>
+                  <%= link_to t(:sign_in), "#login", "data-toggle" => "modal", :class => 'btn btn-small', :id => "login-btn"%>
+                </span>
               <% end %>
             </ul>
           </div>
@@ -107,7 +112,7 @@
           </div>
           <div class="span2 top-buffer">
             <div class="top-buffer">
-              <%= link_to "List Your Own #{ ResourceName }", new_resource_path, class: "btn top-buffer" %>
+              <%= link_to "List Your Own #{ ResourceName.capitalize.singularize }", new_resource_path, class: "btn top-buffer" %>
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@ ready = function() {
   var counter = 0;
   scope.on('rated', function (e) {
     var ri = $(this);
-    var this_permalink = window.location.pathname.substring(1).split('/')[1];
+    var this_permalink = window.location.pathname.substring(1).split('/').pop();
     var value = ri.rateit('value');
     if(!counter && !orig_value) {
       ajaxCall('/ratings.js', { rating: { value: value, permalink: this_permalink }}, 'POST', '', '' );

@@ -1,25 +1,25 @@
 <div class="modal hide fade in" id="sign_up">
   <div class="modal-header">
     <button class="close" data-dismiss="modal">x</button>
-    <h2>Sign Up</h2>
+    <h2><%= t(:sign_up) %></h2>
   </div>
 
     <div class="modal-body">
     <%= form_for(User.new, :url => registration_path(:user)) do |f| %>
     <%= devise_error_messages! %>
 
-    <div><%= f.label :email %><br />
+    <div><%= f.label :email, t(:email) %><br />
     <%= f.email_field :email, :autofocus => true %></div>
 
-    <div><%= f.label :password %><br />
+    <div><%= f.label :password, t(:password) %><br />
     <%= f.password_field :password %></div>
 
-    <div><%= f.label :password_confirmation %><br />
+    <div><%= f.label :password_confirmation, t(:password_confirmation) %><br />
     <%= f.password_field :password_confirmation %></div>
     </div>
     <div class="modal-footer">
-      <p><div><%= f.submit "Sign up", :class => 'btn btn-small btn-success' %></div></p>
-      <p><a href="#" class="btn btn-small" data-dismiss="modal">Close</a></p>
+      <p><div><%= f.submit t(:sign_up), :class => 'btn btn-small btn-success' %></div></p>
+      <p><a href="#" class="btn btn-small" data-dismiss="modal"><%= t(:close) %></a></p>
     </div>
   <% end %>
 </div>

@@ -1,0 +1,9 @@
+<div id="banner">
+  <%= form_tag root_path, class: 'locale' do %>
+    <%= select_tag 'set_locale',
+      options_for_select(LANGUAGES, I18n.locale.to_s),
+      onchange: 'this.form.submit()', class: 'span2' %>
+    <%= submit_tag 'submit' %>
+    <%= javascript_tag "$('.locale input').hide()" %>
+  <% end %>
+</div>

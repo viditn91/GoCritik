@@ -190,3 +190,7 @@ html, body {
 .clicked {
   background-color: green;
 }
+form.locale {
+  margin-top: 5px;
+  margin-bottom: 0px !important;
+}
