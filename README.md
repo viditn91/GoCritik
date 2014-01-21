@@ -25,7 +25,7 @@ This application is a means to create a Review Website, where users can pour in 
 
 - Run db:setup:admin to create any normal user of this website an admin
 - Run db:setup:templates to generate liquid templates for styling the dynamic components in the app
-- Run rake ts:index ( To index the search from conversation content )
+- Run rake ts:index ( To index the search from the fields marked as searchable )
 - Run rake ts:start ( To start the searchd daemon )
 
 ## Features
