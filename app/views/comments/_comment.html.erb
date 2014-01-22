@@ -7,7 +7,7 @@
     <%= image_tag comment.user.picture.photo.url(:thumb) %>
   </div>
   <div class="span10 top-buffer">
-    <div><%= link_to get_full_name(comment.user), comment.user %>  <%= comment.content %></div>
+    <div><%= link_to comment.user.full_name, comment.user %>  <%= comment.content %></div>
     <div>
       <span class="side-buffer"><%= render partial: 'reviews/like_button', locals: {object: comment} %></span>
       <span class="side-buffer"><i class="icon-thumbs-up"><%= comment.likes.count %></i></span>

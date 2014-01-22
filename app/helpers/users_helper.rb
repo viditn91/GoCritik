@@ -1,14 +1,10 @@
 module UsersHelper
 
-  def get_full_name(user)
-    user.first_name.capitalize + " " + user.last_name.capitalize
-  end
-
   def get_heading(title, user)
     if my_profile?(user)
       "My #{title.capitalize}"
     else
-      "#{title.capitalize} by #{ get_full_name(user) }"
+      "#{title.capitalize} by #{ user.full_name }"
     end
   end
 
