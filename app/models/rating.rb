@@ -7,7 +7,7 @@ class Rating < ActiveRecord::Base
 
   after_create :update_resource_rating
   after_update :value_change_on_update, :set_resource_delta_flag
-  after_save :set_resource_delta_flag
+  after_save :set_resource_delta_flag, :touch_associated_user_review
   after_destroy :value_change_on_destroy, :set_resource_delta_flag
 
 private
@@ -33,6 +33,10 @@ private
     resource_obj = self.resource
     resource_obj.delta = true
     resource_obj.save(validate: false)
+  end
+
+  def touch_associated_user_review
+    user.reviews.find_by(resource_id: resource).touch
   end
 
 end
