@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  belongs_to :review
+  belongs_to :review, touch: true
   belongs_to :user
   has_many :likes, as: :likeable, dependent: :destroy
 

@@ -55,6 +55,10 @@ class Resource < ActiveRecord::Base
     end
   end
 
+  def latest_review
+    reviews.order('updated_at').last
+  end
+
 private
   
   def validate_associated_fields
