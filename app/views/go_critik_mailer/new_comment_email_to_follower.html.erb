@@ -5,8 +5,8 @@
   <body>
     <h1>Hey, <%= @follower.full_name %></h1>
     <p>
-      <%= link_to @commentor.full_name.titleize, user_path(@commentor) %>
-        commented on the <%= link_to 'review', review_path(@review) %>  on which you had commented.
+      <%= link_to @commentor.full_name.titleize, user_url(locale: I18n.locale, id: @commentor) %>
+        commented on the <%= link_to 'review', review_url(locale: I18n.locale, id: @review) %>  on which you had commented.
     </p>
     <hr/>
     <p>This is a system generated e-mail, Kindly do not reply </p>
