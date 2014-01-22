@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hey, <%= @reviewer.full_name %></h1>
+    <p>
+      <%= link_to @commentor.full_name.titleize, user_path(@commentor) %>
+        commented on your <%= link_to 'review', review_path(@review) %>
+    </p>
+    <hr/>
+    <p>This is a system generated e-mail, Kindly do not reply </p>
+  </body>
+</html>
+

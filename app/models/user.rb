@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   
   before_create :create_associated_picture
 
+  def full_name
+    first_name.capitalize + " " + last_name.capitalize
+  end
 
   def has_profile_picture?
     picture.photo.url != '/images/default/original/missing.jpg'

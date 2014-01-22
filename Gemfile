@@ -69,3 +69,6 @@ gem 'liquid'
 
 #State Machine
 gem 'state_machine'
+
+#Delayed Job
+gem 'delayed_job_active_record'
