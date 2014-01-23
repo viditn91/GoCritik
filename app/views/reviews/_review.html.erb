@@ -28,7 +28,9 @@
     </ul>
   </div>
 </div>
-<div class="row-fluid comments-container">
-  <%= render review.comments %>
-  <%= render partial: 'reviews/new_comment', locals: {review: review} %>
-</div>
+<% cache ['comment_container', review.latest_comment] do %>
+  <div class="row-fluid comments-container">
+    <%= render review.comments %>
+    <%= render partial: 'reviews/new_comment', locals: {review: review} %>
+  </div>
+<% end %>

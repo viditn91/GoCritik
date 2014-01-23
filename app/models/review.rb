@@ -22,4 +22,8 @@ class Review < ActiveRecord::Base
       user_obj.ratings.find_by(resource_id: resource_obj.id).value.round(2)
     end
   end
+
+  def latest_comment
+    comments.order('updated_at').last
+  end
 end
