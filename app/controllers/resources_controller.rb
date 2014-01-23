@@ -9,6 +9,7 @@ class ResourcesController < ApplicationController
 
   def create
     @resource = Resource.new(resource_params)
+    @resource.suggested_by = current_user.id
     if @resource.save
       flash[:notice] = "Your request for a new #{ ResourceName } is submitted"
       redirect_to resources_path

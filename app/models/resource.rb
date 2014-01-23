@@ -11,6 +11,13 @@ class Resource < ActiveRecord::Base
     event :approve do
       transition :pending => :approved
     end
+
+    around_transition on: :approve do |resource, transition, block|
+      resource.transaction do
+        block.call
+        resource.notify_concerned_user
+      end
+    end
   end
 
   with_options dependent: :destroy do |assoc|
@@ -57,6 +64,10 @@ class Resource < ActiveRecord::Base
 
   def latest_review
     reviews.order('updated_at').last
+  end
+
+  def notify_concerned_user
+    GoCritikMailer.delay.resource_approval_mail(self)
   end
 
 private

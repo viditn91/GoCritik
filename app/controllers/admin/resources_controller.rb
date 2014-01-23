@@ -15,6 +15,7 @@ class Admin::ResourcesController < Admin::BaseController
   def create
     @resource = Resource.new(new_resource_params)
     @resource.state = true
+    @resource.suggested_by = current_user.id
     if @resource.save
       flash[:notice] = "#{ ResourceName } was successfully created"
       redirect_to admin_resources_path
@@ -81,7 +82,7 @@ private
   end
 
   def set_column_names
-    @resource_columns = Resource.column_names - ['id', 'created_at', 'updated_at', 'permalink', 'approved', 'ratings_count', 'reviews_count', 'rating', 'delta']
+    @resource_columns = Resource.column_names - ['id', 'created_at', 'updated_at', 'permalink', 'state', 'suggested_by', 'ratings_count', 'reviews_count', 'rating', 'delta']
   end
 
   def load_all_fields

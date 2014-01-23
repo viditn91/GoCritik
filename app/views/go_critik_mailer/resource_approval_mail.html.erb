@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hey, <%= @user.full_name %></h1>
+    <p>
+      Thanks for writing in to us. <br>
+      <%= link_to @resource.name.capitalize, resource_url(locale: I18n.locale, id: @resource.permalink) %> is now listed on our website. Go ahead, pour in your reviews.
+    </p>
+    <hr/>
+    <p>This is a system generated e-mail, Kindly do not reply </p>
+  </body>
+</html>
