@@ -16,8 +16,8 @@ GoCritik::Application.configure do
     port: 587,
     domain: "gmail.com",
     authentication: "plain",
-    user_name: "viditjn91@gmail.com",
-    password: "magic5303",
+    user_name: "some_user@gmail.com",
+    password: "",
     enable_starttls_auto: true
   }
 

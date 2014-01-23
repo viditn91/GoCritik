@@ -2,8 +2,11 @@ class Admin::ResourcesController < Admin::BaseController
   before_action :set_resource, only: [:show, :edit, :update, :destroy, :approve]
   before_action :set_column_names, only: [:show, :index]
   before_action :load_all_fields, only: [:new, :create, :edit, :index, :update]
+  after_action :expire_action_cache, only: [:create, :update, :destroy]
   # liquid template requirement
   liquid_methods :fields_values
+
+  caches_action :index, :cache_path => Proc.new { |c| c.params }
 
   ##fixed
   ## Please don't use scaffolding when generating controllers. Please remove the json format blocks
@@ -87,6 +90,16 @@ private
 
   def load_all_fields
     @fields = Field.all
+  end
+
+  def expire_action_cache
+    if @resource.state
+      expire_action :action => :index
+      expire_action :action => :index, :status => :approved
+    else
+      expire_action :action => :index, :status => :pending
+    end
+
   end
 
 end
