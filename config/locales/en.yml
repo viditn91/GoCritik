@@ -28,8 +28,12 @@ en:
   action: "Actions"
   sign_out: "Sign Out"
   edit_profile: "Edit Profile"
-  hindi: "Hindi"
-  english: "English"
+  faq: "Frequently Asked Questions"
+  faq_1: "Can I log in to the gocritik.com from any computer with my user name and password, or am I limited to a single computer?"
+  faq_2: "I've always logged in through the login box, but it looks different now. Does this change how I log in?"
+  faq_3: "I can log in from school/work, but I can't log in at home, a coffee shop, etc. Why?"
+  faq_4: "I submitted a request to reset my password, but I didn't receive an email with instructions. What should I do?"
+  faq_5: "I can't remember my user name, what should I do?"
   activerecord:
     attributes:
       review:

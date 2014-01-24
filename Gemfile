@@ -76,8 +76,8 @@ gem 'delayed_job_active_record'
 #Action Caching
 gem 'actionpack-action_caching'
 
-# #Page Caching
-# gem 'actionpack-page_caching'
+#Page Caching
+gem 'actionpack-page_caching'
 
 #Testing
 gem 'rspec-rails', '~> 3.0.0.beta'

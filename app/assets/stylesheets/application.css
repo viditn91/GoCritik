@@ -194,3 +194,6 @@ form.locale {
   margin-top: 5px;
   margin-bottom: 0px !important;
 }
+.faq-question {
+  padding: 20px;
+}

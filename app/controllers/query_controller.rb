@@ -1,4 +1,5 @@
 class QueryController < ApplicationController
+  # caches_page :faq
   
   def home
     if params[:set_locale]
@@ -6,6 +7,9 @@ class QueryController < ApplicationController
       I18n.locale = params[:set_locale]
       redirect_to request_path
     end
+  end
+
+  def faq
   end
 
 end

@@ -18,6 +18,7 @@ GoCritik::Application.routes.draw do
     end
     resources :users, only: [:show, :edit, :update]
     resources :pictures, only: [:create, :show, :update, :destroy]
+    get 'faq' => 'query#faq'
     root to: 'query#home', via: :all
   end
 end
