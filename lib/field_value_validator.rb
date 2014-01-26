@@ -10,4 +10,4 @@ class FieldValueValidator < ActiveModel::Validator
     end
   end
 
-end	
+end

@@ -81,3 +81,8 @@ gem 'actionpack-page_caching'
 
 #Testing
 gem 'rspec-rails', '~> 3.0.0.beta'
+
+#Shoulda Matcher
+group :test do
+  gem 'shoulda-matchers'
+end
