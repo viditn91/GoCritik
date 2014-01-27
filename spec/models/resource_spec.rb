@@ -1,11 +1,14 @@
 require 'spec_helper'
 
 describe Resource do
-
-  before(:all) do
-    @resource = Resource.create(name: "foo", description: "bar")
-    @user = User.create(email: "honey@singh.com", password: "yoyo!")
-  end 
+  
+  let(:resource) do
+    Resource.create(name: "foo1", description: "bar", state: true)
+  end
+  
+  let(:user) do
+    User.create(email: "honey@singh.com", password: "yoyo!")
+  end
 
   describe 'validations' do
     describe 'presence' do
@@ -50,18 +53,18 @@ describe Resource do
 
   describe 'latest_review' do
     it do
-      r1 = @resource.reviews.create(content: "yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo ", 
-        user_id: @user.id, updated_at: 2.seconds.ago)
-      r2 = @resource.reviews.create(content: "yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo ", 
-        user_id: @user.id)
-      r2.touch
-      expect(@resource.latest_review).to eq(r2)
+      r1 = Review.create(content: "yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo ", 
+        user_id: user.id, updated_at: 2.seconds.ago, resource_id: resource.id)
+      r2 = Review.create(content: "yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo ", 
+        user_id: user.id, resource_id: resource.id)
+      expect(resource.latest_review).to eq(r2)
     end
   end
 
   after(:all) do
-    @user.destroy
-    @resource.destroy
+    Resource.delete_all
+    User.delete_all
+    Review.delete_all
   end
 
 end

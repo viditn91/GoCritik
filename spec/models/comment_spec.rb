@@ -2,12 +2,6 @@ require 'spec_helper'
 
 describe Comment do
   
-  before(:all) do
-    @user = User.create(email: 'honey@singh.com',password: 'yoyo!')
-    @review = Review.create(content: "yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo yo ", 
-      user_id: User.last.id)
-  end
-
   describe 'validations' do
     describe 'presence' do
       context 'review' do
@@ -36,11 +30,6 @@ describe Comment do
         it { should have_many(:likes).dependent(:destroy) }
       end
     end
-  end
-
-  after(:all) do
-    @review.destroy
-    @user.destroy
   end
 
 end

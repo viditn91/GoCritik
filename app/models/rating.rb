@@ -36,7 +36,7 @@ private
   end
 
   def touch_associated_user_review
-    user.reviews.find_by(resource_id: resource).touch
+    user.reviews.find_by(resource_id: resource).try(:touch)
   end
 
 end
