@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Resource do
   
   let(:resource) do
-    Resource.create(name: "foo1", description: "bar", state: true)
+    Resource.create(name: "foo1", description: "bar")
   end
   
   let(:user) do
@@ -45,6 +45,20 @@ describe Resource do
     end
   end
 
+  describe 'state-machine' do
+    context 'default-state as :pending' do
+      it do
+        expect(resource.state_name).to eq(:pending)
+      end
+    end
+    context 'state-transition from :pending to :approved' do
+      it do
+        resource.approve
+        expect(resource.state_name).to eq(:approved)
+      end
+    end
+  end
+  
   describe 'nested assignment' do
     context 'fields_values' do
       it { should accept_nested_attributes_for(:fields_values) }

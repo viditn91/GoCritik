@@ -24,6 +24,14 @@ describe Review do
         it { should validate_presence_of(:resource_id) }
       end
     end
+    describe 'length' do
+      context 'content' do
+        it 'if content is less than 50 words' do
+          review.update(content: "this content is less than 50 words")
+          expect(review.errors.full_messages.first).to eq('Review content must have at least 50 words')
+        end
+      end
+    end
   end
 
   describe 'associations' do
