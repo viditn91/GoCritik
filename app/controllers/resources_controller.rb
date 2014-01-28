@@ -2,6 +2,7 @@ class ResourcesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   before_action :set_resource, only: :show
   before_action :load_all_fields, only: [:new, :create, :index]
+  respond_to :html, :json
 
   def new
     @resource = Resource.new
@@ -26,11 +27,13 @@ class ResourcesController < ApplicationController
         @resources = filter_results(a.to_i, b)
       end
     end
+    respond_with(@resources)
   end
 
   def show
     @keywords_template = Template.find_by(controller: 'resources', action: 'show', view_element: 'keywords')
     @tags_template = Template.find_by(controller: 'resources', action: 'show', view_element: 'tags')
+    respond_with(@resource)
   end
 
 private
