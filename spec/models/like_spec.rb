@@ -4,7 +4,7 @@ require 'spec_helper'
 describe Like do
 
   let(:resource) do
-    Resource.create(name: "foo1", description: "bar", state: true)
+    Resource.create(name: "foo1".force_encoding("UTF-8"), description: "bar", state: true)
   end
 
   let(:user) do

@@ -22,10 +22,12 @@ class Field < ActiveRecord::Base
   validates :type, inclusion: { in: FieldTypeArray.map{ |display_text, type| type }, 
     message: "%{value} is not a valid Field-Type" }
   validates_each :required, :unique, :searchable, :sortable do |record, attr, value|
-    value_input = record.send("#{ attr }_before_type_cast".to_sym)
-    record.errors[:base] << "'#{ value_input }' is not a valid value for #{ attr.capitalize } Field" unless value_input.to_s.in? ['true', 'false']
+    record.errors[:base] << "#{ attr.capitalize } Field must be true or false" unless value.in? [true, false]
   end
-  
+  # validates_each :required, :unique, :searchable, :sortable do |record, attr, value|
+  #   value_input = record.send("#{ attr }_before_type_cast".to_sym)
+  #   record.errors[:base] << "'#{ value_input }' is not a valid value for #{ attr.capitalize } Field" unless value_input.to_s.in? ['true', 'false', '1', '0']
+  # end
   # liquid template requirement
   liquid_methods :id, :name
 
