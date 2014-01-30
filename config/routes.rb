@@ -10,7 +10,7 @@ GoCritik::Application.routes.draw do
       get '/' => 'base#home'
     end
     resources :resources, only: [:new, :create, :index, :show], path: ResourceName.pluralize.downcase
-    resources :reviews, only: [:create, :show, :destroy] 
+    resources :reviews, only: [:create, :show, :destroy, :index] 
     resources :comments, only: [:create, :destroy]
     resources :likes, only: [:create, :destroy]
     resources :ratings, only: :create do

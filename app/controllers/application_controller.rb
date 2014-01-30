@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :store_location
   before_action :set_locale
-  helper_method :get_searchable_fields, :previous_or_root_path
+  helper_method :get_searchable_fields, :previous_or_root_path, :current_user
 
 private
 
@@ -64,4 +64,35 @@ private
     Field.searchable.pluck(:name).prepend('name').map(&:downcase)
   end
 
+  def authorize_user
+    api_key = request.headers['HTTP_APP_KEY']
+    unless api_key && api_key_genuine?(api_key)
+      authenticate_user!
+    end
+  end
+
+# overiding verified_request? to jump across the authentication token for json requests
+# from other application 
+  def verified_request?
+    if request.content_type == "application/json"
+      true
+    else
+      super()
+    end
+  end
+  
+# overiding devise current_user method for setting user via api_key
+  alias_method :devise_current_user, :current_user
+  def current_user
+    api_key = request.headers['HTTP_APP_KEY']
+    if api_key
+      User.find_by(api_key: api_key)
+    else
+      devise_current_user
+    end
+  end
+
+  def api_key_genuine?(key)
+    User.find_by(api_key: key).present?
+  end
 end

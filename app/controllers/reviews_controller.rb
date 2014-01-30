@@ -1,19 +1,33 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!, only: :create
+  before_action :authorize_user, only: :create
+  before_action :set_resource, only: :index
   before_action :set_review, only: [:show, :destroy]
+  respond_to :html, :json
 
   def create
     @review = Review.new review_params
     @review.user_id = current_user.id
-    if @review.save
-      flash[:notice] = "Review created successfully"
-      redirect_to_back_or_default_path
-    else
-      ## fixed
-      ## Please show an error message when review not saved successfully
-      flash[:error] = @review.errors
-      redirect_to_back_or_default_path
+    respond_with @review do |format|
+      format.html do
+        if @review.save
+          flash[:notice] = "Review created successfully"
+          redirect_to_back_or_default_path
+        else
+          ## fixed
+          ## Please show an error message when review not saved successfully
+          flash[:error] = @review.errors
+          redirect_to_back_or_default_path
+        end
+      end
+      format.json do 
+        render :json => @review if @review.save
+      end
     end
+  end
+
+  def index
+    @reviews = Review.where(resource_id: @resource.id)
+    respond_with @reviews
   end
 
   def show
@@ -40,6 +54,10 @@ private
     unless @review
       redirect_to_back_or_default_path 
     end
+  end
+
+  def set_resource
+    @resource = Resource.find_by(permalink: params[:permalink])
   end
 
   def review_params

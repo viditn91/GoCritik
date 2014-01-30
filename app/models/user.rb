@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   
-  before_create :create_associated_picture
+  before_create :create_associated_picture, :generate_api_key
 
   def full_name
     first_name.capitalize + " " + last_name.capitalize
@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
 private
   def create_associated_picture
     build_picture
+  end
+
+  def generate_api_key
+    self.api_key = Digest::SHA1.hexdigest(email)
   end
 
 end
