@@ -20,8 +20,8 @@ class UsersController < ApplicationController
 
 private
   def verify_user
-    unless current_user || current_user == @user
-      redirect_to @user
+    if !current_user || current_user != @user
+      redirect_to user_path(@user)
     end
   end
 

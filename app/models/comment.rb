@@ -12,5 +12,4 @@ private
   def notify_the_reviewer_and_followers
     Delayed::Job.enqueue CommentNotificationJob.new(user, review)
   end
-
 end

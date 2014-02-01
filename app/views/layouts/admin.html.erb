@@ -110,7 +110,7 @@
               <%= link_to "List Your Own #{ ResourceName.capitalize.singularize }", new_resource_path, class: "btn top-buffer" %>
             </div>
             <div class="top-buffer">
-              <%= link_to "FAQs", { :controller => '/query', :action => :faq }, class: "btn top-buffer" %>
+              <%= link_to "FAQs", { :controller => :query, :action => :faq }, class: "btn top-buffer" %>
             </div>
           </div>
         </div>
