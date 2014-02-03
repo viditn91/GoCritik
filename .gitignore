@@ -12,7 +12,7 @@
 /db/*.sqlite3-journal
 
 # Ignore certain Sphinx file 
-db/sphinx/*
+db/sphinx
 /config/*.sphinx.conf
 
 # Ignore all logfiles and tempfiles.
