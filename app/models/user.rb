@@ -18,10 +18,6 @@ class User < ActiveRecord::Base
     first_name.capitalize + " " + last_name.capitalize
   end
 
-  def has_profile_picture?
-    picture.photo.url != '/images/default/original/missing.jpg'
-  end
-
 private
   def create_associated_picture
     build_picture

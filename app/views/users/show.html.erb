@@ -1,56 +1,54 @@
-<div id="user-header" class="page-header title-style fill-grey">
+<% present @user do |user_presenter| %>
+  <div id="user-header" class="page-header title-style fill-grey">
+    <div class="row-fluid">
+      <div class="span2 offset1 top-buffer">
+        <%= user_presenter.avatar(:profile,  "img-polaroid") %>
+      </div>
+      <div class="span6 top-buffer">
+        <div class="row-fluid">
+          <div class="pull-left"><h1 class="heading"><%= user_presenter.full_name %></h1></div>
+        </div>
+        <div class="row-fluid top-buffer">
+          <div class="pull-left row-fluid">
+            <div class="span2">
+              <div class="magnify"><%= user_presenter.ratings_by_user %></div>
+              <div><%= user_presenter.quantize_rating %></div>
+            </div>
+            <div class="span2">
+              <div class="magnify"><%= user_presenter.reviews_by_user %></div>
+              <div><%= user_presenter.quantize_reviews %></div>
+            </div>
+          </div>
+        </div>
+        <div class="row-fluid top-buffer">
+          <div class="pull-left">GoCritik member since <%= distance_of_time_in_words(Time.now, @user.created_at) %></div>
+        </div>
+      </div>
+      <div class="top-buffer">
+        <%= user_presenter.edit_button %>
+      </div>
+    </div>
+  </div>
+
   <div class="row-fluid">
-    <div class="span2 offset1 top-buffer">
-      <%= image_tag @user.picture.photo.url(:profile), class: "img-polaroid" %>
-    </div>
-    <div class="span6 top-buffer">
+    <div class="span8 offset1">
       <div class="row-fluid">
-        <div class="pull-left"><h1 class="heading"><%= @user.full_name %></h1></div>
+        <h3 class="heading border-down"><%= user_presenter.get_heading("reviews") %><h3>
       </div>
-      <div class="row-fluid top-buffer">
-        <div class="pull-left row-fluid">
-          <div class="span2">
-            <div class="magnify"><%= @user.ratings_count %></div>
-            <div><%= 'rating'.pluralize(@user.ratings_count).upcase %></div>
-          </div>
-          <div class="span2">
-            <div class="magnify"><%= @user.reviews_count %></div>
-            <div><%= 'review'.pluralize(@user.reviews_count).upcase %></div>
-          </div>
-        </div>
+      <div class="row-fluid">
+        <%= render partial: 'user_review', collection: @user.reviews, as: :review %>
       </div>
-      <div class="row-fluid top-buffer">
-        <div class="pull-left">GoCritik member since <%= distance_of_time_in_words(Time.now, @user.created_at) %></div>
-      </div>
-    </div>
-    <div class="top-buffer">
-      <% if my_profile?(@user) %>
-        <div class="pull-left">
-          <%= link_to "<i class='icon-pencil'></i>Edit".html_safe, edit_user_path(@user), class: 'btn' %>
-        </div>
-      <% end %>
     </div>
   </div>
-</div>
 
-<div class="row-fluid">
-  <div class="span8 offset1">
-    <div class="row-fluid">
-      <h3 class="heading border-down"><%= get_heading("reviews", @user) %><h3>
-    </div>
-    <div class="row-fluid">
-      <%= render partial: 'user_review', collection: @user.reviews, as: :review %>
-    </div>
-  </div>
-</div>
-
-<div class="row-fluid">
-  <div class="span8 offset1">
-    <div>
-      <h3 class="heading border-down tab-top-buffer"><%= get_heading("ratings", @user) %><h3>
-    </div>
-    <div class="row-fluid">
-      <%= render partial: 'user_rating', collection: @user.ratings, as: :rating %>
+  <div class="row-fluid">
+    <div class="span8 offset1">
+      <div>
+        <h3 class="heading border-down tab-top-buffer"><%= user_presenter.get_heading("ratings") %><h3>
+      </div>
+      <div class="row-fluid">
+        <%= render partial: 'user_rating', collection: @user.ratings, as: :rating %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>

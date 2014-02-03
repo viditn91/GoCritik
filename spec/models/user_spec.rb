@@ -47,20 +47,20 @@ describe User do
     end
   end
 
-  describe 'has_profile_picture?' do
-    context 'when picture is uploaded' do
-      it do
-        user.picture.photo = File.new(Rails.root + 'spec/fixtures/images/rails.jpg')
-        expect(user.picture.photo.to_s).not_to eq('/images/default/original/missing.jpg')
-      end
-    end
-    context 'when picture is not uploaded' do
-      it do
-        user.picture.photo = nil
-        expect(user.picture.photo.to_s).to eq('/images/default/original/missing.jpg')
-      end
-    end
-  end
+  # describe 'has_profile_picture?' do
+  #   context 'when picture is uploaded' do
+  #     it do
+  #       user.picture.photo = File.new(Rails.root + 'spec/fixtures/images/rails.jpg')
+  #       expect(user.picture.photo.to_s).not_to eq('/images/default/original/missing.jpg')
+  #     end
+  #   end
+  #   context 'when picture is not uploaded' do
+  #     it do
+  #       user.picture.photo = nil
+  #       expect(user.picture.photo.to_s).to eq('/images/default/original/missing.jpg')
+  #     end
+  #   end
+  # end
 
   describe 'full_name' do
     context 'when first and last name are not set by user' do
