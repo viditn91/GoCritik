@@ -3,8 +3,7 @@ class LikesController < ApplicationController
   before_action :set_like, only: :destroy
 
   def create
-    @like = Like.new like_params
-    @like.user_id = current_user.id
+    @like = current_user.likes.build(like_params)
     respond_to do |format|
       ## fixed
       ## Should we write it this way?

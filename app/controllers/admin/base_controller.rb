@@ -12,14 +12,6 @@ protected
     redirect_to(root_path, notice: "Unauthorized Access") unless current_user.try(:admin?)
   end
 
-  def redirect_to_back_or_default_path
-    if request.referer
-      redirect_to :back 
-    else
-      redirect_to admin_path
-    end   
-  end
-
   def path_for_admin_resources_path
     session[:status] ||= :approved
     admin_resources_path(status: session[:status])

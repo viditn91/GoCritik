@@ -3,8 +3,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: :destroy
 
   def create
-    @comment = Comment.new comment_params
-    @comment.user_id = current_user.id
+    @comment = current_user.comments.build(comment_params)
     respond_to do |format|
       format.js do
         unless @comment.save

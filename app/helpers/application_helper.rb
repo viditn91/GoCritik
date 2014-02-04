@@ -11,4 +11,8 @@ module ApplicationHelper
   	presenter
   end
 
+  def get_searchable_fields
+    Field.searchable.pluck(:name).prepend('name').map(&:downcase)
+  end
+
 end

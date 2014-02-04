@@ -4,13 +4,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :store_location
   before_action :set_locale
-  helper_method :get_searchable_fields, :previous_or_root_path, :current_user
+  helper_method :previous_or_root_path, :current_user
 
 private
 
   def store_location
     # store location - this is needed for post-login/logout or post-signup redirect to whatever the user last visited.
-    if current_path_useful?
+    if request_url_valid?
       session[:previous_url] = request.fullpath
     end
   end
@@ -45,24 +45,21 @@ private
     session[:previous_url] || root_path
   end
 
-  def current_path_useful?
+  def request_url_valid?
     request_path = params[:locale] ? request.fullpath.sub(/\/[\w]+/, '') : request.fullpath
-    ['/users/sign_in', '/users/sign_up', '/users/sign_out'].exclude?(request_path) &&
+    ['/users/sign_in', '/users/sign_up', '/users/sign_out'].exclude?(request_path) && # dont store sign_in, sign_out, sign_up calls
       !request.post? && # don't store post calls
       !request.xhr? # don't store ajax calls
   end
 
-  def redirect_to_back_or_default_path
+  def redirect_to_back_or_default_path(default_path=resources_path)
     if request.referer
       redirect_to :back
     else
-      redirect_to resources_path
+      redirect_to default_path
     end
   end
 
-  def get_searchable_fields
-    Field.searchable.pluck(:name).prepend('name').map(&:downcase)
-  end
 
   def authorize_user
     api_key = request.headers['HTTP_APP_KEY']

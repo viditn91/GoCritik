@@ -63,13 +63,13 @@ private
   def drop_action_on_required_field(exception)
     logger.error exception.message
     flash[:error] = exception.message
-    redirect_to_back_or_default_path
+    redirect_to_back_or_default_path(admin_path)
   end
 
   def prevent_breach(exception)
     logger.error exception.message
     flash[:error] = "Do not temper with the form, Choose the field type from the select-box"
-    redirect_to_back_or_default_path
+    redirect_to_back_or_default_path(admin_path)
   end
 
 end

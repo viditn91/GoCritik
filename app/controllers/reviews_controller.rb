@@ -5,8 +5,7 @@ class ReviewsController < ApplicationController
   respond_to :html, :json
 
   def create
-    @review = Review.new review_params
-    @review.user_id = current_user.id
+    @review = current_user.reviews.build(review_params)
     respond_with @review do |format|
       format.html do
         if @review.save
@@ -52,7 +51,7 @@ private
     ## fixed
     ## Same as described in comments_controller
     unless @review
-      redirect_to_back_or_default_path 
+      redirect_to_back_or_default_path
     end
   end
 

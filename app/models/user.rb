@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
     assoc.has_many :reviews
     assoc.has_many :ratings
     assoc.has_many :likes
+    assoc.has_many :comments
     assoc.has_one :picture, as: :imageable
   end
 
