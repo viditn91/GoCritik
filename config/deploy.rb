@@ -69,6 +69,7 @@ namespace :deploy do
       within release_path do
         with rails_env: fetch(:rails_env) do
           execute :bundle, :exec, :rake, "db:migrate"
+          execute :bundle, :exec, :rake, "ts:rebuild"
           # execute :bundle, :exec, :rake, "assets:precompile"
           execute :bundle, :exec, "unicorn_rails -c /var/www/GoCritik/current/config/unicorn.rb -D"
         end
