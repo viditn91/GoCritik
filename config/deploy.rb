@@ -8,7 +8,6 @@ set :repo_url, 'git@github.com:viditn91/GoCritik.git'
 set :ssh_options, {
   user: 'vj'
   # forward_agent: true,
-  # keys: ["home/sahil/Downloads/soapBox-alpha.pem"]
 }
 
 # Default branch is :master
@@ -58,9 +57,9 @@ namespace :deploy do
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
+      within release_path do
+        # execute :rake, 'cache:clear'
+      end
     end
   end
 
@@ -70,7 +69,7 @@ namespace :deploy do
         with rails_env: fetch(:rails_env) do
           execute :bundle, :exec, :rake, "db:migrate"
           execute :bundle, :exec, :rake, "ts:rebuild"
-          # execute :bundle, :exec, :rake, "assets:precompile"
+          execute :bundle, :exec, :rake, "assets:precompile"
           execute :bundle, :exec, "unicorn_rails -c /var/www/GoCritik/current/config/unicorn.rb -D"
         end
       end
