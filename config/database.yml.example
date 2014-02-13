@@ -3,9 +3,8 @@ development:
   encoding: utf8
   database: goCritik_development
   pool: 5
-  username: root
+  username:
   password:
-  socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -15,15 +14,13 @@ test:
   encoding: utf8
   database: goCritik_test
   pool: 5
-  username: root
+  username:
   password:
-  socket: /var/run/mysqld/mysqld.sock
 
 production:
   adapter: mysql2
   encoding: utf8
   database: goCritik_production
   pool: 5
-  username: root
+  username: 
   password:
-  socket: /var/run/mysqld/mysqld.sock

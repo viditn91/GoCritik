@@ -50,7 +50,7 @@ namespace :deploy do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
     end
-  end
+  end 
 
   after :publishing, :restart
 
@@ -68,6 +68,7 @@ namespace :deploy do
       within release_path do
         with rails_env: fetch(:rails_env) do
           execute :bundle, :exec, :rake, "db:migrate"
+          execute :bundle, :exec, :rake, "ts:configure"
           execute :bundle, :exec, :rake, "ts:rebuild"
           execute :bundle, :exec, :rake, "assets:precompile"
           execute :bundle, :exec, "unicorn_rails -c /var/www/GoCritik/current/config/unicorn.rb -D"
