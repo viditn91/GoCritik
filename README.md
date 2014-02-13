@@ -23,10 +23,13 @@ This application is a means to create a Review Website, where users can pour in 
 
 ## Optional Rake Tasks
 
-- Run db:setup:admin to create any normal user of this website an admin
-- Run db:setup:templates to generate liquid templates for styling the dynamic components in the app
+- Run rake db:setup:admin to create any normal user of this website an admin
+- Run rake db:setup:templates to generate liquid templates for styling the dynamic components in the app
+- Run rake ts:configure ( To generate environment dependent configuration file )
 - Run rake ts:index ( To index the search from the fields marked as searchable	 )
 - Run rake ts:start ( To start the searchd daemon )
+- Run rake jobs:work for delayed jobs ( This is called after running the server, called only if the mailing feature is to be used )
+- 
 
 ## Features
 
