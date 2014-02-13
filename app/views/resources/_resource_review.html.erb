@@ -1,24 +1,22 @@
-<% cache ['review', review] do %>
-  <div id="<%= 'review_' + review.id.to_s + '_container' %>" class="review-container span12 border-down top-buffer">
-    <div class="row-fluid">
-      <div class="pull-left">
-        <%= image_tag review.user.picture.photo.url(:small) %>
-      </div>
-      <div class="span8">
-        <div><h4 class="heading"><%= link_to review.user.full_name, review.user %></h4></div>
-        <div><i class="icon-pencil"></i><%= review.user.reviews_count %><%= ' review'.pluralize(review.user.reviews_count) %></div>
-        <div><i class="icon-ok"></i><%= review.user.ratings_count %><%= ' rating'.pluralize(review.user.ratings_count) %></div>
-      </div>
-      <% if my_review?(review) %>
-      <div class="my-review pull-right">
-      <% else %>
-      <div class="pull-right">
-      <% end %>
-        <%= render partial: 'reviews/rating_meter', locals: { review: review } %>
-      </div>
+<div id="<%= 'review_' + review.id.to_s + '_container' %>" class="review-container span12 border-down top-buffer">
+  <div class="row-fluid">
+    <div class="pull-left">
+      <%= image_tag review.user.picture.photo.url(:small) %>
     </div>
-    <div id="<%= 'review_' + review.id.to_s + '_sub_container' %>">
-      <%= render review %>
+    <div class="span8">
+      <div><h4 class="heading"><%= link_to review.user.full_name, review.user %></h4></div>
+      <div><i class="icon-pencil"></i><%= review.user.reviews_count %><%= ' review'.pluralize(review.user.reviews_count) %></div>
+      <div><i class="icon-ok"></i><%= review.user.ratings_count %><%= ' rating'.pluralize(review.user.ratings_count) %></div>
+    </div>
+    <% if my_review?(review) %>
+    <div class="my-review pull-right">
+    <% else %>
+    <div class="pull-right">
+    <% end %>
+      <%= render partial: 'reviews/rating_meter', locals: { review: review } %>
     </div>
   </div>
-<% end %>
+  <div id="<%= 'review_' + review.id.to_s + '_sub_container' %>">
+    <%= render review %>
+  </div>
+</div>
