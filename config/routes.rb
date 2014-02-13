@@ -1,6 +1,6 @@
 GoCritik::Application.routes.draw do
   scope '(:locale)' do
-    devise_for :users
+    devise_for :users, controllers: {sessions: "sessions"}
     namespace :admin do
       resources :fields
       resources :resources, path: ResourceName.pluralize.downcase do
