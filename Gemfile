@@ -80,6 +80,9 @@ gem 'actionpack-action_caching'
 #Page Caching
 gem 'actionpack-page_caching'
 
+#CanCan
+gem 'cancan'
+
 #Testing
 group :test, :development do
   gem 'rspec-rails', '~> 3.0.0.beta'

@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :authorize_user, only: :create
+  authorize_resource
+  # before_action :authorize_user, only: :create
   before_action :set_resource, only: :index
   before_action :set_review, only: [:show, :destroy]
   respond_to :html, :json

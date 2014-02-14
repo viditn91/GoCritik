@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
   before_action :store_location
   before_action :set_locale
   helper_method :previous_or_root_path, :current_user
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Access Denied. Kindly Log-In"
+    redirect_to new_user_session_path
+  end
 
 private
 
