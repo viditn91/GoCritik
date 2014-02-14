@@ -1,8 +1,9 @@
 class ReviewsController < ApplicationController
-  authorize_resource
+  load_and_authorize_resource 
+  skip_load_resource only: [:create] 
   # before_action :authorize_user, only: :create
   before_action :set_resource, only: :index
-  before_action :set_review, only: [:show, :destroy]
+  # before_action :set_review, only: [:show, :destroy]
   respond_to :html, :json
 
   def create
@@ -47,14 +48,14 @@ class ReviewsController < ApplicationController
   end
 
 private
-  def set_review
-    @review = Review.find_by(id: params[:id])
-    ## fixed
-    ## Same as described in comments_controller
-    unless @review
-      redirect_to_back_or_default_path
-    end
-  end
+  # def set_review
+  #   @review = Review.find_by(id: params[:id])
+  #   ## fixed
+  #   ## Same as described in comments_controller
+  #   unless @review
+  #     redirect_to_back_or_default_path
+  #   end
+  # end
 
   def set_resource
     @resource = Resource.find_by(permalink: params[:permalink])

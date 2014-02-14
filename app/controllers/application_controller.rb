@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     flash[:error] = "Access Denied. Kindly Log-In"
     redirect_to new_user_session_path
   end
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    flash[:error] = "Record Not Found."
+    redirect_to_back_or_default_path
+  end
 
 private
 
