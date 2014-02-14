@@ -37,20 +37,21 @@ class Resource < ActiveRecord::Base
 
   liquid_methods :id, :fields_values
 
+
   def calc_avg_rating
     avg_rating = ratings_count == 0 ? 0 : (rating/ratings_count)
     avg_rating.round(2)
   end
 
-
   def get_field_value(field)
     value = fields_values.find { |el| el.field_id == field.id }.try(:value)
-    if value 
-      if field.options.present?
+    if value
+      case field
+      when SelectBoxField, RadioButtonField
         field.get_disp_text(value)
-      elsif field.type == 'CheckBoxField'
+      when CheckBoxField
         # Showing Check Box value as 'Yes' if checked
-        "Yes"
+         "Yes"
       else
         value
       end
@@ -61,7 +62,7 @@ class Resource < ActiveRecord::Base
       '- NA -'
     end
   end
-
+ 
   def latest_review
     reviews.order('updated_at').last
   end
