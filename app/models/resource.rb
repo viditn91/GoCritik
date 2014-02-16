@@ -45,12 +45,13 @@ class Resource < ActiveRecord::Base
 
   def get_field_value(field)
     value = fields_values.find { |el| el.field_id == field.id }.try(:value)
-    if value 
-      if field.options.present?
+    if value
+      case field
+      when SelectBoxField, RadioButtonField
         field.get_disp_text(value)
-      elsif field.type == 'CheckBoxField'
+      when CheckBoxField
         # Showing Check Box value as 'Yes' if checked
-        "Yes"
+         "Yes"
       else
         value
       end
