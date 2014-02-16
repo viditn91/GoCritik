@@ -92,3 +92,5 @@ end
 group :test do
   gem 'shoulda-matchers', '2.5.0'
 end
+
+gem 'pusher'

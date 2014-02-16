@@ -1,3 +1,22 @@
+<% content_for :channel_javascript do %>
+  <script type='text/javascript'>
+    var ready;
+    ready = function() {
+      var pusher = new Pusher('9927e1f5ae2620aa0c36');
+      var permalink = window.location.pathname.substring(1).split('/').pop();
+      var channel = pusher.subscribe(permalink + '_channel');
+      channel.bind('update_rating', function(data) {
+          $('#resource-header #score').text(data["rating"]);
+          $('#resource-header #votes').text(data["ratings_count"]);
+      });
+    };
+    // uploading script for the first time
+    $(document).ready(ready);
+    // uplaoding script on every page reload
+    $(document).on('page:load',ready);
+  </script>
+<% end %>
+
 <div id="resource-header" class="page-header title-style fill-grey">
   <div class="row-fluid">
     <div class="span8 offset1 top-buffer">
