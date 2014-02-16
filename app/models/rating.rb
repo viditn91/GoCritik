@@ -7,7 +7,7 @@ class Rating < ActiveRecord::Base
 
   after_create :update_resource_rating
   after_update :value_change_on_update, :set_resource_delta_flag
-  after_save :set_resource_delta_flag, :touch_associated_user_review
+  after_save :set_resource_delta_flag, :touch_associated_user_review, :push_rating_to_client
   after_destroy :value_change_on_destroy, :set_resource_delta_flag
 
 private
@@ -39,4 +39,10 @@ private
     user.reviews.find_by(resource_id: resource).try(:touch)
   end
 
+  def push_rating_to_client
+    Pusher["#{ resource.permalink }_channel"].trigger('update_rating', {
+      rating: resource.reload.calc_avg_rating,
+      ratings_count: resource.ratings_count
+    })
+  end
 end

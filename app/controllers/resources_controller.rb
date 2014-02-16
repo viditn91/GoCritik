@@ -6,6 +6,7 @@ class ResourcesController < ApplicationController
 
   def new
     @resource = Resource.new
+    Rails.logger.debug "token is #{ session[:_csrf_token] }"
   end
 
   def create

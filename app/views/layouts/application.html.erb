@@ -35,8 +35,11 @@
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
     <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "http://js.pusher.com/2.1/pusher.min.js" %>
+
   </head>
   <body>
+    <%= yield :channel_javascript %>
     <%= render "query/login_modal" %>
     <%= render "query/sign_up_modal" %> 
     <div class="navbar navbar-inverse navbar-fluid-top">
