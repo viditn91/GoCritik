@@ -1,0 +1,9 @@
+development:
+  app_id: '66330'
+  key: '68456265419d7a1df12c'
+  secret: '2e86e6105828d19eaade'
+
+production:
+  app_id: '66141'
+  key: '9927e1f5ae2620aa0c36'
+  secret: '475e141097384fcbfd8e'

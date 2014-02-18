@@ -8,7 +8,7 @@
 # role :web, %w{deploy@example.com}
 # role :db,  %w{deploy@example.com}
 set :rails_env, :production
-server "54.213.118.120", roles: %w{app web db}
+server "54.201.228.73", roles: %w{app web db}
 
 # Extended Server Syntax
 # ======================
