@@ -1,11 +1,3 @@
-var ready;
-
-ready = function() {
-  var scope = $(document).find('#field_type');
-  field = new Field(scope);
-  field.init();
-}
-
 function Field(scope) {
   this.field_type = scope.find('option:selected').text();
   this.scope = scope;
@@ -76,8 +68,8 @@ Field.prototype = {
   }
 };
 
-  
-// uploading script for the first time
-$(document).ready(ready);
-// uplaoding script on every page reload
-$(document).on('page:load', ready);
+$(function() {
+  var scope = $(document).find('#field_type');
+  field = new Field(scope);
+  field.init();
+});
