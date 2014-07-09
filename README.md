@@ -44,3 +44,5 @@ This application is a means to create a Review Website, where users can pour in 
 
 ## Reporting issues
 - If you face any issue, report me at vidit@vinsol.com
+
+[ ![Codeship Status for viditn91/GoCritik](https://www.codeship.io/projects/8b1c64e0-e8f6-0131-1052-5240ebfefa5a/status)](https://www.codeship.io/projects/26132)
