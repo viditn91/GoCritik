@@ -20,6 +20,5 @@
 /tmp
 
 config/database.yml
-config/config.yml
 public/system
 public/assets
