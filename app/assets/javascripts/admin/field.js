@@ -1,73 +1,75 @@
-var ready;
+function Field(scope) {
+  this.field_type = scope.find('option:selected').text();
+  this.scope = scope;
+}
 
-ready = function() {
-  
-  var scope = $(document).find('#field_type');
-  show_or_hide_elements(scope);
-  // code to append options fields if selectbox/redio buttons are selected
-  $(document).on('change','#field_type',function() {
-    var scope = $(this);
-    show_or_hide_elements(scope);
-  });
-  // code to append options if the add more options button is clicked
-  $(document).on('click','.link_to_add_option', function() {
-    var scope = $(this).closest('.form');
-    add_options(scope);
-    adjust_options(scope);
-  });
-  // code to remove options if the remove button is clicked
-  $(document).on('click','.link_to_remove_option', function() {
-    var scope = $(this).closest('.form');
-    $(this).closest('div').remove();
-    adjust_options(scope);
-  });
+Field.prototype = {
+  init: function() {
+    var form_scope = this.scope.closest('.form');
+    this.showOrHideElements(form_scope);
+    this.bindEvents(form_scope);
+  },
+
+  bindEvents: function(form_scope) {
+    // code to append options fields if selectbox/redio buttons are selected
+    var that = this;
+    form_scope.on('change','#field_type',function() {
+      var scope = $(this);
+      that.field_type = scope.find('option:selected').text();
+      that.showOrHideElements(form_scope);
+    });
+    // code to append options if the add more options button is clicked
+    form_scope.on('click','.link_to_add_option', function() {
+      var scope = $(this).closest('.form');
+      that.addOptions(scope);
+      that.adjustOptions(scope);
+    });
+    // code to remove options if the remove button is clicked
+    form_scope.on('click','.link_to_remove_option', function() {
+      var scope = $(this).closest('.form');
+      $(this).closest('div').remove();
+      that.adjustOptions(scope);
+    });
+  },
+
+  addOptions: function(scope) {
+    var $options_container = scope.find('#options_container');
+    $options_container.find('.link_to_add_option').remove();
+    var appended_elements_string = '<div class="options-row"><input class="input-small" placeholder="Display Text" name="field[options][][text]" type="text" />'
+     + '<input class="input-small" placeholder="Value" name="field[options][][value]" type="text" />' 
+     + '<a class="link_to_remove_option">[-] Remove</a></div>'
+     + '<a class="link_to_add_option">[+] Add Another Option</a>';
+    $options_container.append(appended_elements_string);
+  },
+
+  adjustOptions: function(scope) {
+    var option_rows = scope.find('.options-row');
+    if(!option_rows.length) {
+      this.addOptions(scope);
+      option_rows = scope.find('.options-row');
+      option_rows.first().find('.link_to_remove_option').hide();
+    } else if(option_rows.length == 1) {
+      option_rows.first().find('.link_to_remove_option').hide();
+    } else {
+      option_rows.first().find('.link_to_remove_option').show();
+    }
+  },
+
+  showOrHideElements: function(scope) {
+    scope.find('.default-field, .is-unique-field, .options-field, .input-type-field, .is-searchable-field, .is-sortable-field').show();
+    if(this.field_type == 'Select Box' || this.field_type == 'Radio Buttons') {
+      this.adjustOptions(scope);
+      scope.find('.default-field, .is-unique-field, .is-searchable-field').hide();
+    } else if(this.field_type == 'Check Box') {
+      scope.find('.options-field, .default-field, .input-type-field, .is-unique-field, .is-searchable-field, .is-sortable-field').hide();
+    } else {
+      scope.find('.options-field, .is-sortable-field').hide();
+    }
+  }
 };
-// function to append option fields
-add_options = function(form_scope) {
-  var $options_container = form_scope.find('#options_container');
-  $options_container.find('.link_to_add_option').remove();
-  var appended_elements_string = '<div class="options-row"><input class="input-small" placeholder="Display Text" name="field[options][][text]" type="text" />'
-   + '<input class="input-small" placeholder="Value" name="field[options][][value]" type="text" />' 
-   + '<a class="link_to_remove_option">[-] Remove</a></div>'
-   + '<a class="link_to_add_option">[+] Add Another Option</a>';
-  $options_container.append(appended_elements_string);
-}
-// function to show/hide default/options fields according to the field type
-show_or_hide_elements = function(scope) {
-  var field_type = scope.find('option:selected').text();
-  var form_scope = scope.closest('.form');
-  form_scope.find('.default-field, .is-unique-field, .options-field, .input-type-field, .is-searchable-field, .is-sortable-field').show();
-  if(field_type == 'Select Box' || field_type == 'Radio Buttons') {
-    adjust_options(form_scope);
-    form_scope.find('.default-field, .is-unique-field, .is-searchable-field').hide();
-  } else if(field_type == 'Check Box') {
-    form_scope.find('.options-field, .default-field, .input-type-field, .is-unique-field, .is-searchable-field, .is-sortable-field').hide();
-  } else {
-    form_scope.find('.options-field, .is-sortable-field').hide();
-  }
-}
 
-adjust_options = function(form_scope) {
-  var option_rows = form_scope.find('.options-row');
-  if(!option_rows.length) {
-    add_options(form_scope);
-    option_rows = form_scope.find('.options-row');
-    option_rows.first().find('.link_to_remove_option').hide();
-  } else if(option_rows.length == 1) {
-    option_rows.first().find('.link_to_remove_option').hide();
-  } else{
-    option_rows.first().find('.link_to_remove_option').show();
-  }
-}
-
-hide_fields = function(form_scope, fields) {
-
-}
-
-show_fields = function(form_scope, fields) {
-
-}
-// uploading script for the first time
-$(document).ready(ready);
-// uplaoding script on every page reload
-$(document).on('page:load', ready);
+$(function() {
+  var scope = $(document).find('#field_type');
+  field = new Field(scope);
+  field.init();
+});

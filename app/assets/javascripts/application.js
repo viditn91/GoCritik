@@ -11,13 +11,14 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery.rateit
 //= require jquery.ui.all
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require turbolinks
 //= require_tree .
 //= require_tree ./admin
+//= require turbolinks
 
 $(document).ajaxError(function (e, xhr, settings) {
   if (xhr.status == 401) {
